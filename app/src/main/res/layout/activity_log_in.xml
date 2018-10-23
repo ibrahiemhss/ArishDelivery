@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/rv_container_login"
+    android:background="@drawable/gradient_animation_list"
+    tools:context=".LogInActivity">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerInParent="true"
+        android:layout_marginBottom="@dimen/lgn_container_bottom_margin"
+        android:layout_marginLeft="@dimen/lgn_container_side_margin"
+        android:layout_marginRight="@dimen/lgn_container_side_margin"
+        android:orientation="vertical"
+        tools:ignore="UselessParent">
+
+
+        <EditText
+            android:id="@+id/etEmailDriver"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/lgn_edit_txt_top_margin"
+            android:background="@drawable/bg_rectangle_edittext"
+            android:drawableRight="@drawable/ic_email"
+            android:inputType="textEmailAddress"
+            android:padding="@dimen/lgn_edit_txt_padding"
+            android:textColor="@color/colorPrimaryDark"
+            tools:ignore="LabelFor"
+            android:drawableEnd="@drawable/ic_email" />
+
+
+        <EditText
+            android:id="@+id/etPasswordDriver"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/lgn_edit_txt_top_margin"
+            android:background="@drawable/bg_rectangle_edittext"
+            android:drawableRight="@drawable/ic_key"
+            android:inputType="textPassword"
+            android:padding="@dimen/lgn_edit_txt_padding"
+            android:textColor="@color/colorPrimaryDark"
+            android:drawableEnd="@drawable/ic_key"
+            tools:ignore="LabelFor" />
+
+        <Button
+            android:id="@+id/btnLoginDriver"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/lgn_btn_top_margin"
+            android:background="@drawable/bg_rectangle_button"
+            android:text="@string/log_in"
+            android:textColor="@color/white"
+            android:textSize="@dimen/lgn_btn_txt_size" />
+
+
+        <Button
+            android:id="@+id/btnRegisterDriver"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/lgn_btn_top_margin"
+            android:background="@drawable/bg_rectangle_button"
+            android:text="@string/register"
+            android:textColor="@color/white"
+            android:textSize="@dimen/lgn_btn_txt_size" />
+
+        <TextView
+            android:id="@+id/txt_reset_password"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="6dp"
+            android:layout_marginTop="18dp"
+            android:text="@string/resetpassword"
+            android:textColor="@color/white"
+            android:textSize="@dimen/small_txt_size" />
+
+    </LinearLayout>
+</RelativeLayout>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!--TODO===== LogInActivity ============================ -->
+    <!--  Linear Container View-->
+    <dimen name="lgn_container_side_margin">48dp</dimen>
+    <dimen name="lgn_container_bottom_margin">24dp</dimen>
+    <!--  EditText  -->
+    <dimen name="lgn_edit_txt_top_margin">8dp</dimen>
+    <dimen name="lgn_edit_txt_padding">8dp</dimen>
+    <!--  Button -->
+    <dimen name="lgn_btn_top_margin">16dp</dimen>
+    <dimen name="lgn_btn_txt_size">16sp</dimen>
+    <!--  TextView -->
+    <dimen name="lgn_small_txt_size">16sp</dimen>
+
+    <!--TODO===== RegisterActivity ============================ -->
+    <!--  CircleImageView-->
+    <dimen name="rg_circleimageview_width">120dp</dimen>
+    <dimen name="rg_circleimageview_height">96dp</dimen>
+    <dimen name="rg_circleimageview_side_margin">16dp</dimen>
+    <!--  Linear Container View-->
+    <dimen name="rg_container_side_margin">48dp</dimen>
+    <!--  ImageView-->
+    <dimen name="rg_img_width">120dp</dimen>
+    <dimen name="rg_img_height">80dp</dimen>
+    <!--  TextInputLayout-->
+    <dimen name="rg_txt_input_bottom_margin">8dp</dimen>
+    <!--  EditText-->
+    <dimen name="rg_edit_txt_bottom_margin">8dp</dimen>
+    <dimen name="rg_edit_txt_top_margin">8dp</dimen>
+    <dimen name="rg_edit_txt_padding">8dp</dimen>
+    <!--  Button -->
+    <dimen name="rg_btn_top_margin">8dp</dimen>
+
+
+
+
+
+
+
+
+
+</resources>
