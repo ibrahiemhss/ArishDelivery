@@ -12,7 +12,7 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning"
         android:fullBackupContent="@xml/backup_descriptor">
-        <activity android:name=".LogInActivity">
+        <activity android:name=".ui.log_in.RegisterActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

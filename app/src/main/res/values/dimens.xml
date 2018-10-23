@@ -23,7 +23,7 @@
     <dimen name="rg_container_side_margin">48dp</dimen>
     <!--  ImageView-->
     <dimen name="rg_img_width">120dp</dimen>
-    <dimen name="rg_img_height">80dp</dimen>
+    <dimen name="rg_img_height">96dp</dimen>
     <!--  TextInputLayout-->
     <dimen name="rg_txt_input_bottom_margin">8dp</dimen>
     <!--  EditText-->
@@ -32,12 +32,6 @@
     <dimen name="rg_edit_txt_padding">8dp</dimen>
     <!--  Button -->
     <dimen name="rg_btn_top_margin">8dp</dimen>
-
-
-
-
-
-
 
 
 

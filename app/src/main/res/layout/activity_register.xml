@@ -4,8 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/rv_container_register"
     android:background="@drawable/gradient_animation_list"
-    tools:context=".RegisterActivity">
+    tools:context=".ui.log_in.RegisterActivity">
 
     <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/imgHolder"
