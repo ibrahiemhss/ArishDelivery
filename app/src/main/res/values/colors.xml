@@ -26,4 +26,13 @@
     <color name="colorRed_900">#B71C1C</color>
     <!-- ./ 4th Gradient color -->
 
+    //color log in
+    <color name="login_primary">#E43F3F</color>
+    <color name="login_primary_dark">#E12929</color>
+    <color name="login_primary_darker">#CC1D1D</color>
+    <color name="login_accent">#FFFFFF</color>
+    <color name="iron">#CCCCCC</color>
+
+    <color name="grey">#607D8B</color>
+
 </resources>

@@ -1,6 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <!--TODO===== MainActivity ============================ -->
+    <!--NavigationView-->
+    <dimen name="main_nav_width">216dp</dimen>
+    <dimen name="main_nav_bottom_margin">8dp</dimen>
+    <!--app_bar_main-->
+    <dimen name="main_fab_margin">8dp</dimen>
+    <dimen name="main_fab_elevation">12dp</dimen>
+    <!--nav_header-->
+    <dimen name="nav_header_height">160dp</dimen>
+    <dimen name="nav_header_side_margin">16dp</dimen>
+    <dimen name="nav_header_circleimageview_width">96dp</dimen>
+    <dimen name="nav_header_txt_bottom_margin">2dp</dimen>
+    <dimen name="nav_header_txt_padding">2dp</dimen>
+
     <!--TODO===== LogInActivity ============================ -->
     <!--  Linear Container View-->
     <dimen name="lgn_container_side_margin">48dp</dimen>
@@ -33,6 +47,35 @@
     <!--  Button -->
     <dimen name="rg_btn_top_margin">8dp</dimen>
 
+    <!--TODO===== ResetPasswordActivity ============================ -->
+    <!--TextView-->
+    <dimen name="reset_txt_title_size">24sp</dimen>
+    <!--  TextInputLayout-->
+    <dimen name="reset_txt_input_bottom_margin">8dp</dimen>
+    <dimen name="reset_txt_input_top_margin">96dp</dimen>
+    <dimen name="reset_txt_input_side_margin">48dp</dimen>
+    <!--  EditText-->
+    <dimen name="reset_edit_txt_padding">8dp</dimen>
+    <!--  Button -->
+    <dimen name="reset_btn_top_margin">16dp</dimen>
+    <dimen name="reset_btn_bottom_margin">8dp</dimen>
+    <dimen name="reset_btn_side_margin">48dp</dimen>
+    <!--  ProgressBar -->
+    <dimen name="reset_prgrsbar_top_margin">16dp</dimen>
 
+    <!--TODO===== ProfileActivity ============================ -->
+    <!--AppBarLayout-->
+    <dimen name="profile_app_bar_height">216dp</dimen>
+    <!--AppBarLayout-->
+    <dimen name="profile_circleimageview_width">120dp</dimen>
+    <dimen name="profile_circleimageview_height">96dp</dimen>
+    <dimen name="profile_circleimageview_side_margin">10dp</dimen>
+    <dimen name="profile_circleimageview_bottom_margin">8dp</dimen>
+    <!--  content activity_profile -->
+    <dimen name="profile_side_margin">16dp</dimen>
+    <dimen name="profile_txt_top_margin">8dp</dimen>
+    <dimen name="profile_togglebtn_padding">6dp</dimen>
+    <dimen name="profile_togglebtn_width">24dp</dimen>
+    <dimen name="profile_togglebtn_height">24dp</dimen>
 
 </resources>

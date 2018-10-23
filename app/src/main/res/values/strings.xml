@@ -3,4 +3,21 @@
     <string name="log_in">Log in</string>
     <string name="register">Register</string>
     <string name="resetpassword">Reset password</string>
+    <string name="send_pass_to_email">send password to email</string>
+    <string name="email">Email</string>
+    <string name="content_description_add_image">Click to add image</string>
+    <string name="user_name">user name</string>
+    <string name="password">password</string>
+    <string name="phone">phone</string>
+    <string name="home">Home</string>
+    <string name="send_sms">Send SMS</string>
+    <string name="call">Call</string>
+    <string name="remove_contact">Remove Contact</string>
+    <string name="name">name</string>
+    <string name="personal_page">personal page</string>
+    <string name="privacy_policy">privacy policy</string>
+    <string name="Logout">Log Out</string>
+    <string name="share">Share</string>
+    <string name="loging_in">loging in.......</string>
+    <string name="registring">registering......</string>
 </resources>

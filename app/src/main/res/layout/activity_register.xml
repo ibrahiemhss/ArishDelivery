@@ -38,7 +38,8 @@
             android:id="@+id/addImage"
             android:layout_width="@dimen/rg_img_width"
             android:layout_height="@dimen/rg_img_height"
-            android:background="@drawable/ic_camera" />
+            android:background="@drawable/ic_camera"
+            android:contentDescription="@string/content_description_add_image" />
 
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
@@ -46,14 +47,16 @@
             android:layout_gravity="bottom"
             android:layout_marginBottom="@dimen/rg_txt_input_bottom_margin">
             <EditText
-                android:id="@+id/etNama"
+                android:id="@+id/etName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/bg_rectangle_edittext"
                 android:drawableRight="@drawable/ic_face"
                 android:inputType="textPersonName"
                 android:padding="@dimen/rg_edit_txt_padding"
-                android:textColor="@color/lite_grey"/>
+                android:hint="@string/user_name"
+                android:textColor="@color/lite_grey"
+                android:drawableEnd="@drawable/ic_face" />
         </android.support.design.widget.TextInputLayout>
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
@@ -69,7 +72,9 @@
                 android:drawableRight="@drawable/ic_email"
                 android:inputType="textEmailAddress"
                 android:padding="@dimen/rg_edit_txt_padding"
-                android:textColor="@color/lite_grey"/>
+                android:hint="@string/email"
+                android:textColor="@color/lite_grey"
+                android:drawableEnd="@drawable/ic_email" />
         </android.support.design.widget.TextInputLayout>
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
@@ -86,7 +91,9 @@
                 android:gravity="start"
                 android:inputType="textPassword"
                 android:padding="@dimen/rg_edit_txt_padding"
-                android:textColor="@color/lite_grey"/>
+                android:hint="@string/password"
+                android:textColor="@color/lite_grey"
+                android:drawableEnd="@drawable/ic_key" />
         </android.support.design.widget.TextInputLayout>
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
@@ -102,7 +109,9 @@
                 android:drawableRight="@drawable/ic_phone"
                 android:inputType="phone"
                 android:padding="@dimen/rg_edit_txt_padding"
-                android:textColor="@color/lite_grey"/>
+                android:hint="@string/phone"
+                android:textColor="@color/lite_grey"
+                android:drawableEnd="@drawable/ic_phone" />
         </android.support.design.widget.TextInputLayout>
 
 

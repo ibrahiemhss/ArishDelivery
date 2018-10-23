@@ -2,6 +2,18 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 27
+
+    packagingOptions {
+        exclude 'META-INF/DEPENDENCIES'
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/license.txt'
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/NOTICE.txt'
+        exclude 'META-INF/notice.txt'
+        exclude 'META-INF/ASL2.0'
+    }
+
     defaultConfig {
         applicationId "com.delivery.arish.arishdelivery"
         minSdkVersion 15
@@ -28,11 +40,32 @@ dependencies {
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
 
+    //firebase
+    implementation 'com.google.firebase:firebase-core:16.0.4'
     //butterknife
     implementation 'com.jakewharton:butterknife:8.8.1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
 
+    //retrofit
+    implementation 'com.squareup.retrofit2:retrofit:2.3.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.0.1'
+
+    //okhttp
+    implementation 'com.squareup.okhttp3:okhttp:3.10.0'
+    implementation 'com.squareup.okio:okio:1.14.0'
+    implementation 'com.google.code.gson:gson:2.8.2'
+    implementation 'com.squareup.okhttp3:okhttp:3.9.1'
+
+    //uploadservice
+    implementation 'net.gotev:uploadservice:2.1'
+
+    //apache.httpcomponents
+    implementation 'org.apache.httpcomponents:httpmime:4.4'
+
+    //compressor library compress image befor uploading
+    implementation 'id.zelory:compressor:2.1.0'
     //circleimageview
     implementation 'de.hdodenhof:circleimageview:2.2.0'
 
 }
+apply plugin: 'com.google.gms.google-services'
