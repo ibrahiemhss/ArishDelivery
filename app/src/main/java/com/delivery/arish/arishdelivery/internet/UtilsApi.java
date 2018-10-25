@@ -1,7 +1,7 @@
 package com.delivery.arish.arishdelivery.internet;
 
 
-import static com.delivery.arish.arishdelivery.data.Contract.BAS_LOGIN;
+import static com.delivery.arish.arishdelivery.data.Contract.BAS_URL;
 
 /**
  * Created by ibrahim on 19/01/18.
@@ -9,5 +9,5 @@ import static com.delivery.arish.arishdelivery.data.Contract.BAS_LOGIN;
 
 public class UtilsApi {
     public static BaseApiService getAPIService(){
-        return RetrofitClient.getClient(BAS_LOGIN).create(BaseApiService.class);
+        return RetrofitClient.getClient(BAS_URL).create(BaseApiService.class);
     }    }

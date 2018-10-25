@@ -125,5 +125,13 @@
             android:text="@string/register"
             android:textColor="@color/white"
             />
+        <ProgressBar
+            android:id="@+id/rg_proressbar"
+            style="@android:style/Widget.Holo.Light.ProgressBar.Horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/rg_progresspar_margin"
+            android:layout_marginRight="@dimen/rg_progresspar_margin"
+            android:visibility="gone" />
     </LinearLayout>
 </RelativeLayout>

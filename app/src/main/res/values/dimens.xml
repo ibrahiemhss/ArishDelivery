@@ -33,6 +33,7 @@
     <dimen name="rg_circleimageview_width">120dp</dimen>
     <dimen name="rg_circleimageview_height">96dp</dimen>
     <dimen name="rg_circleimageview_side_margin">16dp</dimen>
+    <dimen name="rg_progresspar_margin">32dp</dimen>
     <!--  Linear Container View-->
     <dimen name="rg_container_side_margin">48dp</dimen>
     <!--  ImageView-->

@@ -1,7 +1,9 @@
 package com.delivery.arish.arishdelivery.internet;
 
 
+import com.delivery.arish.arishdelivery.data.Contract;
 import com.delivery.arish.arishdelivery.internet.model.ResponseApiModel;
+import com.google.gson.JsonObject;
 
 import java.util.Map;
 
@@ -17,43 +19,33 @@ import retrofit2.http.Part;
 import retrofit2.http.PartMap;
 
 
-/**
- * Created by ibrahim on 19/01/18.
- */
-
 public interface BaseApiService {
 
     @FormUrlEncoded
-    @POST("logInUser/loginUser.php")
+    @POST(Contract.LOGIN_URL)
     Call<ResponseBody> loginRequest(
-            @Field("email") String email,
-            @Field("password") String password,
-            @Field("token") String token);
+            @Field(Contract.EMAIL_COL) String email,
+            @Field(Contract.PASSWORD_COL) String password,
+            @Field(Contract.TOKEN_COL) String token);
+
 
     @FormUrlEncoded
-    @POST("logInDriver/loginDriver.php")
-    Call<ResponseBody> loginRequestDriver(
-            @Field("email") String email,
-            @Field("password") String password,
-            @Field("token") String token);
-
-    @FormUrlEncoded
-    @POST("logInUser/registerUser.php")
+    @POST(Contract.REGISTER_URL)
     Call<ResponseBody> registerRequest(
-            @Field("name") String name,
-            @Field("email") String email,
-            @Field("password") String password,
-            @Field("phone") String phone);
+            @Field(Contract.NAME_COL) String name,
+            @Field(Contract.EMAIL_COL) String email,
+            @Field(Contract.PASSWORD_COL) String password,
+            @Field(Contract.PHONE_COL) String phone);
 
     @Multipart
-    @POST("logInUser/registerUserWithImage.php")
+    @POST(Contract.REGISTER_WITH_IMAGE_URL)
     Call<ResponseApiModel> uploadImage(
             @PartMap() Map<String, RequestBody> partMap,
             @Part MultipartBody.Part image);
 
     @FormUrlEncoded
-    @POST("ResetPassword/")
-    Call<ResponseBody> resetPassword(@Field("email") String email);
+    @POST(Contract.RESET_PASSWORD_URL)
+    Call<ResponseBody> resetPassword(@Field(Contract.EMAIL_COL) String email);
 
     @FormUrlEncoded
     @POST("InsertData/insert_booking.php")

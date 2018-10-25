@@ -21,7 +21,7 @@
 
 
         <EditText
-            android:id="@+id/etEmailDriver"
+            android:id="@+id/etEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/lgn_edit_txt_top_margin"
@@ -35,7 +35,7 @@
 
 
         <EditText
-            android:id="@+id/etPasswordDriver"
+            android:id="@+id/etPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/lgn_edit_txt_top_margin"
@@ -48,7 +48,7 @@
             tools:ignore="LabelFor" />
 
         <Button
-            android:id="@+id/btnLoginDriver"
+            android:id="@+id/btnLogin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/lgn_btn_top_margin"
@@ -59,7 +59,7 @@
 
 
         <Button
-            android:id="@+id/btnRegisterDriver"
+            android:id="@+id/btnRegister"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/lgn_btn_top_margin"

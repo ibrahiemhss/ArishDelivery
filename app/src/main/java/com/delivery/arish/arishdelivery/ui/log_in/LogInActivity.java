@@ -21,6 +21,7 @@ import com.delivery.arish.arishdelivery.R;
 import com.delivery.arish.arishdelivery.data.SharedPrefManager;
 import com.delivery.arish.arishdelivery.internet.BaseApiService;
 import com.delivery.arish.arishdelivery.internet.UtilsApi;
+import com.delivery.arish.arishdelivery.presenter.LogInActivityPresenter;
 import com.delivery.arish.arishdelivery.ui.MainActivity;
 import com.delivery.arish.arishdelivery.util.MyAnimation;
 
@@ -53,14 +54,8 @@ public class LogInActivity extends AppCompatActivity {
     @BindView(R.id.btnRegister)
     Button btnRegister;
 
-    private ProgressDialog mLoading;
-    private AlertDialog.Builder mBuilder;
-    private static final String PROTOCOL_CHARSET = "utf-8";
 
     private AnimationDrawable mAnimationDrawable;
-
-    Context mContext;
-    BaseApiService mApiService;
 
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
@@ -68,20 +63,16 @@ public class LogInActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_log_in);
-        Objects.requireNonNull(getSupportActionBar()).hide();
+       // Objects.requireNonNull(getSupportActionBar()).hide();
 
         ButterKnife.bind(this);
-
         mAnimationDrawable=MyAnimation.animateBackground(mRelativeLayout);
-
         if (SharedPrefManager.getInstance( getApplicationContext() ).isUserLoggedIn()) {
-            // PostUser is already logged in. Take him to main activity
             Intent intent = new Intent(LogInActivity.this, MainActivity.class);
             startActivity(intent);
             finish();
         }
-        mContext = this;
-        mApiService = UtilsApi.getAPIService(); // meng-init yang ada di package apihelper
+
         initComponents();
 
     }
@@ -116,90 +107,21 @@ public class LogInActivity extends AppCompatActivity {
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mLoading = ProgressDialog.show(mContext, null,  getResources().getString( R.string.loging_in), true, false);
-                requestLogin();
+
+                LogInActivityPresenter logInActivityPresenter =new LogInActivityPresenter(LogInActivity.this);
+                logInActivityPresenter.requestLogin(mEtEmail.getText().toString(),mEtPassword.getText().toString(),"ytyty");
             }
         });
 
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(mContext, RegisterActivity.class));
+                startActivity(new Intent(LogInActivity.this, RegisterActivity.class));
             }
         });
 
     }
 
-    private void requestLogin(){
-
-
-        mApiService.loginRequest(mEtEmail.getText().toString(), mEtPassword.getText().toString(),SharedPrefManager.getInstance( this ).getDeviceToken())
-                .enqueue(new Callback<ResponseBody>() {
-                    @Override
-                    public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                        if (response.isSuccessful()){
-                            Log.i("debug", "onResponse:start ");
-
-                            mLoading.dismiss();
-                            try {
-                                String remoteResponse=response.body().string();
-
-                                Log.d("JSON", remoteResponse);
-
-                                JSONObject jsonRESULTS = new JSONObject(remoteResponse);
-                                if (jsonRESULTS.getString("error").equals("false")){
-
-                                    SharedPrefManager.getInstance( getApplicationContext() ).setLoginUser(true);
-
-                                    Toast.makeText(mContext, jsonRESULTS.getString("error_msg"), Toast.LENGTH_SHORT).show();
-                                    String id = jsonRESULTS.getString("id");
-                                    String uid = jsonRESULTS.getString("uid");
-                                    String name = jsonRESULTS.getJSONObject("user").getString("name");
-                                    String email = jsonRESULTS.getJSONObject("user").getString("email");
-                                    String phone = jsonRESULTS.getJSONObject("user").getString("phone");
-                                    String imageURl = jsonRESULTS.getJSONObject("user").getString("image");
-                                    String created_at = jsonRESULTS.getJSONObject("user").getString("time");
-                                    String error_message = jsonRESULTS.getString("error_msg");
-
-                                    Log.i("tagconvertstr", "["+ jsonRESULTS.getString("error_msg")+"]");
-
-
-                                    Log.e("debug", "succeess: ERROR > "+error_message );
-                                    SharedPrefManager.getInstance( getApplicationContext() ).saveUserId( id );
-                                    SharedPrefManager.getInstance( getApplicationContext() ).saveNamesOfUsers( name );
-                                    SharedPrefManager.getInstance( getApplicationContext() ).saveEmailOfUsers( email );
-                                    SharedPrefManager.getInstance( getApplicationContext() ).savePhonefUsers( phone );
-                                    SharedPrefManager.getInstance( getApplicationContext() ).saveImagefUsers( imageURl );
-                                    Intent intent=new Intent(mContext, MainActivity
-                                            .class);
-                                    startActivity(intent);
-
-                                } else {
-                                    // Jika login gagal
-                                    Log.e("debug", "onFailure: ERROR > " );
-                                    String error_message = jsonRESULTS.getString("error_msg");
-
-                                    Log.e("debug", "noAcount: ERROR > "+error_message );
-
-                                    Toast.makeText(mContext, error_message, Toast.LENGTH_SHORT).show();
-                                }
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            } catch (IOException e) {
-                                e.printStackTrace();
-                            }
-                        } else {
-                            mLoading.dismiss();
-                        }
-                    }
-
-                    @Override
-                    public void onFailure(Call<ResponseBody> call, Throwable t) {
-                        Log.e("debug", "onFailure: ERROR > " + t.toString());
-                        Toast.makeText(mContext, "خطا بالاتصال بالانترنت", Toast.LENGTH_SHORT).show();
-                    }
-                });
-    }
 
     public void gooResetPass(View view) {
         Intent intent=new Intent(LogInActivity.this, ResetPasswordActivity.class);

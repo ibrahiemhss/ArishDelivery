@@ -1,5 +1,6 @@
 package com.delivery.arish.arishdelivery.internet.model;
 
+import com.delivery.arish.arishdelivery.data.Contract;
 import com.google.gson.annotations.SerializedName;
 
 /**
@@ -7,9 +8,9 @@ import com.google.gson.annotations.SerializedName;
  */
 
 public class ResponseApiModel {
-    @SerializedName("error")
+    @SerializedName(Contract.ERROR)
     String error;
-    @SerializedName("error_msg")
+    @SerializedName(Contract.ERROR_MSG)
     String error_msg;
 
     public String getEerror() {

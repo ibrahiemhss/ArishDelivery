@@ -3,8 +3,12 @@ package com.delivery.arish.arishdelivery.internet;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.net.Uri;
+import android.os.Handler;
+import android.os.Looper;
 import android.util.Log;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.lang.ref.WeakReference;
@@ -12,58 +16,58 @@ import java.lang.ref.WeakReference;
 import okhttp3.MediaType;
 import okhttp3.RequestBody;
 import okio.BufferedSink;
+import retrofit2.http.Multipart;
+import retrofit2.http.POST;
 
 /**
  * Created by ibrahim on 22/01/18.
  */
 
 public class ProgressRequestBody extends RequestBody {
-    private static final String LOG_TAG = ProgressRequestBody.class.getSimpleName();
+    private File mFile;
+    private String mPath;
+    private UploadCallbacks mListener;
 
-    public interface ProgressCallback {
-        public void onProgress(long progress, long total);
+    private static final int DEFAULT_BUFFER_SIZE = 2048;
+
+    public interface UploadCallbacks {
+        void onProgressUpdate(int percentage);
+        void onError();
+        void onFinish();
     }
 
-    public static class UploadInfo {
-        //Content uri for the file
-        public Uri contentUri;
-
-        // File size in bytes
-        public long contentLength;
-    }
-
-    private WeakReference<Context> mContextRef;
-    private UploadInfo mUploadInfo;
-    private ProgressCallback mListener;
-
-    private static final int UPLOAD_PROGRESS_BUFFER_SIZE = 8192;
-
-    public ProgressRequestBody(Context context, UploadInfo uploadInfo, ProgressCallback listener) {
-        mContextRef = new WeakReference<>(context);
-        mUploadInfo =  uploadInfo;
+    public ProgressRequestBody(final File file, final  UploadCallbacks listener) {
+        mFile = file;
         mListener = listener;
     }
 
     @Override
     public MediaType contentType() {
-        // NOTE: We are posting the upload as binary data so we don't need the true mimeType
-        return MediaType.parse("application/octet-stream");
+        // i want to upload only images
+        return MediaType.parse("image/*");
+    }
+
+    @Override
+    public long contentLength() throws IOException {
+        return mFile.length();
     }
 
     @Override
     public void writeTo(BufferedSink sink) throws IOException {
-        long fileLength = mUploadInfo.contentLength;
-        byte[] buffer = new byte[UPLOAD_PROGRESS_BUFFER_SIZE];
-        InputStream in = in();
+        long fileLength = mFile.length();
+        byte[] buffer = new byte[DEFAULT_BUFFER_SIZE];
+        FileInputStream in = new FileInputStream(mFile);
         long uploaded = 0;
 
         try {
             int read;
+            Handler handler = new Handler(Looper.getMainLooper());
             while ((read = in.read(buffer)) != -1) {
-                mListener.onProgress(uploaded, fileLength);
+
+                // update progress on UI thread
+                handler.post(new ProgressUpdater(uploaded, fileLength));
 
                 uploaded += read;
-
                 sink.write(buffer, 0, read);
             }
         } finally {
@@ -71,29 +75,17 @@ public class ProgressRequestBody extends RequestBody {
         }
     }
 
-    /**
-     * WARNING: You must override this function and return the file size or you will get errors
-     */
-    @Override
-    public long contentLength() throws IOException {
-        return mUploadInfo.contentLength;
-    }
-
-    private InputStream in() throws IOException {
-        InputStream stream = null;
-        try {
-            stream = getContentResolver().openInputStream(mUploadInfo.contentUri);
-        } catch (Exception ex) {
-            Log.e(LOG_TAG, "Error getting input stream for upload", ex);
+    private class ProgressUpdater implements Runnable {
+        private long mUploaded;
+        private long mTotal;
+        public ProgressUpdater(long uploaded, long total) {
+            mUploaded = uploaded;
+            mTotal = total;
         }
 
-        return stream;
-    }
-
-    private ContentResolver getContentResolver() {
-        if (mContextRef.get() != null) {
-            return mContextRef.get().getContentResolver();
+        @Override
+        public void run() {
+            mListener.onProgressUpdate((int)(100 * mUploaded / mTotal));
         }
-        return null;
     }
 }
