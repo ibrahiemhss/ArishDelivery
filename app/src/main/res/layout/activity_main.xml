@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    tools:context=".ui.MainActivity">
+    tools:context=".ui.Main.MainActivity">
 
     <android.support.v4.widget.DrawerLayout
         android:id="@+id/drawer_layout"
@@ -24,7 +24,8 @@
             android:layout_width="@dimen/main_nav_width"
             android:layout_height="wrap_content"
             android:layout_gravity="start"
-            android:layout_marginTop="?attr/actionBarSize"
+            android:layout_marginTop="?android:attr/actionBarSize"
+            android:paddingTop="?android:attr/actionBarSize"
             android:fitsSystemWindows="true"
             android:labelFor="@+id/app_bar_main"
             app:headerLayout="@layout/nav_header"
@@ -33,11 +34,7 @@
 
         </android.support.design.widget.NavigationView>
 
-
-        <!--
-                app:headerLayout="@laynav_header_main_usersmain"
-        -->
-
-
     </android.support.v4.widget.DrawerLayout>
+
+
 </RelativeLayout>

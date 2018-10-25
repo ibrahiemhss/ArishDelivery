@@ -24,4 +24,7 @@
     <string name="cancel">Cancel</string>
     <string name="enable_permision">Please Enable the Read Storage permission in permission</string>
     <string name="read_storage_permisio_not">Read Storage Permission required for this app</string>
+    <string name="restaurant">restaurant</string>
+    <string name="cafes">cafes</string>
+    <string name="pharmacies">pharmacies</string>
 </resources>

@@ -21,6 +21,13 @@ allprojects {
         google()
         jcenter()
     }
+
+    ext {
+        androidSupportVersion = "27.1.1"
+        glideVersion = "4.8.0"
+        okhttpVersion = "3.10.0"
+        butterknifeVersion="8.8.1"
+    }
 }
 
 task clean(type: Delete) {

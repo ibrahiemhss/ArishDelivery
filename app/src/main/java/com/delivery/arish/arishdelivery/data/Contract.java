@@ -31,4 +31,7 @@ public class Contract {
     public static final String MULTIPART_FILE_PATH = "multipart/form-file";
 
 
+    public static final String EXTRA_MAIN_LIST_POSITION="main_list_position";
+
+
 }
