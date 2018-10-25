@@ -46,6 +46,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
             android:layout_marginBottom="@dimen/rg_txt_input_bottom_margin">
+
             <EditText
                 android:id="@+id/etName"
                 android:layout_width="match_parent"
@@ -58,11 +59,13 @@
                 android:textColor="@color/lite_grey"
                 android:drawableEnd="@drawable/ic_face" />
         </android.support.design.widget.TextInputLayout>
+
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
             android:layout_marginBottom="@dimen/rg_txt_input_bottom_margin">
+
             <EditText
                 android:id="@+id/etEmail"
                 android:layout_width="match_parent"
@@ -76,11 +79,13 @@
                 android:textColor="@color/lite_grey"
                 android:drawableEnd="@drawable/ic_email" />
         </android.support.design.widget.TextInputLayout>
+
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
             android:layout_marginBottom="@dimen/rg_txt_input_bottom_margin">
+
             <EditText
                 android:id="@+id/etPassword"
                 android:layout_width="match_parent"
@@ -95,11 +100,13 @@
                 android:textColor="@color/lite_grey"
                 android:drawableEnd="@drawable/ic_key" />
         </android.support.design.widget.TextInputLayout>
+
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
             android:layout_marginBottom="@dimen/rg_txt_input_bottom_margin">
+
             <EditText
                 android:id="@+id/etPhone"
                 android:layout_width="match_parent"
@@ -115,7 +122,6 @@
         </android.support.design.widget.TextInputLayout>
 
 
-
         <Button
             android:id="@+id/btnRegister"
             android:layout_width="match_parent"
@@ -123,8 +129,8 @@
             android:layout_marginTop="@dimen/rg_btn_top_margin"
             android:background="@drawable/bg_rectangle_button"
             android:text="@string/register"
-            android:textColor="@color/white"
-            />
+            android:textColor="@color/white" />
+
         <ProgressBar
             android:id="@+id/rg_proressbar"
             style="@android:style/Widget.Holo.Light.ProgressBar.Horizontal"

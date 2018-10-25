@@ -21,6 +21,7 @@
             android:fitsSystemWindows="true"
             app:contentScrim="?attr/colorPrimary"
             app:layout_scrollFlags="scroll|enterAlways|enterAlwaysCollapsed">
+
             <ImageView
                 android:id="@+id/imgHolderProfile"
                 android:layout_width="@dimen/profile_circleimageview_width"
@@ -33,8 +34,6 @@
                 android:src="@drawable/ic_account_box"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true" />
-
-
 
 
             <android.support.v7.widget.Toolbar

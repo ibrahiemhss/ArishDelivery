@@ -5,7 +5,7 @@ import android.widget.RelativeLayout;
 
 public class MyAnimation {
 
-    public static AnimationDrawable animateBackground( RelativeLayout mRelativeLayout) {
+    public static AnimationDrawable animateBackground(RelativeLayout mRelativeLayout) {
         // init constraintLayout
         AnimationDrawable animationDrawable = (AnimationDrawable) mRelativeLayout.getBackground();// initializing animation drawable by getting background from constraint layout
         animationDrawable.setEnterFadeDuration(5000);// setting enter fade animation duration to 5 seconds

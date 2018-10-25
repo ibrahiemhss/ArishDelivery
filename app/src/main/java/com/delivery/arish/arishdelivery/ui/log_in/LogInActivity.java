@@ -63,14 +63,14 @@ public class LogInActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_log_in);
-       // Objects.requireNonNull(getSupportActionBar()).hide();
+        // Objects.requireNonNull(getSupportActionBar()).hide();
 
         ButterKnife.bind(this);
-        mAnimationDrawable=MyAnimation.animateBackground(mRelativeLayout);
-        if (SharedPrefManager.getInstance( getApplicationContext() ).isUserLoggedIn()) {
-            Intent intent = new Intent(LogInActivity.this, MainActivity.class);
-            startActivity(intent);
-            finish();
+        mAnimationDrawable = MyAnimation.animateBackground(mRelativeLayout);
+        if (SharedPrefManager.getInstance(getApplicationContext()).isUserLoggedIn()) {
+            //    Intent intent = new Intent(LogInActivity.this, MainActivity.class);
+            //   startActivity(intent);
+            //   finish();
         }
 
         initComponents();
@@ -108,8 +108,8 @@ public class LogInActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                LogInActivityPresenter logInActivityPresenter =new LogInActivityPresenter(LogInActivity.this);
-                logInActivityPresenter.requestLogin(mEtEmail.getText().toString(),mEtPassword.getText().toString(),"ytyty");
+                LogInActivityPresenter logInActivityPresenter = new LogInActivityPresenter(LogInActivity.this);
+                logInActivityPresenter.requestLogin(mEtEmail.getText().toString(), mEtPassword.getText().toString(), "ytyty");
             }
         });
 
@@ -124,7 +124,7 @@ public class LogInActivity extends AppCompatActivity {
 
 
     public void gooResetPass(View view) {
-        Intent intent=new Intent(LogInActivity.this, ResetPasswordActivity.class);
+        Intent intent = new Intent(LogInActivity.this, ResetPasswordActivity.class);
         startActivity(intent);
 
     }

@@ -13,6 +13,7 @@ import com.delivery.arish.arishdelivery.data.Contract;
 import com.delivery.arish.arishdelivery.internet.BaseApiService;
 import com.delivery.arish.arishdelivery.internet.UtilsApi;
 import com.delivery.arish.arishdelivery.internet.model.ResponseApiModel;
+import com.delivery.arish.arishdelivery.ui.MainActivity;
 import com.delivery.arish.arishdelivery.ui.log_in.LogInActivity;
 
 import org.json.JSONException;
@@ -144,16 +145,17 @@ public class RegisterActivityPresenter {
                                 Log.d("JSONString", remoteResponse);
 
 
-
-                                if (jsonRESULTS.getString(Contract.ERROR).equals(Contract.FALSE_VAL)) {
-                                    mLoading.setMessage(jsonRESULTS.getString(Contract.ERROR_MSG));
-                                    Toast.makeText(mCtx, jsonRESULTS.getString(Contract.ERROR_MSG), Toast.LENGTH_SHORT).show();
-
-                                    mCtx.startActivity(new Intent(mCtx, LogInActivity.class));
+                                if (jsonRESULTS.optString(Contract.ERROR).equals(Contract.FALSE_VAL)) {
+                                    mLoading.setMessage(jsonRESULTS.optString(Contract.ERROR_MSG));
+                                    Toast.makeText(mCtx, jsonRESULTS.optString(Contract.ERROR_MSG), Toast.LENGTH_SHORT).show();
+                                    if (jsonRESULTS.optString(Contract.ERROR_MSG).equals(Contract.SUCESS_MSG)) {
+                                        mCtx.startActivity(new Intent(mCtx, LogInActivity.class));
+                                    }
                                     mLoading.dismiss();
 
+
                                 } else {
-                                    String error_message = jsonRESULTS.getString(Contract.ERROR_MSG);
+                                    String error_message = jsonRESULTS.optString(Contract.ERROR_MSG);
                                     Toast.makeText(mCtx, error_message, Toast.LENGTH_SHORT).show();
                                     mLoading.setMessage(error_message);
                                     mLoading.dismiss();

@@ -9,7 +9,6 @@
     </style>
 
 
-
     <style name="AppTheme_NoActionBar" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="colorPrimary">@color/colorPrimary</item>

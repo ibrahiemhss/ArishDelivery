@@ -19,7 +19,7 @@ public class SharedPrefManager {
 
     public SharedPrefManager(Context context) {
         mCtx = context;
-        pref=mCtx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
+        pref = mCtx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
     }
 
     public static synchronized SharedPrefManager getInstance(Context context) {
@@ -32,9 +32,9 @@ public class SharedPrefManager {
 
 
     //TODO==========================USERS SharedPreferences ======================================================
-    public  boolean saveUserId( String userId) {
+    public boolean saveUserId(String userId) {
         editor = pref.edit();
-        editor.putString( USER_ID_KEY, userId );
+        editor.putString(USER_ID_KEY, userId);
         editor.apply();
         editor.apply();
         return true;
@@ -42,74 +42,79 @@ public class SharedPrefManager {
 
     public String getUserId() {
 
-        return pref.getString( USER_ID_KEY, null );
+        return pref.getString(USER_ID_KEY, null);
 
     }
 
-    public  boolean saveNamesOfUsers( String name) {
+    public boolean saveNamesOfUsers(String name) {
         editor = pref.edit();
-        editor.putString( NAME_USERS_KEY, name );
+        editor.putString(NAME_USERS_KEY, name);
         editor.apply();
         editor.apply();
         return true;
     }
+
     public String getNamesOfUsers() {
 
-        return pref.getString( NAME_USERS_KEY, null );
+        return pref.getString(NAME_USERS_KEY, null);
 
     }
 
-    public  boolean saveEmailOfUsers( String email) {
+    public boolean saveEmailOfUsers(String email) {
         editor = pref.edit();
-        editor.putString( EMAIL_USERS_KEY, email );
+        editor.putString(EMAIL_USERS_KEY, email);
         editor.apply();
         editor.apply();
         return true;
     }
+
     public String getEmailOfUsers() {
 
-        return pref.getString( EMAIL_USERS_KEY, null );
+        return pref.getString(EMAIL_USERS_KEY, null);
 
     }
-    public  boolean saveImagefUsers( String image) {
+
+    public boolean saveImagefUsers(String image) {
         editor = pref.edit();
-        editor.putString( IMAGE_USERS_KEY, image );
+        editor.putString(IMAGE_USERS_KEY, image);
         editor.apply();
         editor.apply();
         return true;
     }
+
     public String getImageOfUsers() {
 
-        return pref.getString( IMAGE_USERS_KEY, null );
+        return pref.getString(IMAGE_USERS_KEY, null);
 
     }
-    public  boolean savePhonefUsers( String phone) {
+
+    public boolean savePhonefUsers(String phone) {
         editor = pref.edit();
-        editor.putString( PHONE_USERS_KEY, phone );
+        editor.putString(PHONE_USERS_KEY, phone);
         editor.apply();
         editor.apply();
         return true;
     }
+
     public String getPhoneOfUsers() {
 
-        return pref.getString( PHONE_USERS_KEY, null );
+        return pref.getString(PHONE_USERS_KEY, null);
 
     }
 
 
-    public  boolean saveDriverId( String userId) {
+    public boolean saveDriverId(String userId) {
         editor = pref.edit();
-        editor.putString( USER_ID_KEY, userId );
+        editor.putString(USER_ID_KEY, userId);
         editor.apply();
         editor.apply();
         return true;
     }
-
 
 
     public void setLoginUser(boolean isLoggedIn) {
         editor = pref.edit();
-        editor.putBoolean( KEY_IS_USER_LOGGEDIN, isLoggedIn );
+        editor.putBoolean(KEY_IS_USER_LOGGEDIN, isLoggedIn);
         editor.apply();
         editor.commit();
 
@@ -117,13 +122,13 @@ public class SharedPrefManager {
 
 
     public boolean isUserLoggedIn() {
-        return pref.getBoolean( KEY_IS_USER_LOGGEDIN, false );
+        return pref.getBoolean(KEY_IS_USER_LOGGEDIN, false);
 
     }
 
     //fetch the device token
-    public String getDeviceToken(){
+    public String getDeviceToken() {
         pref = mCtx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
-        return  pref.getString(TAG_TOKEN, null);
+        return pref.getString(TAG_TOKEN, null);
     }
 }

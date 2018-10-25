@@ -8,6 +8,7 @@ import static com.delivery.arish.arishdelivery.data.Contract.BAS_URL;
  */
 
 public class UtilsApi {
-    public static BaseApiService getAPIService(){
+    public static BaseApiService getAPIService() {
         return RetrofitClient.getClient(BAS_URL).create(BaseApiService.class);
-    }    }
+    }
+}

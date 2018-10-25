@@ -63,7 +63,7 @@ public interface BaseApiService {
             @Field("status") String status);
 
     @FormUrlEncoded
-    @POST ("FCM/sendSinglePush.php")
+    @POST("FCM/sendSinglePush.php")
     Call<ResponseBody> sentMessagToDriverRequest(
             @Field("title") String title,
             @Field("from") String from,

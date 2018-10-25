@@ -32,11 +32,13 @@ public class ProgressRequestBody extends RequestBody {
 
     public interface UploadCallbacks {
         void onProgressUpdate(int percentage);
+
         void onError();
+
         void onFinish();
     }
 
-    public ProgressRequestBody(final File file, final  UploadCallbacks listener) {
+    public ProgressRequestBody(final File file, final UploadCallbacks listener) {
         mFile = file;
         mListener = listener;
     }
@@ -78,6 +80,7 @@ public class ProgressRequestBody extends RequestBody {
     private class ProgressUpdater implements Runnable {
         private long mUploaded;
         private long mTotal;
+
         public ProgressUpdater(long uploaded, long total) {
             mUploaded = uploaded;
             mTotal = total;
@@ -85,7 +88,7 @@ public class ProgressRequestBody extends RequestBody {
 
         @Override
         public void run() {
-            mListener.onProgressUpdate((int)(100 * mUploaded / mTotal));
+            mListener.onProgressUpdate((int) (100 * mUploaded / mTotal));
         }
     }
 }

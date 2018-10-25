@@ -64,7 +64,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class RegisterActivity extends AppCompatActivity implements ProgressRequestBody.UploadCallbacks ,View.OnClickListener{
+public class RegisterActivity extends AppCompatActivity implements ProgressRequestBody.UploadCallbacks, View.OnClickListener {
 
     protected static final int REQUEST_CODE_MANUAL = 5;
 
@@ -110,6 +110,7 @@ public class RegisterActivity extends AppCompatActivity implements ProgressReque
         mAddImage.setOnClickListener(this);
         mBtnRegister.setOnClickListener(this);
     }
+
     @Override
     protected void onResume() {
         super.onResume();
@@ -118,6 +119,7 @@ public class RegisterActivity extends AppCompatActivity implements ProgressReque
             mAnimationDrawable.start();
         }
     }
+
     @Override
     protected void onPause() {
         super.onPause();
@@ -126,6 +128,7 @@ public class RegisterActivity extends AppCompatActivity implements ProgressReque
             mAnimationDrawable.stop();
         }
     }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -135,22 +138,22 @@ public class RegisterActivity extends AppCompatActivity implements ProgressReque
                     try {
                         Uri dataimage = data.getData();
                         String[] imageprojection = {MediaStore.Images.Media.DATA};
-                        Cursor cursor = getContentResolver().query( dataimage, imageprojection, null, null, null );
+                        Cursor cursor = getContentResolver().query(dataimage, imageprojection, null, null, null);
 
                         if (cursor != null) {
                             cursor.moveToFirst();
-                            int indexImage = cursor.getColumnIndex( imageprojection[0] );
-                            mPart_image = cursor.getString( indexImage );
+                            int indexImage = cursor.getColumnIndex(imageprojection[0]);
+                            mPart_image = cursor.getString(indexImage);
 
                             if (mPart_image != null) {
-                                mActualImageFile = new File( mPart_image );
-                               // mImgHolder.setImageBitmap( BitmapFactory.decodeFile( mActualImageFile.getAbsolutePath() ) );
+                                mActualImageFile = new File(mPart_image);
+                                // mImgHolder.setImageBitmap( BitmapFactory.decodeFile( mActualImageFile.getAbsolutePath() ) );
                                 Glide.with(this).load(mActualImageFile).into(mImgHolder);
 
 
                             }
                         }
-                    }catch (Exception e) {
+                    } catch (Exception e) {
                         e.printStackTrace();
                     }
                 }
@@ -162,6 +165,7 @@ public class RegisterActivity extends AppCompatActivity implements ProgressReque
         photoPickerIntent.setType("image/*");
         startActivityForResult(photoPickerIntent, 1);
     }
+
     void galleryPermissionDialog() {
 
         int hasWriteContactsPermission = 0;
@@ -181,8 +185,6 @@ public class RegisterActivity extends AppCompatActivity implements ProgressReque
             openGallry();
         }
     }
-
-
 
 
     @Override
@@ -248,7 +250,7 @@ public class RegisterActivity extends AppCompatActivity implements ProgressReque
     }
 
     public void showMessageOKCancel(String message, DialogInterface.OnClickListener okListener) {
-        new android.app.AlertDialog.Builder( RegisterActivity.this)
+        new android.app.AlertDialog.Builder(RegisterActivity.this)
                 .setTitle(R.string.app_name)
                 .setMessage(message)
                 .setCancelable(false)
@@ -278,8 +280,8 @@ public class RegisterActivity extends AppCompatActivity implements ProgressReque
 
     @Override
     public void onClick(View view) {
-        int id=view.getId();
-        switch (id){
+        int id = view.getId();
+        switch (id) {
             case R.id.btnRegister:
                 initRegister();
                 break;
@@ -290,8 +292,8 @@ public class RegisterActivity extends AppCompatActivity implements ProgressReque
         }
     }
 
-    private void initRegister(){
-        RegisterActivityPresenter registerActivityPresenter=new RegisterActivityPresenter(this);
+    private void initRegister() {
+        RegisterActivityPresenter registerActivityPresenter = new RegisterActivityPresenter(this);
         if (mPart_image == null) {
             registerActivityPresenter.requestRegister(
                     mEtName.getText().toString(),
@@ -299,7 +301,7 @@ public class RegisterActivity extends AppCompatActivity implements ProgressReque
                     mEtPassword.getText().toString(),
                     mEtPhone.getText().toString());
 
-            Log.d(TAG,"ImageUploaingCase = null");
+            Log.d(TAG, "ImageUploaingCase = null");
         } else {
             registerActivityPresenter.requestRegisterWithPhoto(
                     mPart_image,
@@ -309,13 +311,13 @@ public class RegisterActivity extends AppCompatActivity implements ProgressReque
                     mEtPassword.getText().toString(),
                     mEtPhone.getText().toString());
 
-            Log.d(TAG,"ImageUploaingCase = Value");
+            Log.d(TAG, "ImageUploaingCase = Value");
 
         }
     }
 
 
-    private void initImage(){
+    private void initImage() {
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
 
@@ -348,7 +350,7 @@ public class RegisterActivity extends AppCompatActivity implements ProgressReque
             requestPermissions(INITIAL_PERMS, REQUEST_CODE_ASK_PERMISSIONS);
 
 
-        }else {
+        } else {
             openGallry();
             if (mPart_image == null) {
                 mImgHolder.setVisibility(View.VISIBLE);
