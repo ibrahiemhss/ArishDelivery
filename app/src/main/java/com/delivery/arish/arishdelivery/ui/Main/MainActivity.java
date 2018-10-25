@@ -13,7 +13,7 @@ import android.view.Surface;
 import android.view.WindowManager;
 
 import com.delivery.arish.arishdelivery.R;
-import com.delivery.arish.arishdelivery.mvp.View.OnMainItemListClickListener;
+import com.delivery.arish.arishdelivery.mvp.View.OnItemListClickListener;
 import com.delivery.arish.arishdelivery.mvp.model.MainModel;
 import com.delivery.arish.arishdelivery.data.Contract;
 import com.delivery.arish.arishdelivery.mvp.presenter.MainPresenter;
@@ -32,11 +32,11 @@ public class MainActivity extends AppCompatActivity  {
     @BindView(R.id.recycler_view)
     protected RecyclerView mRv;
     private ArrayList<MainModel> mMainModelArrayList;
-    private BakesAdapter mBakesAdapter;
+    private MainListAdapter mMainListAdapter;
     protected MainPresenter mPresenter;
 
 
-    private final OnMainItemListClickListener onBakeClickListener = new OnMainItemListClickListener() {
+    private final OnItemListClickListener onBakeClickListener = new OnItemListClickListener() {
         @Override
         public void onlItemClick(int pos) {
             launchDetailActivity(pos);
@@ -111,11 +111,11 @@ public class MainActivity extends AppCompatActivity  {
         mRv.setLayoutManager(new LinearLayoutManager(this,
                 LinearLayoutManager.VERTICAL, false));
         //Pass a list of images with inflater ​​in adapter
-        mBakesAdapter = new BakesAdapter(MainPresenter.getMainModel(this), getLayoutInflater());
+        mMainListAdapter = new MainListAdapter(MainPresenter.getMainModel(this), getLayoutInflater());
 
-        mBakesAdapter.setBakeClickListener(onBakeClickListener);
+        mMainListAdapter.setBakeClickListener(onBakeClickListener);
 
-        mRv.setAdapter(mBakesAdapter);
+        mRv.setAdapter(mMainListAdapter);
     }
 
     //initialiseList to show values inside mBake_list
@@ -127,11 +127,11 @@ public class MainActivity extends AppCompatActivity  {
         mRv.setLayoutManager(new GridLayoutManager(this, 2,
                 GridLayoutManager.VERTICAL, false));
         //Pass a list of images with inflater ​​in adapter
-        mBakesAdapter = new BakesAdapter(MainPresenter.getMainModel(this), getLayoutInflater());
+        mMainListAdapter = new MainListAdapter(MainPresenter.getMainModel(this), getLayoutInflater());
 
-        mBakesAdapter.setBakeClickListener(onBakeClickListener);
+        mMainListAdapter.setBakeClickListener(onBakeClickListener);
 
-        mRv.setAdapter(mBakesAdapter);
+        mRv.setAdapter(mMainListAdapter);
     }
 
 }

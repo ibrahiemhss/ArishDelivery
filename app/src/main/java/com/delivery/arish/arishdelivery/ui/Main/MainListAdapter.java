@@ -1,9 +1,7 @@
 package com.delivery.arish.arishdelivery.ui.Main;
 
 import android.content.Context;
-import android.graphics.Bitmap;
 import android.support.annotation.NonNull;
-import android.support.v7.graphics.Palette;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,25 +11,24 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.delivery.arish.arishdelivery.R;
-import com.delivery.arish.arishdelivery.mvp.View.OnMainItemListClickListener;
+import com.delivery.arish.arishdelivery.mvp.View.OnItemListClickListener;
 import com.delivery.arish.arishdelivery.mvp.model.MainModel;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class BakesAdapter extends RecyclerView.Adapter<BakesAdapter.Holder> {
+public class MainListAdapter extends RecyclerView.Adapter<MainListAdapter.Holder> {
 
-    private static final String TAG = ArticlListAdapter.class.toString();
+    private static final String TAG = MainListAdapter.class.toString();
     private ArrayList<MainModel> mMainModelsList=new ArrayList<>();;
-    private OnMainItemListClickListener onMainItemListClickListener;
+    private OnItemListClickListener onItemListClickListener;
     private final LayoutInflater mLayoutInflater;
     private int mMutedColor = 0xFF333333;
 
 
-    public BakesAdapter(ArrayList<MainModel> mainModelArrayList, LayoutInflater inflater) {
+    public MainListAdapter(ArrayList<MainModel> mainModelArrayList, LayoutInflater inflater) {
         this.mMainModelsList=mainModelArrayList;
         mLayoutInflater = inflater;
     }
@@ -56,8 +53,8 @@ public class BakesAdapter extends RecyclerView.Adapter<BakesAdapter.Holder> {
     }
 
     //create interface to goo another activity
-    public void setBakeClickListener(OnMainItemListClickListener listener) {
-        onMainItemListClickListener = listener;
+    public void setBakeClickListener(OnItemListClickListener listener) {
+        onItemListClickListener = listener;
     }
 
 
@@ -100,8 +97,8 @@ public class BakesAdapter extends RecyclerView.Adapter<BakesAdapter.Holder> {
 
         @Override
         public void onClick(View view) {
-            if (onMainItemListClickListener != null) {
-                onMainItemListClickListener.onlItemClick(getAdapterPosition());
+            if (onItemListClickListener != null) {
+                onItemListClickListener.onlItemClick(getAdapterPosition());
             }
         }
     }
