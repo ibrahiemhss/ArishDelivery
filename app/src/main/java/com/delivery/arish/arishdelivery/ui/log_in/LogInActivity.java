@@ -14,7 +14,7 @@ import android.widget.RelativeLayout;
 
 import com.delivery.arish.arishdelivery.R;
 import com.delivery.arish.arishdelivery.data.SharedPrefManager;
-import com.delivery.arish.arishdelivery.mvp.presenter.LogInActivityPresenter;
+import com.delivery.arish.arishdelivery.mvp.presenter.LogInPresenter;
 import com.delivery.arish.arishdelivery.ui.Main.MainActivity;
 import com.delivery.arish.arishdelivery.util.MyAnimation;
 
@@ -85,8 +85,8 @@ public class LogInActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                LogInActivityPresenter logInActivityPresenter = new LogInActivityPresenter(LogInActivity.this);
-                logInActivityPresenter.requestLogin(mEtEmail.getText().toString(), mEtPassword.getText().toString(), "ytyty");
+                LogInPresenter logInPresenter = new LogInPresenter(LogInActivity.this);
+                logInPresenter.requestLogin(mEtEmail.getText().toString(), mEtPassword.getText().toString(), "ytyty");
             }
         });
 

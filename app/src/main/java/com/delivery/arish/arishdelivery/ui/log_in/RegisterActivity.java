@@ -28,7 +28,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.delivery.arish.arishdelivery.R;
 import com.delivery.arish.arishdelivery.internet.ProgressRequestBody;
-import com.delivery.arish.arishdelivery.mvp.presenter.RegisterActivityPresenter;
+import com.delivery.arish.arishdelivery.mvp.presenter.RegisterPresenter;
 import com.delivery.arish.arishdelivery.util.MyAnimation;
 
 import java.io.File;
@@ -268,9 +268,9 @@ public class RegisterActivity extends AppCompatActivity implements ProgressReque
     }
 
     private void initRegister() {
-        RegisterActivityPresenter registerActivityPresenter = new RegisterActivityPresenter(this);
+        RegisterPresenter registerPresenter = new RegisterPresenter(this);
         if (mPart_image == null) {
-            registerActivityPresenter.requestRegister(
+            registerPresenter.requestRegister(
                     mEtName.getText().toString(),
                     mEtName.getText().toString(),
                     mEtPassword.getText().toString(),
@@ -278,7 +278,7 @@ public class RegisterActivity extends AppCompatActivity implements ProgressReque
 
             Log.d(TAG, "ImageUploaingCase = null");
         } else {
-            registerActivityPresenter.requestRegisterWithPhoto(
+            registerPresenter.requestRegisterWithPhoto(
                     mPart_image,
                     mActualImageFile,
                     mEtName.getText().toString(),

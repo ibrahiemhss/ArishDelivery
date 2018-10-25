@@ -24,12 +24,12 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 
-public class LogInActivityPresenter {
+public class LogInPresenter {
 
     private Context mCtx;
     private BaseApiService mApiService;
     private ProgressDialog mLoading;
-    public LogInActivityPresenter(Context context) {
+    public LogInPresenter(Context context) {
         mCtx = context;
         mApiService = UtilsApi.getAPIService();
         mLoading = ProgressDialog.show(mCtx, null,  mCtx.getResources().getString( R.string.registring), true, false);

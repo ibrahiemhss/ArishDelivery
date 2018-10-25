@@ -31,12 +31,12 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class RegisterActivityPresenter {
+public class RegisterPresenter {
 
     private Context mCtx;
     private BaseApiService mApiService;
     private ProgressDialog mLoading;
-    public RegisterActivityPresenter(Context context) {
+    public RegisterPresenter(Context context) {
         mCtx = context;
         mApiService = UtilsApi.getAPIService();
         mLoading = ProgressDialog.show(mCtx, null, mCtx.getResources().getString(R.string.registring), true, false);
