@@ -41,7 +41,7 @@
                 android:layout_toRightOf="@id/ivContactItem1"
                 android:text="(123) 456-7890"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                android:textColor="#212121" />
+                android:textColor="@color/black" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -54,22 +54,19 @@
                 android:layout_toRightOf="@id/ivContactItem1"
                 android:text="@string/home"
                 android:textAppearance="@style/TextAppearance.AppCompat.Small"
-                android:textColor="#727272" />
+                android:textColor="@color/grey" />
 
-            <ToggleButton
+            <Button
                 android:id="@+id/chkState1"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
+                android:layout_width="@dimen/profile_btn_width"
+                android:layout_height="@dimen/profile_btn_height"
+                android:text="edit"
+                android:background="@drawable/button_back"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
-                android:layout_marginLeft="@dimen/profile_side_margin"
-                android:layout_marginStart="@dimen/profile_side_margin"
-                android:background="@drawable/toggle_selector_profile"
-                android:checked="true"
-                android:padding="6dp"
-                android:textOff=""
-                android:textOn="" />
+                android:padding="@dimen/profile_btn_padding"
+                />
 
         </RelativeLayout>
 
@@ -109,9 +106,9 @@
                 android:layout_toStartOf="@+id/chkState3"
                 android:ellipsize="end"
                 android:maxLines="1"
-                android:text="chintan@letsnurture.com"
+                android:text="UserEmail@Email.com"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                android:textColor="#212121" />
+                android:textColor="@color/black" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -124,22 +121,18 @@
                 android:layout_toRightOf="@id/ivContactItem3"
                 android:text="@string/home"
                 android:textAppearance="@style/TextAppearance.AppCompat.Small"
-                android:textColor="#727272" />
+                android:textColor="@color/grey" />
 
-            <ToggleButton
+            <Button
                 android:id="@+id/chkState3"
-                android:layout_width="@dimen/profile_togglebtn_width"
-                android:layout_height="@dimen/profile_togglebtn_height"
+                android:layout_width="@dimen/profile_btn_width"
+                android:layout_height="@dimen/profile_btn_height"
+                android:text="edit"
+                android:background="@drawable/button_back"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
-                android:layout_marginLeft="@dimen/profile_side_margin"
-                android:layout_marginStart="@dimen/profile_side_margin"
-                android:background="@drawable/toggle_selector_profile"
-                android:checked="true"
-                android:padding="@dimen/profile_togglebtn_padding"
-                android:textOff=""
-                android:textOn="" />
+                android:padding="@dimen/profile_btn_padding"/>
 
         </RelativeLayout>
 
@@ -179,9 +172,9 @@
                 android:layout_toStartOf="@+id/chkState5"
                 android:ellipsize="end"
                 android:maxLines="1"
-                android:text="202 Park Street, Los Angeles"
+                android:text="Arish_masaeed"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                android:textColor="#212121" />
+                android:textColor="@color/black" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -194,22 +187,18 @@
                 android:layout_toRightOf="@id/ivContactItem5"
                 android:text="@string/home"
                 android:textAppearance="@style/TextAppearance.AppCompat.Small"
-                android:textColor="#727272" />
+                android:textColor="@color/grey" />
 
-            <ToggleButton
+            <Button
                 android:id="@+id/chkState5"
-                android:layout_width="@dimen/profile_togglebtn_width"
-                android:layout_height="@dimen/profile_togglebtn_height"
+                android:layout_width="@dimen/profile_btn_width"
+                android:layout_height="@dimen/profile_btn_height"
+                android:text="edit"
+                android:background="@drawable/button_back"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
-                android:layout_marginLeft="@dimen/profile_side_margin"
-                android:layout_marginStart="@dimen/profile_side_margin"
-                android:background="@drawable/toggle_selector_profile"
-                android:checked="true"
-                android:padding="@dimen/profile_togglebtn_padding"
-                android:textOff=""
-                android:textOn="" />
+                android:padding="@dimen/profile_btn_padding"/>
 
         </RelativeLayout>
 
@@ -221,39 +210,15 @@
             android:layout_marginTop="8dp"
             android:background="@color/grey" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="@dimen/profile_side_margin">
+
 
             <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/send_sms" />
-
-            <Button
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/profile_side_margin"
-                android:layout_marginTop="@dimen/profile_side_margin"
-                android:text="@string/call" />
-
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/profile_side_margin"
-                android:layout_marginTop="@dimen/profile_side_margin"
-                android:text="@string/email" />
-
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/profile_side_margin"
+                android:background="@drawable/button_back"
                 android:layout_marginTop="@dimen/profile_side_margin"
                 android:text="@string/remove_contact" />
-
-        </LinearLayout>
     </LinearLayout>
 
 </android.support.v4.widget.NestedScrollView>

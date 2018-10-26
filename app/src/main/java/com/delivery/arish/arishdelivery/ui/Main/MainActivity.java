@@ -4,28 +4,44 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.os.PersistableBundle;
+import android.support.annotation.NonNull;
+import android.support.design.widget.NavigationView;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
+import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.Surface;
+import android.view.View;
 import android.view.WindowManager;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.delivery.arish.arishdelivery.R;
+import com.delivery.arish.arishdelivery.data.SharedPrefManager;
 import com.delivery.arish.arishdelivery.mvp.View.OnItemListClickListener;
 import com.delivery.arish.arishdelivery.mvp.model.MainModel;
 import com.delivery.arish.arishdelivery.data.Contract;
 import com.delivery.arish.arishdelivery.mvp.presenter.MainPresenter;
 import com.delivery.arish.arishdelivery.ui.details.DetailsActivity;
+import com.delivery.arish.arishdelivery.ui.log_in.LogInActivity;
+import com.delivery.arish.arishdelivery.ui.log_in.ProfileActivity;
 
 import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import de.hdodenhof.circleimageview.CircleImageView;
 
 @SuppressLint("Registered")
-public class MainActivity extends AppCompatActivity  {
+public class MainActivity extends AppCompatActivity {
 
 
     //bind RecyclerView
@@ -33,10 +49,18 @@ public class MainActivity extends AppCompatActivity  {
     protected RecyclerView mRv;
     private ArrayList<MainModel> mMainModelArrayList;
     private MainListAdapter mMainListAdapter;
-    protected MainPresenter mPresenter;
+    @BindView(R.id.drawer_layout)
+    protected DrawerLayout mDrawerLayout;
+    @BindView(R.id.maintoolbar)
+    protected Toolbar mToolbar;
+    @BindView(R.id.nav_view)
+    protected NavigationView mNavigationView;
+
+    private ActionBarDrawerToggle mDrawerToggle;
 
 
-    private final OnItemListClickListener onBakeClickListener = new OnItemListClickListener() {
+
+    private final OnItemListClickListener onItemListClickListener = new OnItemListClickListener() {
         @Override
         public void onlItemClick(int pos) {
             launchDetailActivity(pos);
@@ -50,7 +74,18 @@ public class MainActivity extends AppCompatActivity  {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        ButterKnife.bind(this);
+
+
+        mMainModelArrayList=MainPresenter.getMainModel(this);
             GetListByScreenSize();
+
+
+            setSupportActionBar(mToolbar);
+            mToolbar.setLogoDescription(getResources().getString(R.string.app_name));
+
+        initNavigationDrawer();
+
 
     }
 
@@ -79,7 +114,6 @@ public class MainActivity extends AppCompatActivity  {
                 } else {
                     initialiseListWithPhoneScreen();
                 }
-
                 break;
             case Surface.ROTATION_90:
                 initialiseListWithsLargeSize();
@@ -87,7 +121,6 @@ public class MainActivity extends AppCompatActivity  {
             case Surface.ROTATION_180:
                 initialiseListWithPhoneScreen();
                 break;
-
 
             case Surface.ROTATION_270:
                 break;
@@ -100,38 +133,93 @@ public class MainActivity extends AppCompatActivity  {
                 >= Configuration.SCREENLAYOUT_SIZE_LARGE;
     }
 
-
-
-    //initialiseList to show values inside mBake_list
     private void initialiseListWithPhoneScreen() {
-
 
         ButterKnife.bind(this);
         mRv.setHasFixedSize(true);
         mRv.setLayoutManager(new LinearLayoutManager(this,
                 LinearLayoutManager.VERTICAL, false));
-        //Pass a list of images with inflater ​​in adapter
-        mMainListAdapter = new MainListAdapter(MainPresenter.getMainModel(this), getLayoutInflater());
-
-        mMainListAdapter.setBakeClickListener(onBakeClickListener);
-
+        mMainListAdapter = new MainListAdapter(mMainModelArrayList, getLayoutInflater());
+        mMainListAdapter.setOnItemListClickListener(onItemListClickListener);
         mRv.setAdapter(mMainListAdapter);
+        mMainListAdapter.notifyDataSetChanged();
     }
 
-    //initialiseList to show values inside mBake_list
     private void initialiseListWithsLargeSize() {
-
 
         ButterKnife.bind(this);
         mRv.setHasFixedSize(true);
         mRv.setLayoutManager(new GridLayoutManager(this, 2,
                 GridLayoutManager.VERTICAL, false));
-        //Pass a list of images with inflater ​​in adapter
-        mMainListAdapter = new MainListAdapter(MainPresenter.getMainModel(this), getLayoutInflater());
-
-        mMainListAdapter.setBakeClickListener(onBakeClickListener);
-
+        mMainListAdapter = new MainListAdapter(mMainModelArrayList, getLayoutInflater());
+        mMainListAdapter.setOnItemListClickListener(onItemListClickListener);
         mRv.setAdapter(mMainListAdapter);
+        mMainListAdapter.notifyDataSetChanged();
+
     }
 
+    @Override
+    public void onBackPressed() {
+
+        if (mDrawerLayout.isDrawerOpen( GravityCompat.START )) {
+            mDrawerLayout.closeDrawer( GravityCompat.START );
+        } else {
+            super.onBackPressed();
+        }
+    }
+
+
+
+
+    private void initNavigationDrawer(){
+
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this, mDrawerLayout, mToolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close );
+        mDrawerLayout.addDrawerListener( toggle );
+        toggle.syncState();
+
+        CircleImageView circleImageView =mNavigationView.findViewById(R.id.nav_image);
+        TextView txtName =mNavigationView.findViewById(R.id.nav_txtname);
+        CircleImageView txtEmail =mNavigationView.findViewById(R.id.nav_txtemail);
+        ImageView imgProfile=mNavigationView.findViewById(R.id.nav_profile);
+        ImageView imgShare=mNavigationView.findViewById(R.id.nav_share);
+        ImageView imgLogOut=mNavigationView.findViewById(R.id.nav_signout);
+
+        imgProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Launching the login activity
+                Intent intent = new Intent( MainActivity.this, ProfileActivity.class );
+                startActivity( intent );
+                finish();
+            }
+        });
+
+        imgShare.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+        imgLogOut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                logoutUser();
+            }
+        });
+
+
+
+
+    }
+
+    private void logoutUser() {
+
+        SharedPrefManager.getInstance( this ).setLoginUser( false );
+
+        // Launching the login activity
+        Intent intent = new Intent( MainActivity.this, LogInActivity.class );
+        startActivity( intent );
+        finish();
+    }
 }

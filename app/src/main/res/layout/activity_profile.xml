@@ -8,14 +8,14 @@
     tools:context=".ui.log_in.ProfileActivity">
 
     <android.support.design.widget.AppBarLayout
-        android:id="@+id/app_bar"
+        android:id="@+id/aprofile_pp_bar"
         android:layout_width="match_parent"
         android:layout_height="@dimen/profile_app_bar_height"
         android:fitsSystemWindows="true"
         android:theme="@style/AppTheme.AppBarOverlay">
 
         <android.support.design.widget.CollapsingToolbarLayout
-            android:id="@+id/toolbar_layout"
+            android:id="@+id/profile_collapsing_toolbar"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:fitsSystemWindows="true"
@@ -32,12 +32,11 @@
                 android:layout_marginRight="@dimen/profile_circleimageview_side_margin"
                 android:adjustViewBounds="true"
                 android:src="@drawable/ic_account_box"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true" />
+                android:layout_gravity="center" />
 
 
             <android.support.v7.widget.Toolbar
-                android:id="@+id/toolbarProfile"
+                android:id="@+id/profile_toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 app:layout_collapseMode="pin"

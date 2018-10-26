@@ -1,12 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorPrimary">#419fd9</color>
+    <color name="colorPrimaryDark">#0071a7</color>
     <color name="theme_primary_light">#FFCCBC</color>
     <color name="colorAccent">#FF4081</color>
     <color name="white">#ffffff</color>
+    <color name="black">#000000</color>
     <color name="lite_grey">#CFD8DC</color>
     <color name="WhiteTransparent">#8fff</color>
+    <color name="color12">#ff7058</color>
+    <color name="Ivory">#FFFFF0</color>
+    <color name="blue_light">#5cb8ff</color>
+
 
     <!-- 1st Gradient color -->
     <color name="colorPurple_A400">#D500F9</color>

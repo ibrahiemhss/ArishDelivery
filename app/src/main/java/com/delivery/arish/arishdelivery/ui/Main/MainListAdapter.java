@@ -1,7 +1,9 @@
 package com.delivery.arish.arishdelivery.ui.Main;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.support.annotation.NonNull;
+import android.support.v7.graphics.Palette;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +12,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.delivery.arish.arishdelivery.R;
 import com.delivery.arish.arishdelivery.mvp.View.OnItemListClickListener;
 import com.delivery.arish.arishdelivery.mvp.model.MainModel;
@@ -53,7 +57,7 @@ public class MainListAdapter extends RecyclerView.Adapter<MainListAdapter.Holder
     }
 
     //create interface to goo another activity
-    public void setBakeClickListener(OnItemListClickListener listener) {
+    public void setOnItemListClickListener(OnItemListClickListener listener) {
         onItemListClickListener = listener;
     }
 
@@ -64,8 +68,6 @@ public class MainListAdapter extends RecyclerView.Adapter<MainListAdapter.Holder
         private final Context mContext;
         @BindView(R.id.article_title)
         public  TextView titleView;
-        @BindView(R.id.article_subtitle)
-        public  TextView subtitleView;
         @BindView(R.id.thumbnail)
         protected ImageView thumbnail;
         @BindView(R.id.LinearListContainer)
@@ -80,9 +82,14 @@ public class MainListAdapter extends RecyclerView.Adapter<MainListAdapter.Holder
 
         public void bind(MainModel mainModel, int position) {
             titleView.setText(mainModel.getName());
-            thumbnail.setImageResource(mainModel.getImage());
 
-           /* thumbnail.buildDrawingCache();
+            Glide.with(mContext)
+                    .load("null value")
+                    .apply(new RequestOptions()
+                            .placeholder(mainModel.getImage()))
+                    .into(thumbnail);
+
+          thumbnail.buildDrawingCache();
 
             Bitmap bitmap = thumbnail.getDrawingCache();
             if (bitmap != null) {
@@ -91,7 +98,7 @@ public class MainListAdapter extends RecyclerView.Adapter<MainListAdapter.Holder
                 LinearListContainer
                         .setBackgroundColor(mMutedColor);
             }
-*/
+
         }
 
 

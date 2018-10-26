@@ -14,9 +14,13 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:actionBarStyle">@style/NavigationViewStyle</item>
+        <item name="android:windowFullscreen">true</item>
 
     </style>
-
+    <style name="NavigationViewStyle">
+        <item name="android:listPreferredItemHeightSmall">25dp</item><!-- menu item height-->
+    </style>
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />

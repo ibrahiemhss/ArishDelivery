@@ -9,25 +9,33 @@ import java.util.ArrayList;
 
 public class MainPresenter {
 
+
+
     public static ArrayList<MainModel> getMainModel(Context context)
     {
-        ArrayList<MainModel> spaceships=new ArrayList<>();
 
-        MainModel s=new MainModel();
-        s.setName(context.getString(R.string.restaurant));
-        s.setImage(R.drawable.restaurant);
-        spaceships.add(s);
 
-        s=new MainModel();
-        s.setName(context.getString(R.string.cafes));
-        s.setImage(R.drawable.cafes);
-        spaceships.add(s);
+         final String names_values[] = {
+                 context.getString(R.string.restaurant),
+                 context.getString(R.string.cafes),
+                 context.getString(R.string.pharmacies),
 
-        s=new MainModel();
-        s.setName(context.getString(R.string.pharmacies));
-        s.setImage(R.drawable.pharmacies);
-        spaceships.add(s);
+        };
 
-        return spaceships;
+         final int images_values[] = {
+                 R.drawable.restaurant,
+                 R.drawable.cafes,
+                 R.drawable.pharmacies
+        };
+        ArrayList<MainModel> mainModelArrayList=new ArrayList<>();
+
+
+        for(int i=0;i<names_values.length;i++){
+            MainModel s=new MainModel();
+            s.setName(names_values[i]);
+            s.setImage(images_values[i]);
+            mainModelArrayList.add(s);
+        }
+        return mainModelArrayList;
     }
 }
