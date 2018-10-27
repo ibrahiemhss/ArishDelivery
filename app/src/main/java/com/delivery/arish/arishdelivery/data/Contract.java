@@ -32,6 +32,9 @@ public class Contract {
 
 
     public static final String EXTRA_MAIN_LIST_POSITION="main_list_position";
+    public static final String EXTRA_DETAILS_LIST_POSITION="details_list_position";
+    public static final String EXTRA_INTER_ACTIVITY="inter_activity";
+
     public static final String EXTRA_DETAILS_LIST="details_list";
 
 

@@ -56,8 +56,6 @@ public class MainActivity extends BaseActivity {
     protected Toolbar mToolbar;
     @BindView(R.id.nav_view)
     protected NavigationView mNavigationView;
-
-
     @Override
     protected int getResourceLayout() {
         return R.layout.activity_main;

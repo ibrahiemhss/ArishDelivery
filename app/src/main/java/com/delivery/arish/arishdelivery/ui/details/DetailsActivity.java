@@ -16,6 +16,7 @@ import android.view.Surface;
 import android.view.WindowManager;
 
 import com.delivery.arish.arishdelivery.R;
+import com.delivery.arish.arishdelivery.base.BaseActivity;
 import com.delivery.arish.arishdelivery.data.Contract;
 import com.delivery.arish.arishdelivery.mvp.View.OnItemListClickListener;
 import com.delivery.arish.arishdelivery.mvp.model.DetailsModel;
@@ -32,7 +33,7 @@ import java.util.ArrayList;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class DetailsActivity extends AppCompatActivity {
+public class DetailsActivity extends BaseActivity {
 
 
     //bind RecyclerView
@@ -49,25 +50,44 @@ public class DetailsActivity extends AppCompatActivity {
     private final OnItemListClickListener onItemListClickListener = new OnItemListClickListener() {
         @Override
         public void onlItemClick(int pos) {
-            launchOrderActivity(pos);
 
+            launchOrderActivity(pos);
         }
 
 
     };
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_details);
+    protected int getResourceLayout() {
+        return R.layout.activity_details;
+    }
 
+    @Override
+    protected void init() {
 
-        ButterKnife.bind(this);
-
-
+        Bundle extras = getIntent().getExtras();
+        assert extras != null;
+        if(extras !=null&&extras.containsKey(Contract.EXTRA_MAIN_LIST_POSITION)){
+            int id = extras.getInt(Contract.EXTRA_MAIN_LIST_POSITION,0);
+            mDetailsModelArrayList=
+                    extras.getParcelableArrayList(Contract.EXTRA_DETAILS_LIST);
+            if(id>0){
+                Bundle extras2 = new Bundle();
+                extras2.putBoolean(Contract.EXTRA_INTER_ACTIVITY,false);
+                Intent intent=new Intent(DetailsActivity.this, OrdersActivity.class);
+                intent.putExtras(extras2);
+                startActivity(intent);
+                finish();
+            }
+        }
         mDetailsModelArrayList= DetailsPresenter.getDetailsModel(this);
         setupToolbar();
 
         GetListByScreenSize();
+    }
+
+    @Override
+    protected void setListener() {
 
     }
 
@@ -91,6 +111,7 @@ public class DetailsActivity extends AppCompatActivity {
             // Respond to the action bar's Up/Home button
             case android.R.id.home:
                 Intent intent = new Intent( DetailsActivity.this, MainActivity.class );
+
                 startActivity( intent );
                 return true;
 
@@ -156,7 +177,7 @@ public class DetailsActivity extends AppCompatActivity {
     private  void launchOrderActivity(int position) {
         Intent intent = new Intent(DetailsActivity.this, OrdersActivity.class);
         Bundle extras = new Bundle();
-        extras.putInt(Contract.EXTRA_MAIN_LIST_POSITION, position);
+        extras.putInt(Contract.EXTRA_DETAILS_LIST_POSITION, position);
         extras.putParcelableArrayList(Contract.EXTRA_DETAILS_LIST,mDetailsModelArrayList);
         // SharedPrefManager.getInstance(this).setPrefBakePosition(position);
         // String name = mMainModelArrayList.get(position).getName();
