@@ -10,28 +10,53 @@
     tools:context=".ui.Main.MainActivity">
 
     <android.support.design.widget.AppBarLayout
+        android:id="@+id/details_app_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:theme="@style/AppTheme.AppBarOverlay">
 
         <android.support.v7.widget.Toolbar
-            android:id="@+id/maintoolbar"
+            android:id="@+id/detailstoolbar"
             android:layout_width="match_parent"
             android:layout_height="?android:attr/actionBarSize"
             app:popupTheme="@style/AppTheme.PopupOverlay" />
 
     </android.support.design.widget.AppBarLayout>
 
-    <!--<android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab"
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab_details"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:elevation="@dimen/main_fab_elevation"
         android:layout_margin="@dimen/main_fab_margin"
         app:rippleColor="@color/colorPrimaryDark"
-        android:background="@color/white" />-->
+        android:background="@color/white" />
 
-    <include layout="@layout/content_main" />
+    <RelativeLayout
+        android:id="@+id/swipe_content_details"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/lite_grey"
+        android:orientation="vertical"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        tools:context=".ui.Main.MainActivity"
+        tools:showIn="@layout/app_bar_main">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/details_recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipToPadding="false"
+            android:paddingBottom="@dimen/list_bottom_padding"
+            android:paddingLeft="@dimen/list_side_padding"
+            android:paddingRight="@dimen/list_side_padding"
+            android:paddingTop="@dimen/list_top_padding"
+            android:layout_centerInParent="true"
+            android:scrollbarStyle="outsideOverlay" />
+
+    </RelativeLayout>
+
+
 
 </android.support.design.widget.CoordinatorLayout>

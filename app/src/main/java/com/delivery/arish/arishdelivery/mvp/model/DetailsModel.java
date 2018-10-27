@@ -3,37 +3,28 @@ package com.delivery.arish.arishdelivery.mvp.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-public class MainModel implements Parcelable{
+public class DetailsModel implements Parcelable {
 
-    private String name;
+   private String name;
     private int image;
-    private int color;
 
-    public int getColor() {
-        return color;
+    public DetailsModel() {
     }
 
-    public void setColor(int color) {
-        this.color = color;
-    }
-
-    public MainModel() {
-
-    }
-    public MainModel(Parcel in) {
+    protected DetailsModel(Parcel in) {
         name = in.readString();
         image = in.readInt();
     }
 
-    public static final Creator<MainModel> CREATOR = new Creator<MainModel>() {
+    public static final Creator<DetailsModel> CREATOR = new Creator<DetailsModel>() {
         @Override
-        public MainModel createFromParcel(Parcel in) {
-            return new MainModel(in);
+        public DetailsModel createFromParcel(Parcel in) {
+            return new DetailsModel(in);
         }
 
         @Override
-        public MainModel[] newArray(int size) {
-            return new MainModel[size];
+        public DetailsModel[] newArray(int size) {
+            return new DetailsModel[size];
         }
     };
 

@@ -49,11 +49,11 @@ public class LogInActivity extends AppCompatActivity {
 
         ButterKnife.bind(this);
         mAnimationDrawable = MyAnimation.animateBackground(mRelativeLayout);
-        if (SharedPrefManager.getInstance(getApplicationContext()).isUserLoggedIn()) {
+       // if (SharedPrefManager.getInstance(getApplicationContext()).isUserLoggedIn()) {
                 Intent intent = new Intent(LogInActivity.this, MainActivity.class);
                startActivity(intent);
                finish();
-        }
+       // }
         initComponents();
 
     }

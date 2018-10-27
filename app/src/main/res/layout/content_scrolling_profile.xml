@@ -60,7 +60,8 @@
                 android:id="@+id/chkState1"
                 android:layout_width="@dimen/profile_btn_width"
                 android:layout_height="@dimen/profile_btn_height"
-                android:text="edit"
+                android:text="@string/edit"
+                android:textAllCaps="false"
                 android:background="@drawable/button_back"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
@@ -127,7 +128,8 @@
                 android:id="@+id/chkState3"
                 android:layout_width="@dimen/profile_btn_width"
                 android:layout_height="@dimen/profile_btn_height"
-                android:text="edit"
+                android:text="@string/edit"
+                android:textAllCaps="false"
                 android:background="@drawable/button_back"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
@@ -193,10 +195,11 @@
                 android:id="@+id/chkState5"
                 android:layout_width="@dimen/profile_btn_width"
                 android:layout_height="@dimen/profile_btn_height"
-                android:text="edit"
+                android:text="@string/edit"
                 android:background="@drawable/button_back"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
+                android:textAllCaps="false"
                 android:layout_centerVertical="true"
                 android:padding="@dimen/profile_btn_padding"/>
 
@@ -218,6 +221,7 @@
                 android:layout_marginBottom="@dimen/profile_side_margin"
                 android:background="@drawable/button_back"
                 android:layout_marginTop="@dimen/profile_side_margin"
+                android:textAllCaps="false"
                 android:text="@string/remove_contact" />
     </LinearLayout>
 

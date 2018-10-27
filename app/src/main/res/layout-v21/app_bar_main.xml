@@ -22,7 +22,7 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <android.support.design.widget.FloatingActionButton
+    <!--<android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -30,7 +30,7 @@
         android:elevation="@dimen/main_fab_elevation"
         android:layout_margin="@dimen/main_fab_margin"
         app:rippleColor="@color/colorPrimaryDark"
-        android:background="@color/white" />
+        android:background="@color/white" />-->
 
     <include layout="@layout/content_main" />
 

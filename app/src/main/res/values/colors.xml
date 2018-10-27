@@ -10,13 +10,25 @@
     <color name="WhiteTransparent">#8fff</color>
     <color name="color12">#ff7058</color>
     <color name="Ivory">#FFFFF0</color>
-    <color name="blue_light">#5cb8ff</color>
-
+    <color name="blue_light">#9cd1fa</color>
+    <color name="blue_light_transparent">#16a3d2f5</color>
+    <color name="blue_dark_transparent">#470071a7</color>
 
     <!-- 1st Gradient color -->
     <color name="colorPurple_A400">#D500F9</color>
     <color name="colorPurple_900">#4A148C</color>
     <!-- ./ 1st Gradient color -->
+
+    <color name="colorGreen1">#4CAF50</color>
+    <color name="colorGreen2">#43A047</color>
+    <color name="colorGreen3">#388E3C</color>
+    <color name="colorGreen4">#2E7D32</color>
+    <color name="colorGreen5">#4CAF50</color>
+    <color name="colorGreen6">#43A047</color>
+    <color name="colorGreen7">#388E3C</color>
+    <color name="colorGreen8">#2E7D32</color>
+
+    <color name="green_whatsapp">#25D366</color>
 
     <!-- 2nd Gradient color -->
     <color name="colorAmber_A400">#FFC400</color>

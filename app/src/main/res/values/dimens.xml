@@ -33,14 +33,32 @@
     <dimen name="list_side_padding">5dp</dimen>
     <dimen name="list_top_padding">8dp</dimen>
     <dimen name="list_bottom_padding">24dp</dimen>
-    <!-- list item -->
-    <integer name="list_column_count">2</integer>
-    <dimen name="network_image_height">100dp</dimen>
-    <dimen name="item_layout_margin">4dp</dimen>
-    <dimen name="text_side_margin">12dp</dimen>
-    <dimen name="text_title_top_margin">12dp</dimen>
-    <dimen name="text_title_bottom_margin">4dp</dimen>
+    <!-- main list item -->
 
+    <dimen name="main_itemlist_bottom_margin">4dp</dimen>
+    <dimen name="main_itemlist_image_size">48dp</dimen>
+    <dimen name="main_itemlist_margin">8dp</dimen>
+    <dimen name="main_itemlist_image_padding">2dp</dimen>
+    <dimen name="main_itemlist_side_margin">16sp</dimen>
+    <dimen name="main_itemlist_text_size">22sp</dimen>
+
+    <!--TODO===== DetailsActivity ============================ -->
+
+    <!-- details list item -->
+
+    <dimen name="details_itemlist_text_side_margin">8dp</dimen>
+    <dimen name="details_itemlist_layout_margin">4dp</dimen>
+    <dimen name="details_itemlist_side_margin">12dp</dimen>
+    <dimen name="details_itemlist_text_top_margin">12dp</dimen>
+    <dimen name="details_itemlist_text_bottom_margin">4dp</dimen>
+    <dimen name="details_itemlist_text_size">16sp</dimen>
+
+    <!--TODO===== OrderActivity ============================ -->
+
+    <dimen name="order_layout_margin">16dp</dimen>
+    <dimen name="order_views_margin">4dp</dimen>
+    <dimen name="odrer_views_padding">4dp</dimen>
+    <dimen name="odrer_img_size">48dp</dimen>
     <!--TODO===== LogInActivity ============================ -->
     <!--  Linear Container View-->
     <dimen name="lgn_container_side_margin">48dp</dimen>

@@ -22,7 +22,7 @@
             app:contentScrim="?attr/colorPrimary"
             app:layout_scrollFlags="scroll|enterAlways|enterAlwaysCollapsed">
 
-            <ImageView
+            <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/imgHolderProfile"
                 android:layout_width="@dimen/profile_circleimageview_width"
                 android:layout_height="@dimen/profile_circleimageview_height"
@@ -30,9 +30,10 @@
                 android:layout_marginBottom="@dimen/lgn_container_bottom_margin"
                 android:layout_marginLeft="@dimen/profile_circleimageview_side_margin"
                 android:layout_marginRight="@dimen/profile_circleimageview_side_margin"
-                android:adjustViewBounds="true"
-                android:src="@drawable/ic_account_box"
-                android:layout_gravity="center" />
+                android:src="@drawable/bas"
+                app:civ_border_width="2dp"
+                android:layout_gravity="center"
+                app:civ_border_color="@color/white" />
 
 
             <android.support.v7.widget.Toolbar

@@ -3,33 +3,40 @@
     <string name="log_in">Log in</string>
     <string name="register">Register</string>
     <string name="resetpassword">Reset password</string>
-    <string name="send_pass_to_email">send password to email</string>
+    <string name="send_pass_to_email">Send password to email</string>
     <string name="email">Email</string>
     <string name="content_description_add_image">Click to add image</string>
-    <string name="user_name">user name</string>
-    <string name="password">password</string>
-    <string name="phone">phone</string>
+    <string name="user_name">User name</string>
+    <string name="password">Password</string>
+    <string name="phone">Phone</string>
     <string name="home">Home</string>
     <string name="send_sms">Send SMS</string>
     <string name="call">Call</string>
-    <string name="remove_contact">Remove All Details</string>
-    <string name="name">name</string>
-    <string name="personal_page">personal page</string>
-    <string name="privacy_policy">privacy policy</string>
+    <string name="remove_contact">Remove all details</string>
+    <string name="name">Name</string>
+    <string name="personal_page">Personal page</string>
+    <string name="privacy_policy">Privacy policy</string>
     <string name="Logout">Log Out</string>
     <string name="share">Share</string>
-    <string name="loging_in">loging in.......</string>
-    <string name="registring">registering......</string>
+    <string name="loging_in">Loging in.......</string>
+    <string name="registring">Registering......</string>
     <string name="ok">OK</string>
     <string name="cancel">Cancel</string>
     <string name="enable_permision">Please Enable the Read Storage permission in permission</string>
     <string name="read_storage_permisio_not">Read Storage Permission required for this app</string>
-    <string name="restaurant">restaurant</string>
-    <string name="cafes">cafes</string>
-    <string name="pharmacies">pharmacies</string>
+    <string name="restaurant">Restaurant</string>
+    <string name="pharmacies">Pharmacies</string>
 
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="libraries">libraries</string>
+    <string name="architectural_tools">Architectural tools</string>
+    <string name="other">Meat ,Fish ,Vegetables..etc</string>
+    <string name="call_with_whatsapp">Call with whatsApp</string>
+    <string name="type_order">Type your order</string>
+    <string name="add_your_order">Add your order</string>
+    <string name="direct_call">Direct call</string>
+    <string name="edit">Edit</string>
 
 </resources>

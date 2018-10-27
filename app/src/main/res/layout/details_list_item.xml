@@ -2,7 +2,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="@dimen/item_layout_margin"
+    android:layout_margin="@dimen/details_itemlist_layout_margin"
     android:background="@color/theme_primary_light"
     android:clickable="true"
     android:clipToPadding="false"
@@ -12,34 +12,36 @@
     <LinearLayout
         android:id="@+id/LinearListContainer"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:background="@color/white"
         android:orientation="vertical">
 
         <!--suppress AndroidLintContentDescription -->
         <ImageView
-            android:id="@+id/thumbnail"
+            android:id="@+id/image_details_item"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/item_layout_margin"
+            android:layout_margin="@dimen/details_itemlist_layout_margin"
+            android:layout_marginTop="@dimen/details_itemlist_layout_margin"
             android:layout_gravity="center"
-            />
-
+            android:adjustViewBounds="true"
+            android:scaleType="centerInside" />
 
         <TextView
-            android:id="@+id/article_title"
+            android:id="@+id/name_details_item"
             style="@style/TextAppearance.AppCompat.Subhead"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ellipsize="end"
             android:fontFamily="serif"
+            android:textStyle="bold"
             android:maxLines="4"
             android:textAlignment="center"
-            android:paddingBottom="@dimen/text_title_bottom_margin"
-            android:paddingLeft="@dimen/text_side_margin"
-            android:paddingRight="@dimen/text_side_margin"
-            android:paddingTop="@dimen/text_title_top_margin"
-            android:textColor="@color/black" />
+            android:paddingBottom="@dimen/details_itemlist_text_bottom_margin"
+            android:paddingLeft="@dimen/details_itemlist_side_margin"
+            android:paddingRight="@dimen/details_itemlist_side_margin"
+            android:paddingTop="@dimen/details_itemlist_text_size"
+            android:textColor="@color/white" />
 
 
     </LinearLayout>

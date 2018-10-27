@@ -1,11 +1,10 @@
-package com.delivery.arish.arishdelivery.ui.Main;
+package com.delivery.arish.arishdelivery.ui.details;
 
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.support.annotation.NonNull;
 import android.support.v7.graphics.Palette;
-import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,32 +17,32 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.delivery.arish.arishdelivery.R;
 import com.delivery.arish.arishdelivery.mvp.View.OnItemListClickListener;
+import com.delivery.arish.arishdelivery.mvp.model.DetailsModel;
 import com.delivery.arish.arishdelivery.mvp.model.MainModel;
 
 import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import de.hdodenhof.circleimageview.CircleImageView;
 
-public class MainListAdapter extends RecyclerView.Adapter<MainListAdapter.Holder> {
+public class DetailsAdapter extends RecyclerView.Adapter<DetailsAdapter.Holder> {
 
-    private static final String TAG = MainListAdapter.class.toString();
-    private ArrayList<MainModel> mMainModelsList=new ArrayList<>();;
+    private static final String TAG = DetailsAdapter.class.toString();
+    private ArrayList<DetailsModel> mDetailsModels=new ArrayList<>();;
     private OnItemListClickListener onItemListClickListener;
     private final LayoutInflater mLayoutInflater;
     private int mMutedColor = 0xFF333333;
 
 
-    public MainListAdapter(ArrayList<MainModel> mainModelArrayList, LayoutInflater inflater) {
-        this.mMainModelsList=mainModelArrayList;
+    public DetailsAdapter(ArrayList<DetailsModel> detailsModelArrayList, LayoutInflater inflater) {
+        this.mDetailsModels=detailsModelArrayList;
         mLayoutInflater = inflater;
     }
 
     @NonNull
     @Override
     public Holder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = mLayoutInflater.inflate(R.layout.main_list_item, parent, false);
+        View view = mLayoutInflater.inflate(R.layout.details_list_item, parent, false);
 
         return new Holder(view);
     }
@@ -51,12 +50,12 @@ public class MainListAdapter extends RecyclerView.Adapter<MainListAdapter.Holder
     @Override
     public void onBindViewHolder(@NonNull Holder holder, int position) {
 
-        holder.bind(mMainModelsList.get(position), position);
+        holder.bind(mDetailsModels.get(position), position);
     }
 
     @Override
     public int getItemCount() {
-        return mMainModelsList.size();
+        return mDetailsModels.size();
     }
 
     //create interface to goo another activity
@@ -69,15 +68,12 @@ public class MainListAdapter extends RecyclerView.Adapter<MainListAdapter.Holder
     @SuppressWarnings("unused")
     public class Holder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private final Context mContext;
-        @BindView(R.id.name_item)
+        @BindView(R.id.name_details_item)
         protected  TextView titleView;
-        @BindView(R.id.image_item)
-        protected CircleImageView thumbnail;
-        @BindView(R.id.main_linear_item_list_container)
+        @BindView(R.id.image_details_item)
+        protected ImageView thumbnail;
+        @BindView(R.id.LinearListContainer)
         protected LinearLayout LinearListContainer;
-        @BindView(R.id.main_listitem_card)
-        protected CardView mCardView;
-
 
         public Holder(View itemView) {
             super(itemView);
@@ -86,21 +82,37 @@ public class MainListAdapter extends RecyclerView.Adapter<MainListAdapter.Holder
             ButterKnife.bind(this, itemView);
         }
 
-        public void bind(MainModel mainModel, int position) {
-            titleView.setText(mainModel.getName());
+        public void bind(DetailsModel detailsModel, int position) {
+            titleView.setText(detailsModel.getName());
 
             Glide.with(mContext)
                     .load("null value")
                     .apply(new RequestOptions()
-                            .placeholder(mainModel.getImage()))
+                            .placeholder(detailsModel.getImage()))
                     .into(thumbnail);
 
-            thumbnail.buildDrawingCache();
+          thumbnail.buildDrawingCache();
+            Bitmap bitmap = BitmapFactory.decodeResource(mContext.getResources(),detailsModel.getImage());
 
-            thumbnail.buildDrawingCache();
+        //    Bitmap bitmap = thumbnail.getDrawingCache();
+            if (bitmap != null) {
+                Palette p = Palette.generate(bitmap, 15000000);
+                mMutedColor = p.getDarkMutedColor(0xFF333333);
+                LinearListContainer
+                        .setBackgroundColor(mMutedColor);
 
-            mCardView.setCardBackgroundColor(mainModel.getColor());
+
+
+               /* Palette.generateAsync(bitmap, new Palette.PaletteAsyncListener() {
+                    public void onGenerated(Palette palette) {
+                        int bgColor = palette.getMutedColor(mContext.getResources().getColor(android.R.color.black));
+                        LinearListContainer.setBackgroundColor(bgColor);
+                    }
+                });*/
+            }
+
         }
+
 
         @Override
         public void onClick(View view) {
@@ -110,4 +122,5 @@ public class MainListAdapter extends RecyclerView.Adapter<MainListAdapter.Holder
         }
     }
 }
+
 

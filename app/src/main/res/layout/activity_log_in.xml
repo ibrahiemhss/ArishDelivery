@@ -54,6 +54,7 @@
             android:layout_marginTop="@dimen/lgn_btn_top_margin"
             android:background="@drawable/bg_rectangle_button"
             android:text="@string/log_in"
+            android:textAllCaps="false"
             android:textColor="@color/white"
             android:textSize="@dimen/lgn_btn_txt_size" />
 
@@ -65,6 +66,7 @@
             android:layout_marginTop="@dimen/lgn_btn_top_margin"
             android:background="@drawable/bg_rectangle_button"
             android:text="@string/register"
+            android:textAllCaps="false"
             android:textColor="@color/white"
             android:textSize="@dimen/lgn_btn_txt_size" />
 

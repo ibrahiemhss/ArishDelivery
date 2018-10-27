@@ -25,7 +25,7 @@
             android:layout_width="@dimen/main_nav_width"
             android:layout_height="wrap_content"
             android:layout_gravity="start"
-            android:background="@drawable/white_back"
+            android:background="@drawable/nav_background"
             android:layout_marginTop="?android:attr/actionBarSize"
             android:labelFor="@+id/app_bar_main"
             android:layout_marginBottom="@dimen/main_nav_bottom_margin">

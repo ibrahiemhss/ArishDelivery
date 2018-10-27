@@ -46,7 +46,10 @@
                 android:resource="@xml/provider_paths" />
         </provider>
 
-        <activity android:name=".ui.details.DetailsActivity"></activity>
+        <activity android:name=".ui.details.DetailsActivity" />
+        <activity android:name=".ui.order.OrdersActivity"
+            android:theme="@style/AppTheme"
+            ></activity>
     </application>
 
 </manifest>

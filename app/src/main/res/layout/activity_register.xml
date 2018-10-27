@@ -129,6 +129,7 @@
             android:layout_marginTop="@dimen/rg_btn_top_margin"
             android:background="@drawable/bg_rectangle_button"
             android:text="@string/register"
+            android:textAllCaps="false"
             android:textColor="@color/white" />
 
         <ProgressBar

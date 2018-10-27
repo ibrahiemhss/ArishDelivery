@@ -56,6 +56,7 @@
         android:layout_height="wrap_content"
         android:textColor="@color/white"
         android:text="@string/send_pass_to_email"
+        android:textAllCaps="false"
         android:background="@drawable/bg_rectangle_button" />
 
     <ProgressBar
