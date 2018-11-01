@@ -26,7 +26,9 @@ public interface BaseApiService {
     Call<ResponseBody> loginRequest(
             @Field(Contract.EMAIL_COL) String email,
             @Field(Contract.PASSWORD_COL) String password,
-            @Field(Contract.TOKEN_COL) String token);
+            @Field(Contract.TOKEN_COL) String token,
+            @Field(Contract.LANG_COL) String lang);
+
 
 
     @FormUrlEncoded
@@ -35,7 +37,9 @@ public interface BaseApiService {
             @Field(Contract.NAME_COL) String name,
             @Field(Contract.EMAIL_COL) String email,
             @Field(Contract.PASSWORD_COL) String password,
-            @Field(Contract.PHONE_COL) String phone);
+            @Field(Contract.PHONE_COL) String phone,
+            @Field(Contract.LANG_COL) String lang);
+
 
     @Multipart
     @POST(Contract.REGISTER_WITH_IMAGE_URL)
@@ -43,9 +47,21 @@ public interface BaseApiService {
             @PartMap() Map<String, RequestBody> partMap,
             @Part MultipartBody.Part image);
 
+
     @FormUrlEncoded
-    @POST(Contract.RESET_PASSWORD_URL)
-    Call<ResponseBody> resetPassword(@Field(Contract.EMAIL_COL) String email);
+    @POST(Contract.FORGET_PASSWORD_URL)
+    Call<ResponseBody> sendCodeToMail(
+            @Field(Contract.EMAIL_COL) String email,
+            @Field(Contract.LANG_COL) String lang);
+
+    @FormUrlEncoded
+    @POST(Contract.UPDATE_PASSWORD_URL)
+    Call<ResponseBody> updatePass(
+            @Field(Contract.EMAIL_COL) String email,
+            @Field(Contract.PASSWORD_COL) String password,
+            @Field(Contract.CODE_COL) String phone,
+            @Field(Contract.LANG_COL) String lang);
+
 
     @FormUrlEncoded
     @POST("InsertData/insert_booking.php")

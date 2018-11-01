@@ -4,60 +4,19 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="@dimen/nav_width"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="?attr/actionBarSize"
-    android:background="@drawable/nav_background"
+    android:layout_marginTop="?android:attr/actionBarSize"
     android:elevation="@dimen/nav_elevation"
     tools:context="com.delivery.arish.arishdelivery.ui.Main.MainActivity">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
     <LinearLayout
-        android:id="@+id/lin1"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/nav_header_height"
+        android:background="@color/white"
         android:orientation="vertical"
-        android:background="@drawable/blue_gradient" >
-
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/nav_image"
-            android:layout_width="@dimen/nav_header_circleimageview_width"
-            android:layout_weight="1"
-            android:layout_gravity="center"
-            android:layout_height="0dp"
-            android:src="@drawable/bas"
-            app:civ_border_width="2dp"
-            app:civ_border_color="@color/white" />
-
-
-        <TextView
-            android:id="@+id/nav_txtname"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="@dimen/nav_header_txt_padding"
-            android:layout_marginBottom="@dimen/nav_header_txt_bottom_margin"
-            android:textAlignment="center"
-            android:gravity="center"
-            android:layout_gravity="center"
-            android:textColor="@color/login_primary_dark"
-            android:text="@string/name" />
-
-
-        <TextView
-            android:id="@+id/nav_txtemail"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="@dimen/nav_header_txt_padding"
-            android:layout_marginBottom="@dimen/nav_header_txt_bottom_margin"
-            android:gravity="center"
-            android:layout_gravity="center"
-            android:textColor="@color/login_primary_darker"
-            android:inputType="textMultiLine"
-            android:ellipsize="end"
-            android:singleLine="true"
-            android:text="@string/email" />
-    </LinearLayout>
+        android:layout_height="wrap_content">
+        <include
+            layout="@layout/nav_header_main"
+            android:layout_width="match_parent"
+            android:layout_height="200dp" />
 
     <RelativeLayout
         android:layout_width="wrap_content"
@@ -153,6 +112,6 @@
 
 
     </RelativeLayout>
-    </RelativeLayout>
+    </LinearLayout>
 
 </ScrollView>

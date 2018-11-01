@@ -2,27 +2,37 @@ package com.delivery.arish.arishdelivery.ui.log_in;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Build;
 import android.os.Bundle;
+import com.delivery.arish.arishdelivery.util.LangUtil;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
+import android.view.inputmethod.InputMethodSubtype;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.delivery.arish.arishdelivery.R;
+import com.delivery.arish.arishdelivery.base.BaseActivity;
 import com.delivery.arish.arishdelivery.data.SharedPrefManager;
 import com.delivery.arish.arishdelivery.mvp.presenter.LogInPresenter;
 import com.delivery.arish.arishdelivery.ui.Main.MainActivity;
-import com.delivery.arish.arishdelivery.util.MyAnimation;
+import com.delivery.arish.arishdelivery.ui.log_in.resetPassword.ResetPasswordActivity;
+
+import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
 @SuppressLint("Registered")
-public class LogInActivity extends AppCompatActivity {
+public class LogInActivity extends BaseActivity {
+    private static final String TAG = LogInActivity.class.getSimpleName();
 
     @SuppressWarnings("WeakerAccess")
     @BindView(R.id.rv_container_login)
@@ -36,50 +46,60 @@ public class LogInActivity extends AppCompatActivity {
     Button btnLogin;
     @BindView(R.id.btnRegister)
     Button btnRegister;
+    @BindView(R.id.txt_reset_password)
+    TextView mTxtResetPass;
 
 
-    private AnimationDrawable mAnimationDrawable;
-
-
-    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_log_in);
+    protected void onViewReady(Bundle savedInstanceState, Intent intent) {
+        super.onViewReady(savedInstanceState, intent);
+        if (SharedPrefManager.getInstance(getApplicationContext()).isUserLoggedIn()) {
+            Intent myintent = new Intent(LogInActivity.this, MainActivity.class);
+            startActivity(myintent);
+            finish();
 
-        ButterKnife.bind(this);
-        mAnimationDrawable = MyAnimation.animateBackground(mRelativeLayout);
-       // if (SharedPrefManager.getInstance(getApplicationContext()).isUserLoggedIn()) {
-                Intent intent = new Intent(LogInActivity.this, MainActivity.class);
-               startActivity(intent);
-               finish();
-       // }
-        initComponents();
+            Log.d(TAG, "LanguageDevice oncreate is  "+LangUtil.getCurentLanguage(this));
+
+        }
+    }
+
+    @Override
+    protected int getResourceLayout() {
+        return R.layout.activity_log_in;
+    }
+
+    @Override
+    protected void init() {
+    }
+
+    @Override
+    protected void setListener() {
+        onClickViews();
 
     }
 
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        Log.d(TAG, "LanguageDevice onRestart is  "+LangUtil.getCurentLanguage(this));
+
+    }
 
     @Override
     protected void onResume() {
         super.onResume();
-        if (mAnimationDrawable != null && !mAnimationDrawable.isRunning()) {
-            // start the animation
-            mAnimationDrawable.start();
-        }
+        Log.d(TAG, "LanguageDevice onResume is  "+LangUtil.getCurentLanguage(this));
 
     }
 
     @Override
-    protected void onPause() {
-        super.onPause();
-        if (mAnimationDrawable != null && mAnimationDrawable.isRunning()) {
-            // stop the animation
-            mAnimationDrawable.stop();
-        }
+    protected void onStart() {
+        super.onStart();
+        Log.d(TAG, "LanguageDevice onStart is  "+LangUtil.getCurentLanguage(this));
+
     }
 
-
-    private void initComponents() {
+    private void onClickViews() {
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -94,6 +114,12 @@ public class LogInActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(LogInActivity.this, RegisterActivity.class));
+            }
+        });
+        mTxtResetPass.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                gooResetPass(view);
             }
         });
 

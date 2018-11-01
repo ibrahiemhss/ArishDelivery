@@ -13,7 +13,9 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.Surface;
+import android.view.View;
 import android.view.WindowManager;
+import android.widget.ImageView;
 
 import com.delivery.arish.arishdelivery.R;
 import com.delivery.arish.arishdelivery.base.BaseActivity;
@@ -58,6 +60,18 @@ public class DetailsActivity extends BaseActivity {
     };
 
     @Override
+    protected void onViewReady(Bundle savedInstanceState, Intent intent) {
+        super.onViewReady(savedInstanceState, intent);
+        setSupportActionBar(mToolbar);
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setDisplayShowHomeEnabled(true);
+            mToolbar.setTitle(getResources().getString(R.string.app_name));
+        }
+    }
+
+
+    @Override
     protected int getResourceLayout() {
         return R.layout.activity_details;
     }
@@ -78,10 +92,10 @@ public class DetailsActivity extends BaseActivity {
                 intent.putExtras(extras2);
                 startActivity(intent);
                 finish();
+
             }
         }
         mDetailsModelArrayList= DetailsPresenter.getDetailsModel(this);
-        setupToolbar();
 
         GetListByScreenSize();
     }
@@ -91,20 +105,6 @@ public class DetailsActivity extends BaseActivity {
 
     }
 
-    private void setupToolbar() {
-        setSupportActionBar(mToolbar);
-        if (getSupportActionBar() != null) {
-            getSupportActionBar().setHomeButtonEnabled(true);
-            getSupportActionBar().setDisplayShowTitleEnabled(true);
-            mToolbar.setTitle(getResources().getString(R.string.app_name));
-            if (!isTablet) {
-                getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            }
-
-        }
-
-
-    }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {

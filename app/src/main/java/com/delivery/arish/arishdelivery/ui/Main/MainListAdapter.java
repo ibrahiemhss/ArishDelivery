@@ -75,8 +75,6 @@ public class MainListAdapter extends RecyclerView.Adapter<MainListAdapter.Holder
         protected CircleImageView thumbnail;
         @BindView(R.id.main_linear_item_list_container)
         protected LinearLayout LinearListContainer;
-        @BindView(R.id.main_listitem_card)
-        protected CardView mCardView;
 
 
         public Holder(View itemView) {
@@ -99,7 +97,6 @@ public class MainListAdapter extends RecyclerView.Adapter<MainListAdapter.Holder
 
             thumbnail.buildDrawingCache();
 
-            mCardView.setCardBackgroundColor(mainModel.getColor());
         }
 
         @Override

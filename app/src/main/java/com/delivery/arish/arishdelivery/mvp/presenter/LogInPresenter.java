@@ -12,6 +12,7 @@ import com.delivery.arish.arishdelivery.data.SharedPrefManager;
 import com.delivery.arish.arishdelivery.internet.BaseApiService;
 import com.delivery.arish.arishdelivery.internet.UtilsApi;
 import com.delivery.arish.arishdelivery.ui.Main.MainActivity;
+import com.delivery.arish.arishdelivery.util.LangUtil;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -38,7 +39,7 @@ public class LogInPresenter {
  public void requestLogin(String emailVal,String passVal,String tokenVal){
 
 
-        mApiService.loginRequest( emailVal,passVal,tokenVal)
+        mApiService.loginRequest( emailVal,passVal,tokenVal,LangUtil.getCurentLanguage(mCtx))
 
                 // ,SharedPrefManager.getInstance( this ).getDeviceToken())
                 .enqueue(new Callback<ResponseBody>() {
@@ -84,7 +85,7 @@ public class LogInPresenter {
                                     SharedPrefManager.getInstance( mCtx ).saveEmailOfUsers( email );
                                     SharedPrefManager.getInstance( mCtx ).savePhonefUsers( phone );
                                     SharedPrefManager.getInstance( mCtx ).saveImagefUsers( imageURl );
-                                    if(jsonRESULTS.optString(Contract.ERROR_MSG).equals(Contract.SUCESS_MSG)){
+                                    if(jsonRESULTS.optString(Contract.SUCESS_MSG).equals(Contract.SUCESS_MSG_VALUE)){
                                         Intent intent=new Intent(mCtx, MainActivity.class);
                                         mCtx.startActivity(intent);
                                     }

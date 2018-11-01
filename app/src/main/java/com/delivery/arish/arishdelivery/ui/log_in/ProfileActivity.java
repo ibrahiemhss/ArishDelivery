@@ -9,10 +9,12 @@ import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 import android.widget.RelativeLayout;
 
 import com.delivery.arish.arishdelivery.R;
+import com.delivery.arish.arishdelivery.base.BaseActivity;
 import com.delivery.arish.arishdelivery.ui.Main.MainActivity;
 
 import java.util.Objects;
@@ -20,7 +22,8 @@ import java.util.Objects;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class ProfileActivity extends AppCompatActivity {
+public class ProfileActivity extends BaseActivity {
+    private static final String TAG = ProfileActivity.class.getSimpleName();
 
     @BindView(R.id.profile_toolbar)
     protected Toolbar mToolbar;
@@ -28,21 +31,61 @@ public class ProfileActivity extends AppCompatActivity {
     protected CollapsingToolbarLayout mCollapsingToolbarLayout;
     @BindView(R.id.aprofile_pp_bar)
     protected AppBarLayout mAppBarLayout;
+    private String mLocale;
 
 
     private boolean isTablet;
 
-    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_profile);
-        ButterKnife.bind(this);
+    protected void onViewReady(Bundle savedInstanceState, Intent intent) {
+        super.onViewReady(savedInstanceState, intent);
         isTablet = getResources().getBoolean(R.bool.isTablet);
 
         setupToolbar();
         AppBarLayout.LayoutParams params = (AppBarLayout.LayoutParams) mCollapsingToolbarLayout.getLayoutParams();
+        Log.d(TAG, "LanguageDevice oncreate is  "+mLocale);
+
     }
+
+    @Override
+    protected int getResourceLayout() {
+        return R.layout.activity_profile;
+    }
+
+    @Override
+    protected void init() {
+
+    }
+
+    @Override
+    protected void setListener() {
+
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        mLocale = getResources().getConfiguration().locale.getDisplayName();
+        Log.d(TAG, "LanguageDevice onRestart is  "+mLocale);
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mLocale = getResources().getConfiguration().locale.getDisplayName();
+        Log.d(TAG, "LanguageDevice onRestart is  "+mLocale);
+
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        mLocale = getResources().getConfiguration().locale.getDisplayName();
+        Log.d(TAG, "LanguageDevice onRestart is  "+mLocale);
+
+    }
+
     private void setupToolbar() {
         setSupportActionBar(mToolbar);
         if (getSupportActionBar() != null) {

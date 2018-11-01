@@ -1,20 +1,31 @@
 package com.delivery.arish.arishdelivery.ui.log_in;
 
 import android.Manifest;
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.ContextWrapper;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.AnimationDrawable;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
+import android.os.ParcelFileDescriptor;
 import android.provider.MediaStore;
+import android.provider.OpenableColumns;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -27,23 +38,49 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.delivery.arish.arishdelivery.R;
+import com.delivery.arish.arishdelivery.data.Contract;
+import com.delivery.arish.arishdelivery.internet.BaseApiService;
 import com.delivery.arish.arishdelivery.internet.ProgressRequestBody;
+import com.delivery.arish.arishdelivery.internet.UtilsApi;
+import com.delivery.arish.arishdelivery.internet.model.ResponseApiModel;
 import com.delivery.arish.arishdelivery.mvp.presenter.RegisterPresenter;
+import com.delivery.arish.arishdelivery.util.FileUtil;
 import com.delivery.arish.arishdelivery.util.MyAnimation;
+import com.nabinbhandari.android.permissions.PermissionHandler;
+import com.nabinbhandari.android.permissions.Permissions;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileDescriptor;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.text.DecimalFormat;
 import java.util.HashMap;
 import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import de.hdodenhof.circleimageview.CircleImageView;
+import id.zelory.compressor.Compressor;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.functions.Consumer;
+import io.reactivex.schedulers.Schedulers;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class RegisterActivity extends AppCompatActivity implements ProgressRequestBody.UploadCallbacks, View.OnClickListener {
-
     protected static final int REQUEST_CODE_MANUAL = 5;
+    private static final int PICK_IMAGE_REQUEST = 1;
 
-    private static final int REQUEST_IMAGE_CAPTURE = 2;
 
     private static final String TAG = RegisterActivity.class.getSimpleName();
     private static final String[] INITIAL_PERMS = {android.Manifest.permission.READ_EXTERNAL_STORAGE};
@@ -72,8 +109,7 @@ public class RegisterActivity extends AppCompatActivity implements ProgressReque
     private String mPart_image;
     private File mActualImageFile;
 
-    private AnimationDrawable mAnimationDrawable;
-
+    private String mLocale;
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,34 +117,68 @@ public class RegisterActivity extends AppCompatActivity implements ProgressReque
         setContentView(R.layout.activity_register);
         ButterKnife.bind(this);
 
-        mAnimationDrawable = MyAnimation.animateBackground(mRelativeLayout);
         mAddImage.setOnClickListener(this);
         mBtnRegister.setOnClickListener(this);
+        mLocale = getResources().getConfiguration().locale.getDisplayName();
+        Log.d(TAG, "LanguageDevice oncreate is  "+mLocale);
+
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        mLocale = getResources().getConfiguration().locale.getDisplayName();
+        Log.d(TAG, "LanguageDevice onRestart is  "+mLocale);
+
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        if (mAnimationDrawable != null && !mAnimationDrawable.isRunning()) {
-            // start the animation
-            mAnimationDrawable.start();
-        }
+        mLocale = getResources().getConfiguration().locale.getDisplayName();
+        Log.d(TAG, "LanguageDevice onRestart is  "+mLocale);
+
     }
 
     @Override
-    protected void onPause() {
-        super.onPause();
-        if (mAnimationDrawable != null && mAnimationDrawable.isRunning()) {
-            // stop the animation
-            mAnimationDrawable.stop();
+    protected void onStart() {
+        super.onStart();
+        mLocale = getResources().getConfiguration().locale.getDisplayName();
+        Log.d(TAG, "LanguageDevice onRestart is  "+mLocale);
+
+    }
+
+    private String saveToInternalStorage(Bitmap bitmapImage){
+        ContextWrapper cw = new ContextWrapper(getApplicationContext());
+        // path to /data/data/yourapp/app_data/imageDir
+        File directory = cw.getDir("imageDir", Context.MODE_PRIVATE);
+        // Create imageDir
+        File mypath=new File(directory,"profile.jpg");
+
+        FileOutputStream fos = null;
+        try {
+            fos = new FileOutputStream(mypath);
+
+
+            // Use the compress method on the BitMap object to write image to the OutputStream
+            bitmapImage.compress(Bitmap.CompressFormat.PNG, 100, fos);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                fos.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
+        return directory.getAbsolutePath();
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         switch (requestCode) {
-            case 1:
+            case PICK_IMAGE_REQUEST:
                 if (resultCode == RESULT_OK) {
                     try {
                         Uri dataimage = data.getData();
@@ -124,6 +194,7 @@ public class RegisterActivity extends AppCompatActivity implements ProgressReque
                                 mActualImageFile = new File(mPart_image);
                                 // mImgHolder.setImageBitmap( BitmapFactory.decodeFile( mActualImageFile.getAbsolutePath() ) );
                                 Glide.with(this).load(mActualImageFile).into(mImgHolder);
+                               // customCompressImage();
 
 
                             }
@@ -135,10 +206,14 @@ public class RegisterActivity extends AppCompatActivity implements ProgressReque
         }
     }
 
+
+
+
+
     void openGallry() {
         Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
         photoPickerIntent.setType("image/*");
-        startActivityForResult(photoPickerIntent, 1);
+        startActivityForResult(photoPickerIntent, PICK_IMAGE_REQUEST);
     }
 
     void galleryPermissionDialog() {
@@ -336,6 +411,3 @@ public class RegisterActivity extends AppCompatActivity implements ProgressReque
 
 
 }
-
-
-

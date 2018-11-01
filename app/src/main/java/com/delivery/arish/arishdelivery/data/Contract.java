@@ -3,17 +3,22 @@ package com.delivery.arish.arishdelivery.data;
 public class Contract {
 
 
-    public static final String BAS_URL = "https://kekoreko3.000webhostapp.com/dvr/";
+    public static final String BAS_URL = "https://ibrhimhssss.000webhostapp.com/";
 
     public static final String LOGIN_URL = "login/loginUser.php";
     public static final String REGISTER_URL = "login/registerUser.php";
     public static final String REGISTER_WITH_IMAGE_URL = "login/registerUserWithImage.php";
-    public static final String RESET_PASSWORD_URL = "login/ResetPassword/";
+    public static final String FORGET_PASSWORD_URL = "login/forgot-password.php";
+    public static final String UPDATE_PASSWORD_URL = "login/update-password.php";
+
 
     public static final String ERROR = "error";
     public static final String FALSE_VAL = "false";
     public static final String ERROR_MSG = "error_msg";
-    public static final String SUCESS_MSG = "welcome";
+    public static final String SUCESS_MSG = "success_msg";
+    public static final String SUCESS_MSG_VALUE = "success";
+    public static final String IMG_MSG = "photo_msg";
+
 
 
     public static final String ID_COL = "id";
@@ -26,6 +31,10 @@ public class Contract {
     public static final String PHONE_COL = "phone";
     public static final String CREATED_AT_COL = "created_at";
     public static final String TOKEN_COL = "token";
+    public static final String CODE_COL = "lost";
+    public static final String LANG_COL = "lang";
+
+
 
     public static final String PIC_TO_LOAD = "pic";
     public static final String MULTIPART_FILE_PATH = "multipart/form-file";

@@ -75,12 +75,21 @@ dependencies {
 
     //compressor library compress image befor uploading
     implementation 'id.zelory:compressor:2.1.0'
+    implementation 'com.iceteck.silicompressorr:silicompressor:2.2.1'
+
     //circleimageview library
     implementation 'de.hdodenhof:circleimageview:2.2.0'
 
     //glide library
     implementation "com.github.bumptech.glide:glide:$glideVersion"
     annotationProcessor "com.github.bumptech.glide:compiler:$glideVersion"
+
+    //PhotoView library
+    implementation 'com.commit451:PhotoView:1.2.4'
+    //nabinbhandari library to access permisions
+    implementation 'com.nabinbhandari.android:permissions:3.7'
+    implementation 'io.reactivex.rxjava2:rxandroid:2.0.1'
+
 
     implementation files('libs/volley.jar')
 }

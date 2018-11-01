@@ -43,7 +43,7 @@
             android:layout_marginRight="@dimen/main_itemlist_side_margin"
             android:layout_weight="1"
             android:ellipsize="end"
-            android:textColor="@color/white" />
+            android:textColor="@color/color_mountains_dark" />
 
 
 

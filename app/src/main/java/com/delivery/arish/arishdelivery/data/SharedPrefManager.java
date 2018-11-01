@@ -12,6 +12,8 @@ public class SharedPrefManager {
     private static final String SHARED_PREF_NAME = "save_contents";
     private static final String KEY_IS_USER_LOGGEDIN = "isUserLoggedIn";
     private static final String TAG_TOKEN = "tagtoken";
+    private static final String KEY_CCESS = "key_access";
+
     private static SharedPrefManager mInstance;
     private static Context mCtx;
     SharedPreferences pref;
@@ -126,6 +128,20 @@ public class SharedPrefManager {
 
     }
 
+
+    public void setIsNotAccess(boolean is) {
+        editor = pref.edit();
+        editor.putBoolean(KEY_CCESS, is);
+        editor.apply();
+        editor.commit();
+
+    }
+
+
+    public boolean isNotAccess() {
+        return pref.getBoolean(KEY_CCESS, false);
+
+    }
     //fetch the device token
     public String getDeviceToken() {
         pref = mCtx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);

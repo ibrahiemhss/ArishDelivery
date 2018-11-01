@@ -6,8 +6,7 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
     android:background="@color/lite_grey"
-
-    tools:context=".ui.Main.MainActivity">
+    tools:context=".ui.details.DetailsActivity">
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/details_app_bar"
@@ -37,7 +36,7 @@
         android:id="@+id/swipe_content_details"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/lite_grey"
+        android:background="@color/color_group_a"
         android:orientation="vertical"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         tools:context=".ui.Main.MainActivity"

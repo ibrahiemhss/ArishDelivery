@@ -154,14 +154,7 @@ public class MainPresenter {
 
          };
 
-        final int colors_values[] = {
-                context.getResources().getColor(R.color.colorGreen1),
-                context.getResources().getColor(R.color.colorGreen2),
-                context.getResources().getColor(R.color.colorGreen3),
-                context.getResources().getColor(R.color.colorGreen4),
-                context.getResources().getColor(R.color.colorGreen5)
 
-        };
         ArrayList<MainModel> mainModelArrayList=new ArrayList<>();
 
 
@@ -169,7 +162,6 @@ public class MainPresenter {
             MainModel s=new MainModel();
             s.setName(names_values[i]);
             s.setImage(images_values[i]);
-            s.setColor(colors_values[i]);
             mainModelArrayList.add(s);
         }
         return mainModelArrayList;

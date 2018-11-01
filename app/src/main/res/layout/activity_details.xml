@@ -5,18 +5,12 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:background="@color/lite_grey"
+    android:background="@color/color_group_a"
     tools:context="com.delivery.arish.arishdelivery.ui.details.DetailsActivity">
-
-
 
         <include
             layout="@layout/app_bar_details"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
-
-
-
-
 
 </RelativeLayout>

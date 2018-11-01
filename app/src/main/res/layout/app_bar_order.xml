@@ -1,0 +1,140 @@
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:background="@color/color_group_a"
+
+    tools:context=".ui.order.OrdersActivity">
+
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/order_app_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/order_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?android:attr/actionBarSize"
+            app:popupTheme="@style/AppTheme.PopupOverlay" />
+
+    </android.support.design.widget.AppBarLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+    <ImageView
+        android:id="@+id/img_menu"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/base_shap"
+        android:adjustViewBounds="true"
+        android:scaleType="centerInside"/>
+        <ImageView
+            android:id="@+id/arraw_upp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|center"
+            android:layout_margin="@dimen/order_views_margin"
+            android:background="@drawable/ic_arrow_upward_grey"/>
+
+    <RelativeLayout
+        android:id="@+id/rv_container_orders"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/color_group_a"
+        android:layout_margin="@dimen/order_layout_margin"
+        android:layout_gravity="bottom">
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            >
+            <ImageView
+                android:id="@+id/arraw_down"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_alignParentTop="true"
+                android:layout_margin="@dimen/order_views_margin"
+                android:background="@drawable/ic_arrow_downward_grey"/>
+            <Button
+                android:id="@+id/btn_add_order"
+                android:layout_width="wrap_content"
+                android:background="@drawable/button_back"
+                android:layout_margin="@dimen/order_views_margin"
+                android:text="@string/add_your_order"
+                android:padding="@dimen/odrer_views_padding"
+                android:layout_below="@+id/arraw_down"
+                android:textColor="@color/white"
+                android:textAllCaps="false"
+                android:layout_height="wrap_content" />
+            <EditText
+                android:id="@+id/etx_add_order"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="@string/type_order"
+                android:layout_margin="@dimen/order_views_margin"
+                android:layout_below="@+id/arraw_down"
+                android:layout_alignParentEnd="true"
+                android:layout_toRightOf="@+id/btn_add_order"
+                android:layout_alignParentRight="true" />
+
+            <RelativeLayout
+                android:id="@+id/rv_direct_call"
+                android:layout_width="match_parent"
+                android:background="@drawable/button_back"
+                android:layout_margin="@dimen/order_views_margin"
+                android:padding="@dimen/odrer_views_padding"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/btn_add_order">
+                <ImageView
+                    android:id="@+id/img_direct_call"
+                    android:layout_width="@dimen/odrer_img_size"
+                    android:layout_height="@dimen/odrer_img_size"
+                    android:background="@drawable/ic_phone_forwarded_white"/>
+                <Button
+                    android:id="@+id/btn_call"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/color_transeparent"
+                    android:textAllCaps="false"
+                    android:text="@string/direct_call"
+                    android:layout_toRightOf="@+id/img_direct_call"
+                    android:textColor="@color/white"
+                    />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rv_whatsapp"
+                android:layout_width="match_parent"
+                android:background="@drawable/btn_whatsapp"
+                android:layout_margin="@dimen/order_views_margin"
+                android:padding="@dimen/odrer_views_padding"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/rv_direct_call">
+                <ImageView
+                    android:id="@+id/img_whatsapp"
+                    android:layout_width="@dimen/odrer_img_size"
+                    android:layout_height="@dimen/odrer_img_size"
+                    android:textAllCaps="false"
+                    android:background="@drawable/whatsapp"/>
+                <Button
+                    android:id="@+id/btn_whatssapp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/color_transeparent"
+                    android:layout_toRightOf="@+id/img_whatsapp"
+                    android:text="@string/call_with_whatsapp"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white" />
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+    </FrameLayout>
+
+</android.support.design.widget.CoordinatorLayout>
