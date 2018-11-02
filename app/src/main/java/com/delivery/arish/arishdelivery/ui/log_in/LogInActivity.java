@@ -6,6 +6,8 @@ import android.content.res.Resources;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Build;
 import android.os.Bundle;
+
+import com.delivery.arish.arishdelivery.util.EdetTextUtil;
 import com.delivery.arish.arishdelivery.util.LangUtil;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
@@ -106,7 +108,8 @@ public class LogInActivity extends BaseActivity {
             public void onClick(View v) {
 
                 LogInPresenter logInPresenter = new LogInPresenter(LogInActivity.this);
-                logInPresenter.requestLogin(mEtEmail.getText().toString(), mEtPassword.getText().toString(), "ytyty");
+
+                    logInPresenter.requestLogin(mEtEmail.getText().toString(), mEtPassword.getText().toString(), "ytyty");
             }
         });
 

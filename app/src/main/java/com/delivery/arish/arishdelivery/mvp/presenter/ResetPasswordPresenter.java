@@ -15,6 +15,7 @@ import com.delivery.arish.arishdelivery.data.SharedPrefManager;
 import com.delivery.arish.arishdelivery.internet.BaseApiService;
 import com.delivery.arish.arishdelivery.internet.UtilsApi;
 import com.delivery.arish.arishdelivery.ui.Main.MainActivity;
+import com.delivery.arish.arishdelivery.ui.log_in.LogInActivity;
 import com.delivery.arish.arishdelivery.ui.log_in.resetPassword.FragmentUpdatePassowrd;
 import com.delivery.arish.arishdelivery.util.LangUtil;
 
@@ -37,11 +38,11 @@ public class ResetPasswordPresenter {
     public ResetPasswordPresenter(Context context) {
         mCtx = context;
         mApiService = UtilsApi.getAPIService();
-        mLoading = ProgressDialog.show(mCtx, null,  mCtx.getResources().getString( R.string.registring), true, false);
     }
 
     public void requestResetPass(final String emailVal){
 
+        mLoading = ProgressDialog.show(mCtx, null,  mCtx.getResources().getString( R.string.registring), true, false);
 
         mApiService.sendCodeToMail( emailVal, LangUtil.getCurentLanguage(mCtx))
 
@@ -71,6 +72,56 @@ public class ResetPasswordPresenter {
                                         transaction.replace(R.id.contents_containerdddddd, fragmentUpdatePassowrd);
                                         transaction.addToBackStack(null);
                                         transaction.commit();
+
+                                    }
+                                } else {
+                                    Toast.makeText(mCtx, jsonRESULTS.optString(Contract.ERROR_MSG), Toast.LENGTH_SHORT).show();
+                                }
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                        } else {
+                            mLoading.dismiss();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<ResponseBody> call, Throwable t) {
+                        Log.e("debugJSONS", "onFailure: ERROR > " + t.toString());
+                    }
+                });
+    }
+
+    public void requestUpdateWithCode(String email,String newPass,String code){
+
+        mLoading = ProgressDialog.show(mCtx, null,  mCtx.getResources().getString( R.string.registring), true, false);
+
+        mApiService.updatePass( email, newPass, code,LangUtil.getCurentLanguage(mCtx))
+
+                // ,SharedPrefManager.getInstance( this ).getDeviceToken())
+                .enqueue(new Callback<ResponseBody>() {
+                    @Override
+                    public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                        if (response.isSuccessful()){
+                            mLoading.dismiss();
+                            try {
+                                String remoteResponse=response.body().string();
+
+
+                                JSONObject jsonRESULTS = new JSONObject(remoteResponse);
+
+                                if (jsonRESULTS.getString(Contract.ERROR).equals(Contract.FALSE_VAL)){
+
+
+                                    Toast.makeText(mCtx, jsonRESULTS.optString(Contract.ERROR_MSG), Toast.LENGTH_SHORT).show();
+
+                                    if(jsonRESULTS.optString(Contract.SUCESS_MSG).equals(Contract.SUCESS_MSG_VALUE)){
+                                        Log.d("checkValue", jsonRESULTS.optString(Contract.SUCESS_MSG));
+
+                                        mCtx.startActivity(new Intent(mCtx, LogInActivity.class));
+
 
                                     }
                                 } else {

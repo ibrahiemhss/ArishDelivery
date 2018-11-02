@@ -33,11 +33,11 @@ public class LogInPresenter {
     public LogInPresenter(Context context) {
         mCtx = context;
         mApiService = UtilsApi.getAPIService();
-        mLoading = ProgressDialog.show(mCtx, null,  mCtx.getResources().getString( R.string.registring), true, false);
     }
 
  public void requestLogin(String emailVal,String passVal,String tokenVal){
 
+     mLoading = ProgressDialog.show(mCtx, null,  mCtx.getResources().getString( R.string.registring), true, false);
 
         mApiService.loginRequest( emailVal,passVal,tokenVal,LangUtil.getCurentLanguage(mCtx))
 

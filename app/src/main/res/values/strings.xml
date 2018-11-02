@@ -44,5 +44,11 @@
     <string name="code">Code from e-mail</string>
     <string name="ubdate_password">New password</string>
     <string name="copnfirm_password">Confirm password</string>
+    <string name="email_error">Please enter a valid e-mail address</string>
+    <string name="password_error">Password must contain at least 8 characters</string>
+    <string name="name_error">Username must contain at least 6 characters</string>
+    <string name="phone_error">The phone number must consist of 10 digits</string>
+    <string name="confirm_password_error">The password is not the same</string>
+    <string name="name_error_char"><![CDATA[Make sure your UserName not contains this characters  ($&+,:;=\\\\?@#|/\'<>.^*()%!-])]]></string>
 
 </resources>

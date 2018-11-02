@@ -10,8 +10,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import com.delivery.arish.arishdelivery.util.EdetTextUtil;
 
 import com.delivery.arish.arishdelivery.R;
+import com.delivery.arish.arishdelivery.data.SharedPrefManager;
 import com.delivery.arish.arishdelivery.mvp.presenter.ResetPasswordPresenter;
 
 import butterknife.BindView;
@@ -47,10 +49,24 @@ public class FragmentUpdatePassowrd extends Fragment implements View.OnClickList
     public void onClick(View view) {
         int id=view.getId();
         switch (id){
-            case R.id.btn_send_code:
-             //   ResetPasswordPresenter resetPasswordPresenter = new ResetPasswordPresenter(getActivity());
-                //resetPasswordPresenter.requestResetPass(mEtxtGetEmail.getText().toString());
+            case R.id.btn_ubdate_passord:
+                ResetPasswordPresenter resetPasswordPresenter = new ResetPasswordPresenter(getActivity());
+                if(EdetTextUtil.passCases(mEtxtGetNewPass.getText().toString())==6) {
+                    mEtxtGetNewPass.setError(getResources().getString(R.string.password_error));
+                    return;
 
+                }
+                if(!mEtxtGetNewPass.getText().toString().equals(mEtxtConfirmNewPass.getText().toString())) {
+                    mEtxtGetNewPass.setError(getResources().getString(R.string.confirm_password_error));
+                    mEtxtConfirmNewPass.setError(getResources().getString(R.string.confirm_password_error));
+
+                    return;
+
+                }
+                resetPasswordPresenter.requestUpdateWithCode(
+                                SharedPrefManager.getInstance(getActivity()).getEmailOfUsers(),
+                                mEtxtGetNewPass.getText().toString(),
+                                mEtxtGetCode.getText().toString());
         }
 
     }

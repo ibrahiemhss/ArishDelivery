@@ -50,7 +50,6 @@ public class RegisterPresenter {
     public RegisterPresenter(Context context) {
         mCtx = context;
         mApiService = UtilsApi.getAPIService();
-        mLoading = ProgressDialog.show(mCtx, null, mCtx.getResources().getString(R.string.registring), true, false);
     }
 
 
@@ -62,6 +61,8 @@ public class RegisterPresenter {
             String emailval,
             String passval,
             String phoneval) {
+        mLoading = ProgressDialog.show(mCtx, null, mCtx.getResources().getString(R.string.registring), true, false);
+
 
         File imagefile = new File(old_part_img);
         try {
@@ -150,6 +151,8 @@ public class RegisterPresenter {
                                 String emailval,
                                 String passval,
                                 String phoneval) {
+
+        mLoading = ProgressDialog.show(mCtx, null, mCtx.getResources().getString(R.string.registring), true, false);
 
         mApiService.registerRequest(
                 nameval,

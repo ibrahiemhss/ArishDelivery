@@ -44,6 +44,7 @@ import com.delivery.arish.arishdelivery.internet.ProgressRequestBody;
 import com.delivery.arish.arishdelivery.internet.UtilsApi;
 import com.delivery.arish.arishdelivery.internet.model.ResponseApiModel;
 import com.delivery.arish.arishdelivery.mvp.presenter.RegisterPresenter;
+import com.delivery.arish.arishdelivery.util.EdetTextUtil;
 import com.delivery.arish.arishdelivery.util.FileUtil;
 import com.delivery.arish.arishdelivery.util.MyAnimation;
 import com.nabinbhandari.android.permissions.PermissionHandler;
@@ -77,7 +78,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class RegisterActivity extends AppCompatActivity implements ProgressRequestBody.UploadCallbacks, View.OnClickListener {
+public class RegisterActivity extends AppCompatActivity implements View.OnClickListener {
     protected static final int REQUEST_CODE_MANUAL = 5;
     private static final int PICK_IMAGE_REQUEST = 1;
 
@@ -103,13 +104,9 @@ public class RegisterActivity extends AppCompatActivity implements ProgressReque
     protected Button mBtnRegister;
     @BindView(R.id.imgHolder)
     protected CircleImageView mImgHolder;
-    @BindView(R.id.rg_proressbar)
-    protected ProgressBar mProgressBar;
 
     private String mPart_image;
     private File mActualImageFile;
-
-    private String mLocale;
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -119,60 +116,11 @@ public class RegisterActivity extends AppCompatActivity implements ProgressReque
 
         mAddImage.setOnClickListener(this);
         mBtnRegister.setOnClickListener(this);
-        mLocale = getResources().getConfiguration().locale.getDisplayName();
-        Log.d(TAG, "LanguageDevice oncreate is  "+mLocale);
+
 
     }
 
-    @Override
-    protected void onRestart() {
-        super.onRestart();
-        mLocale = getResources().getConfiguration().locale.getDisplayName();
-        Log.d(TAG, "LanguageDevice onRestart is  "+mLocale);
 
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        mLocale = getResources().getConfiguration().locale.getDisplayName();
-        Log.d(TAG, "LanguageDevice onRestart is  "+mLocale);
-
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        mLocale = getResources().getConfiguration().locale.getDisplayName();
-        Log.d(TAG, "LanguageDevice onRestart is  "+mLocale);
-
-    }
-
-    private String saveToInternalStorage(Bitmap bitmapImage){
-        ContextWrapper cw = new ContextWrapper(getApplicationContext());
-        // path to /data/data/yourapp/app_data/imageDir
-        File directory = cw.getDir("imageDir", Context.MODE_PRIVATE);
-        // Create imageDir
-        File mypath=new File(directory,"profile.jpg");
-
-        FileOutputStream fos = null;
-        try {
-            fos = new FileOutputStream(mypath);
-
-
-            // Use the compress method on the BitMap object to write image to the OutputStream
-            bitmapImage.compress(Bitmap.CompressFormat.PNG, 100, fos);
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                fos.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-        return directory.getAbsolutePath();
-    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -310,23 +258,6 @@ public class RegisterActivity extends AppCompatActivity implements ProgressReque
                 .show();
     }
 
-    @Override
-    public void onProgressUpdate(int percentage) {
-        mProgressBar.setProgress(percentage);
-
-    }
-
-    @Override
-    public void onError() {
-
-    }
-
-    @Override
-    public void onFinish() {
-        mProgressBar.setProgress(100);
-
-    }
-
 
     @Override
     public void onClick(View view) {
@@ -344,22 +275,84 @@ public class RegisterActivity extends AppCompatActivity implements ProgressReque
 
     private void initRegister() {
         RegisterPresenter registerPresenter = new RegisterPresenter(this);
+
         if (mPart_image == null) {
+
+
+            if (EdetTextUtil.isNameCase(mEtName.getText().toString())==1) {
+                mEtName.setError(getResources().getString(R.string.name_error));
+                return;
+
+            }
+
+            if (EdetTextUtil.isNameCase(mEtName.getText().toString())==2) {
+                mEtName.setError(getResources().getString(R.string.name_error_char));
+                return;
+
+            }
+
+            if (!EdetTextUtil.isEmailValid(mEtEmail.getText().toString())) {
+                mEtEmail.setError(getResources().getString(R.string.email_error));
+                return;
+
+            }
+
+            if(EdetTextUtil.passCases(mEtPassword.getText().toString())==6){
+                mEtPassword.setError(getResources().getString(R.string.password_error));
+                return;
+
+            }
+            if(EdetTextUtil.phonCases(mEtPhone.getText().toString())==10){
+                mEtPhone.setError(getResources().getString(R.string.phone_error));
+                return;
+            }
             registerPresenter.requestRegister(
-                    mEtName.getText().toString(),
-                    mEtName.getText().toString(),
-                    mEtPassword.getText().toString(),
-                    mEtPhone.getText().toString());
+                        mEtName.getText().toString(),
+                        mEtEmail.getText().toString(),
+                        mEtPassword.getText().toString(),
+                        mEtPhone.getText().toString());
+
+
 
             Log.d(TAG, "ImageUploaingCase = null");
-        } else {
-            registerPresenter.requestRegisterWithPhoto(
+        } else if(mPart_image!=null) {
+
+
+            if (EdetTextUtil.isNameCase(mEtName.getText().toString())==1) {
+                mEtName.setError(getResources().getString(R.string.name_error));
+                return;
+
+            }
+
+            if (EdetTextUtil.isNameCase(mEtName.getText().toString())==2) {
+                mEtName.setError(getResources().getString(R.string.name_error_char));
+                return;
+
+            }
+
+            if (!EdetTextUtil.isEmailValid(mEtEmail.getText().toString())) {
+                mEtEmail.setError(getResources().getString(R.string.email_error));
+                return;
+
+            }
+
+            if(EdetTextUtil.passCases(mEtPassword.getText().toString())==6){
+                mEtPassword.setError(getResources().getString(R.string.password_error));
+                return;
+
+            }
+            if(EdetTextUtil.phonCases(mEtPhone.getText().toString())==10){
+                mEtPhone.setError(getResources().getString(R.string.phone_error));
+                return;
+            }
+                registerPresenter.requestRegisterWithPhoto(
                     mPart_image,
                     mActualImageFile,
                     mEtName.getText().toString(),
                     mEtName.getText().toString(),
                     mEtPassword.getText().toString(),
                     mEtPhone.getText().toString());
+
 
             Log.d(TAG, "ImageUploaingCase = Value");
 
