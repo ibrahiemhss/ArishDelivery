@@ -4,7 +4,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 @SuppressWarnings("unused")
-public class MainModel implements Parcelable{
+public class MainModel implements Parcelable {
 
     private String name;
     private int image;
@@ -21,6 +21,7 @@ public class MainModel implements Parcelable{
     public MainModel() {
 
     }
+
     private MainModel(Parcel in) {
         name = in.readString();
         image = in.readInt();

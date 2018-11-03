@@ -58,7 +58,6 @@
                 android:textColor="@color/grey" />
 
 
-
         </RelativeLayout>
 
 
@@ -179,16 +178,15 @@
             android:background="@color/grey" />
 
 
-
-            <Button
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/profile_side_margin"
-                android:background="@drawable/bg_rectangle_button"
-                android:layout_marginTop="@dimen/profile_side_margin"
-                android:textAllCaps="false"
-                android:textColor="@color/white"
-                android:text="@string/remove_contact" />
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/profile_side_margin"
+            android:background="@drawable/bg_rectangle_button"
+            android:layout_marginTop="@dimen/profile_side_margin"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:text="@string/remove_contact" />
     </LinearLayout>
 
 </android.support.v4.widget.NestedScrollView>

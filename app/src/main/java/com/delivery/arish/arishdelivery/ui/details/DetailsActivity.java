@@ -74,21 +74,21 @@ public class DetailsActivity extends BaseActivity {
 
         Bundle extras = getIntent().getExtras();
         assert extras != null;
-        if(extras.containsKey(Contract.EXTRA_MAIN_LIST_POSITION)){
-            int id = extras.getInt(Contract.EXTRA_MAIN_LIST_POSITION,0);
-            mDetailsModelArrayList=
+        if (extras.containsKey(Contract.EXTRA_MAIN_LIST_POSITION)) {
+            int id = extras.getInt(Contract.EXTRA_MAIN_LIST_POSITION, 0);
+            mDetailsModelArrayList =
                     extras.getParcelableArrayList(Contract.EXTRA_DETAILS_LIST);
-            if(id>0){
+            if (id > 0) {
                 Bundle extras2 = new Bundle();
-                extras2.putBoolean(Contract.EXTRA_INTER_ACTIVITY,false);
-                Intent intent=new Intent(DetailsActivity.this, OrdersActivity.class);
+                extras2.putBoolean(Contract.EXTRA_INTER_ACTIVITY, false);
+                Intent intent = new Intent(DetailsActivity.this, OrdersActivity.class);
                 intent.putExtras(extras2);
                 startActivity(intent);
                 finish();
 
             }
         }
-        mDetailsModelArrayList= DetailsPresenter.getDetailsModel();
+        mDetailsModelArrayList = DetailsPresenter.getDetailsModel();
 
         GetListByScreenSize();
     }
@@ -103,9 +103,9 @@ public class DetailsActivity extends BaseActivity {
         switch (item.getItemId()) {
             // Respond to the action bar's Up/Home button
             case android.R.id.home:
-                Intent intent = new Intent( DetailsActivity.this, MainActivity.class );
+                Intent intent = new Intent(DetailsActivity.this, MainActivity.class);
 
-                startActivity( intent );
+                startActivity(intent);
                 return true;
 
         }
@@ -143,6 +143,7 @@ public class DetailsActivity extends BaseActivity {
                 & Configuration.SCREENLAYOUT_SIZE_MASK)
                 >= Configuration.SCREENLAYOUT_SIZE_LARGE;
     }
+
     private void initialiseListWithPhoneScreen() {
 
         ButterKnife.bind(this);
@@ -168,11 +169,11 @@ public class DetailsActivity extends BaseActivity {
 
     }
 
-    private  void launchOrderActivity(int position) {
+    private void launchOrderActivity(int position) {
         Intent intent = new Intent(DetailsActivity.this, OrdersActivity.class);
         Bundle extras = new Bundle();
         extras.putInt(Contract.EXTRA_DETAILS_LIST_POSITION, position);
-        extras.putParcelableArrayList(Contract.EXTRA_DETAILS_LIST,mDetailsModelArrayList);
+        extras.putParcelableArrayList(Contract.EXTRA_DETAILS_LIST, mDetailsModelArrayList);
         // SharedPrefManager.getInstance(this).setPrefBakePosition(position);
         // String name = mMainModelArrayList.get(position).getName();
         // extras.putString(Contract.EXTRA_BAKE_NAME, name);

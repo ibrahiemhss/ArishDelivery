@@ -50,11 +50,10 @@ public class RegisterPresenter {
     }
 
 
-
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     public void requestRegisterWithPhoto(
             String old_part_img,
-             File myfile,
+            File myfile,
             String nameval,
             String emailval,
             String passval,
@@ -83,7 +82,6 @@ public class RegisterPresenter {
         }
 
 
-
         RequestBody reqBody = RequestBody.create(MediaType.parse(Contract.MULTIPART_FILE_PATH), imagefile);
         MultipartBody.Part partImage = MultipartBody.Part.createFormData(Contract.PIC_TO_LOAD, imagefile.getName(), reqBody);
         RequestBody name = createPartFromString(nameval);
@@ -106,19 +104,18 @@ public class RegisterPresenter {
             @Override
             public void onResponse(@NonNull Call<ResponseApiModel> call, @NonNull final Response<ResponseApiModel> response) {
 
-                Log.d(TAG,"myjson = : " +
+                Log.d(TAG, "myjson = : " +
                         Objects.requireNonNull(response.body()).toString());
 
                 if (Objects.requireNonNull(response.body()).getError().equals(Contract.FALSE_VAL)) {
                     //   mLoading.setMessage(response.body().getError_msg());
 
 
-
                     Log.d(TAG, "server_message : " + Objects.requireNonNull(response.body()).getError_msg()
-                                                   +"\n"+ Objects.requireNonNull(response.body()).getSuccess_msg());
+                            + "\n" + Objects.requireNonNull(response.body()).getSuccess_msg());
 
                     //    mLoading.dismiss();
-                    if(Objects.requireNonNull(response.body()).getSuccess_msg().equals(Contract.SUCCESS_MSG_VALUE)){
+                    if (Objects.requireNonNull(response.body()).getSuccess_msg().equals(Contract.SUCCESS_MSG_VALUE)) {
                         Toast.makeText(mCtx,
                                 Objects.requireNonNull(response.body()).getError_msg()
                                 , Toast.LENGTH_SHORT).show();
@@ -127,7 +124,7 @@ public class RegisterPresenter {
                     mLoading.dismiss();
 
 
-                } else if (Objects.requireNonNull(response.body()).getError().equals("true")){
+                } else if (Objects.requireNonNull(response.body()).getError().equals("true")) {
                     Toast.makeText(mCtx,
                             Objects.requireNonNull(response.body()).getError_msg()
                             , Toast.LENGTH_SHORT).show();
@@ -149,8 +146,6 @@ public class RegisterPresenter {
     private RequestBody createPartFromString(String partString) {
         return RequestBody.create(MultipartBody.FORM, partString);
     }
-
-
 
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
@@ -180,7 +175,7 @@ public class RegisterPresenter {
                                 if (jsonRESULTS.getString(Contract.ERROR).equals(Contract.FALSE_VAL)) {
                                     mLoading.setMessage(jsonRESULTS.optString(Contract.ERROR_MSG));
                                     Toast.makeText(mCtx, jsonRESULTS.optString(Contract.ERROR_MSG), Toast.LENGTH_SHORT).show();
-                                    if(jsonRESULTS.optString(Contract.SUCCESS_MSG).equals(Contract.SUCCESS_MSG_VALUE)){
+                                    if (jsonRESULTS.optString(Contract.SUCCESS_MSG).equals(Contract.SUCCESS_MSG_VALUE)) {
                                         mCtx.startActivity(new Intent(mCtx, LogInActivity.class));
                                     }
                                     mLoading.dismiss();

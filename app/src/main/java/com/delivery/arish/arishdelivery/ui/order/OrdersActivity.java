@@ -56,7 +56,7 @@ public class OrdersActivity extends BaseActivity {
     @BindView(R.id.arrow_upp)
     protected ImageView mArrowUpp;
 
-    private boolean isInterActivity=true;
+    private boolean isInterActivity = true;
 
     @Override
     protected int getResourceLayout() {
@@ -73,6 +73,7 @@ public class OrdersActivity extends BaseActivity {
             mToolbar.setTitle(getResources().getString(R.string.app_name));
         }
     }
+
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void init() {
@@ -80,8 +81,8 @@ public class OrdersActivity extends BaseActivity {
 
         Bundle extras = getIntent().getExtras();
         assert extras != null;
-        if(extras.containsKey(Contract.EXTRA_DETAILS_LIST_POSITION)
-                &&extras.containsKey(Contract.EXTRA_DETAILS_LIST)){
+        if (extras.containsKey(Contract.EXTRA_DETAILS_LIST_POSITION)
+                && extras.containsKey(Contract.EXTRA_DETAILS_LIST)) {
             int mPosition = extras.getInt(Contract.EXTRA_DETAILS_LIST_POSITION, 0);
             ArrayList<DetailsModel> mDetailsModelArrayList = extras.getParcelableArrayList(Contract.EXTRA_DETAILS_LIST);
             mArrowDown.setVisibility(View.VISIBLE);
@@ -91,12 +92,12 @@ public class OrdersActivity extends BaseActivity {
             mRvContainerOrders.setElevation(12);
             mRvContainerOrders.setBackgroundColor(getResources().getColor(R.color.white));
             PhotoViewAttacher photoAttacher;
-            photoAttacher= new PhotoViewAttacher(mImgMenu);
+            photoAttacher = new PhotoViewAttacher(mImgMenu);
             photoAttacher.update();
-           // isHide=true;
+            // isHide=true;
 
-        }else if(extras.containsKey(Contract.EXTRA_INTER_ACTIVITY)) {
-            isInterActivity=extras.getBoolean(Contract.EXTRA_INTER_ACTIVITY);
+        } else if (extras.containsKey(Contract.EXTRA_INTER_ACTIVITY)) {
+            isInterActivity = extras.getBoolean(Contract.EXTRA_INTER_ACTIVITY);
             mArrowDown.setVisibility(View.GONE);
             mArrowUpp.setVisibility(View.GONE);
         }
@@ -123,24 +124,26 @@ public class OrdersActivity extends BaseActivity {
             }
         });
     }
+
     @Override
     public boolean onSupportNavigateUp() {
         onBackPressed();
         return true;
     }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             // Respond to the action bar's Up/Home button
             case android.R.id.home:
-                Intent intent ;
-                if(isInterActivity){
-                    intent= new Intent( OrdersActivity.this, DetailsActivity.class );
-                }else {
-                    intent= new Intent( OrdersActivity.this, MainActivity.class );
+                Intent intent;
+                if (isInterActivity) {
+                    intent = new Intent(OrdersActivity.this, DetailsActivity.class);
+                } else {
+                    intent = new Intent(OrdersActivity.this, MainActivity.class);
                 }
 
-                startActivity( intent );
+                startActivity(intent);
                 return true;
 
         }
@@ -151,25 +154,25 @@ public class OrdersActivity extends BaseActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        Intent intent ;
-        if(isInterActivity){
-            intent= new Intent( OrdersActivity.this, DetailsActivity.class );
-        }else {
-            intent= new Intent( OrdersActivity.this, MainActivity.class );
+        Intent intent;
+        if (isInterActivity) {
+            intent = new Intent(OrdersActivity.this, DetailsActivity.class);
+        } else {
+            intent = new Intent(OrdersActivity.this, MainActivity.class);
         }
 
-        startActivity( intent );
+        startActivity(intent);
     }
 
 
-    private void slideUp(View view){
+    private void slideUp(View view) {
         view.startAnimation(AnimationUtils.loadAnimation(this,
                 R.anim.push_up_in));
         mRvContainerOrders.setVisibility(View.VISIBLE);
     }
 
     // slide the view from its current position to below itself
-    private void slideDown(View view){
+    private void slideDown(View view) {
         view.startAnimation(AnimationUtils.loadAnimation(this,
                 R.anim.push_down_out));
         mRvContainerOrders.setVisibility(View.GONE);

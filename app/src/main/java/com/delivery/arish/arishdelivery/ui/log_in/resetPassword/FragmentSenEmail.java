@@ -23,7 +23,6 @@ import butterknife.ButterKnife;
 public class FragmentSenEmail extends Fragment implements View.OnClickListener {
 
 
-
     @SuppressWarnings("WeakerAccess")
     @BindView(R.id.et_send_email)
     protected EditText mEtxtGetEmail;
@@ -49,13 +48,13 @@ public class FragmentSenEmail extends Fragment implements View.OnClickListener {
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
     public void onClick(View view) {
-        int id=view.getId();
-        switch (id){
+        int id = view.getId();
+        switch (id) {
             case R.id.btn_send_code:
                 ResetPasswordPresenter resetPasswordPresenter = new ResetPasswordPresenter(getActivity());
                 resetPasswordPresenter.requestResetPass(mEtxtGetEmail.getText().toString());
                 SharedPrefManager.getInstance(getActivity()).isNotAccess();
-                if(!SharedPrefManager.getInstance(getActivity()).isNotAccess()){
+                if (!SharedPrefManager.getInstance(getActivity()).isNotAccess()) {
                     Log.d("checkValue", "access true");
                     SharedPrefManager.getInstance(getActivity()).setIsNotAccess(true);
 

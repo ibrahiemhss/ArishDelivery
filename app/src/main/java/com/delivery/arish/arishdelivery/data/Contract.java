@@ -20,7 +20,6 @@ public class Contract {
     // --Commented out by Inspection (03/11/18 02:00 م):public static final String IMG_MSG = "photo_msg";
 
 
-
     public static final String ID_COL = "id";
     public static final String UID_COL = "uid";
     public static final String USER_COL = "user";
@@ -35,17 +34,15 @@ public class Contract {
     public static final String LANG_COL = "lang";
 
 
-
     public static final String PIC_TO_LOAD = "pic";
     public static final String MULTIPART_FILE_PATH = "multipart/form-file";
 
 
-    public static final String EXTRA_MAIN_LIST_POSITION="main_list_position";
-    public static final String EXTRA_DETAILS_LIST_POSITION="details_list_position";
-    public static final String EXTRA_INTER_ACTIVITY="inter_activity";
+    public static final String EXTRA_MAIN_LIST_POSITION = "main_list_position";
+    public static final String EXTRA_DETAILS_LIST_POSITION = "details_list_position";
+    public static final String EXTRA_INTER_ACTIVITY = "inter_activity";
 
-    public static final String EXTRA_DETAILS_LIST="details_list";
-
+    public static final String EXTRA_DETAILS_LIST = "details_list";
 
 
 }

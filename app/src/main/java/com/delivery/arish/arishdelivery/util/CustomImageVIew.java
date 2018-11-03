@@ -56,20 +56,20 @@ public class CustomImageVIew extends AppCompatImageView implements View.OnTouchL
     }
 
     @Override
-    public void onSizeChanged (int w, int h, int oldw, int oldh){
+    public void onSizeChanged(int w, int h, int oldw, int oldh) {
         super.onSizeChanged(w, h, oldw, oldh);
         mViewWidth = w;
         mViewHeight = h;
     }
 
     @SuppressWarnings("unused")
-    public void setBitmap(Bitmap bitmap){
-        if(bitmap != null){
+    public void setBitmap(Bitmap bitmap) {
+        if (bitmap != null) {
             setImageBitmap(bitmap);
 
             mBitmapWidth = bitmap.getWidth();
             mBitmapHeight = bitmap.getHeight();
-            mBitmapMiddlePoint.x = (mViewWidth / 2) - (mBitmapWidth /  2);
+            mBitmapMiddlePoint.x = (mViewWidth / 2) - (mBitmapWidth / 2);
             mBitmapMiddlePoint.y = (mViewHeight / 2) - (mBitmapHeight / 2);
 
             matrix.postTranslate(mBitmapMiddlePoint.x, mBitmapMiddlePoint.y);
@@ -78,7 +78,7 @@ public class CustomImageVIew extends AppCompatImageView implements View.OnTouchL
     }
 
     @Override
-    public boolean onTouch(View v, MotionEvent event){
+    public boolean onTouch(View v, MotionEvent event) {
         switch (event.getAction() & MotionEvent.ACTION_MASK) {
             case MotionEvent.ACTION_DOWN:
                 savedMatrix.set(matrix);
@@ -87,7 +87,7 @@ public class CustomImageVIew extends AppCompatImageView implements View.OnTouchL
                 break;
             case MotionEvent.ACTION_POINTER_DOWN:
                 oldDist = spacing(event);
-                if(oldDist > 10f){
+                if (oldDist > 10f) {
                     savedMatrix.set(matrix);
                     midPoint(mMiddlePoint, event);
                     mode = ZOOM;
@@ -98,9 +98,9 @@ public class CustomImageVIew extends AppCompatImageView implements View.OnTouchL
                 mode = NONE;
                 break;
             case MotionEvent.ACTION_MOVE:
-                if(mode == DRAG){
+                if (mode == DRAG) {
                     drag(event);
-                } else if(mode == ZOOM){
+                } else if (mode == ZOOM) {
                     zoom(event);
                 }
                 break;
@@ -110,56 +110,55 @@ public class CustomImageVIew extends AppCompatImageView implements View.OnTouchL
     }
 
 
-
-    public void drag(MotionEvent event){
+    public void drag(MotionEvent event) {
         matrix.getValues(matrixValues);
 
         float left = matrixValues[2];
         float top = matrixValues[5];
         float bottom = (top + (matrixValues[0] * mBitmapHeight)) - mViewHeight;
-        float right = (left + (matrixValues[0] * mBitmapWidth)) -mViewWidth;
+        float right = (left + (matrixValues[0] * mBitmapWidth)) - mViewWidth;
 
         float eventX = event.getX();
         float eventY = event.getY();
         float spacingX = eventX - mStartPoint.x;
         float spacingY = eventY - mStartPoint.y;
-        float newPositionLeft = (left  < 0 ? spacingX : spacingX * -1) + left;
+        float newPositionLeft = (left < 0 ? spacingX : spacingX * -1) + left;
         float newPositionRight = (spacingX) + right;
-        float newPositionTop = (top  < 0 ? spacingY : spacingY * -1) + top;
+        float newPositionTop = (top < 0 ? spacingY : spacingY * -1) + top;
         float newPositionBottom = (spacingY) + bottom;
         boolean x = true;
         boolean y = true;
 
-        if(newPositionRight < 0.0f || newPositionLeft > 0.0f){
-            if(newPositionRight < 0.0f && newPositionLeft > 0.0f){
+        if (newPositionRight < 0.0f || newPositionLeft > 0.0f) {
+            if (newPositionRight < 0.0f && newPositionLeft > 0.0f) {
                 x = false;
-            } else{
+            } else {
                 eventX = oldEventX;
                 mStartPoint.x = oldStartPointX;
             }
         }
-        if(newPositionBottom < 0.0f || newPositionTop > 0.0f){
-            if(newPositionBottom < 0.0f && newPositionTop > 0.0f){
+        if (newPositionBottom < 0.0f || newPositionTop > 0.0f) {
+            if (newPositionBottom < 0.0f && newPositionTop > 0.0f) {
                 y = false;
-            } else{
+            } else {
                 eventY = oldEventY;
                 mStartPoint.y = oldStartPointY;
             }
         }
 
-        if(mDraggable){
+        if (mDraggable) {
             matrix.set(savedMatrix);
-            matrix.postTranslate(x? eventX - mStartPoint.x : 0, y? eventY - mStartPoint.y : 0);
+            matrix.postTranslate(x ? eventX - mStartPoint.x : 0, y ? eventY - mStartPoint.y : 0);
             this.setImageMatrix(matrix);
-            if(x)oldEventX = eventX;
-            if(y)oldEventY = eventY;
-            if(x)oldStartPointX = mStartPoint.x;
-            if(y)oldStartPointY = mStartPoint.y;
+            if (x) oldEventX = eventX;
+            if (y) oldEventY = eventY;
+            if (x) oldStartPointX = mStartPoint.x;
+            if (y) oldStartPointY = mStartPoint.y;
         }
 
     }
 
-    public void zoom(MotionEvent event){
+    public void zoom(MotionEvent event) {
         matrix.getValues(matrixValues);
 
         float newDist = spacing(event);
@@ -167,7 +166,7 @@ public class CustomImageVIew extends AppCompatImageView implements View.OnTouchL
         float bimtapHeight = matrixValues[0] * mBitmapHeight;
         boolean in = newDist > oldDist;
 
-        if(!in && matrixValues[0] < 1){
+        if (!in && matrixValues[0] < 1) {
             return;
         }
         mDraggable = bitmapWidth > mViewWidth || bimtapHeight > mViewHeight;
@@ -185,18 +184,19 @@ public class CustomImageVIew extends AppCompatImageView implements View.OnTouchL
     }
 
 
-
-
-
-    /** Determine the space between the first two fingers */
+    /**
+     * Determine the space between the first two fingers
+     */
     private float spacing(MotionEvent event) {
         float x = event.getX(0) - event.getX(1);
         float y = event.getY(0) - event.getY(1);
 
-        return (float)Math.sqrt(x * x + y * y);
+        return (float) Math.sqrt(x * x + y * y);
     }
 
-    /** Calculate the mid point of the first two fingers */
+    /**
+     * Calculate the mid point of the first two fingers
+     */
     private void midPoint(PointF point, MotionEvent event) {
         float x = event.getX(0) + event.getX(1);
         float y = event.getY(0) + event.getY(1);

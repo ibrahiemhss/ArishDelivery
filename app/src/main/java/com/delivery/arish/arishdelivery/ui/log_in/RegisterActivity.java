@@ -74,6 +74,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
     private String mPart_image;
     private File mActualImageFile;
+
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,7 +87,6 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
 
     }
-
 
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
@@ -110,7 +110,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                                 mActualImageFile = new File(mPart_image);
                                 // mImgHolder.setImageBitmap( BitmapFactory.decodeFile( mActualImageFile.getAbsolutePath() ) );
                                 Glide.with(this).load(mActualImageFile).into(mImgHolder);
-                               // customCompressImage();
+                                // customCompressImage();
                                 cursor.close();
 
                             }
@@ -121,9 +121,6 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                 }
         }
     }
-
-
-
 
 
     private void openGallery() {
@@ -248,13 +245,13 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         if (mPart_image == null) {
 
 
-            if (EditTextUtil.isNameCase(mEtName.getText().toString())==1) {
+            if (EditTextUtil.isNameCase(mEtName.getText().toString()) == 1) {
                 mEtName.setError(getResources().getString(R.string.name_error));
                 return;
 
             }
 
-            if (EditTextUtil.isNameCase(mEtName.getText().toString())==2) {
+            if (EditTextUtil.isNameCase(mEtName.getText().toString()) == 2) {
                 mEtName.setError(getResources().getString(R.string.name_error_char));
                 return;
 
@@ -266,34 +263,33 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
             }
 
-            if(EditTextUtil.passCases(mEtPassword.getText().toString())==6){
+            if (EditTextUtil.passCases(mEtPassword.getText().toString()) == 6) {
                 mEtPassword.setError(getResources().getString(R.string.password_error));
                 return;
 
             }
-            if(EditTextUtil.phoneCases(mEtPhone.getText().toString())==10){
+            if (EditTextUtil.phoneCases(mEtPhone.getText().toString()) == 10) {
                 mEtPhone.setError(getResources().getString(R.string.phone_error));
                 return;
             }
             registerPresenter.requestRegister(
-                        mEtName.getText().toString(),
-                        mEtEmail.getText().toString(),
-                        mEtPassword.getText().toString(),
-                        mEtPhone.getText().toString());
-
+                    mEtName.getText().toString(),
+                    mEtEmail.getText().toString(),
+                    mEtPassword.getText().toString(),
+                    mEtPhone.getText().toString());
 
 
             Log.d(TAG, "ImageUploadingCase = null");
         } else {
 
 
-            if (EditTextUtil.isNameCase(mEtName.getText().toString())==1) {
+            if (EditTextUtil.isNameCase(mEtName.getText().toString()) == 1) {
                 mEtName.setError(getResources().getString(R.string.name_error));
                 return;
 
             }
 
-            if (EditTextUtil.isNameCase(mEtName.getText().toString())==2) {
+            if (EditTextUtil.isNameCase(mEtName.getText().toString()) == 2) {
                 mEtName.setError(getResources().getString(R.string.name_error_char));
                 return;
 
@@ -305,16 +301,16 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
             }
 
-            if(EditTextUtil.passCases(mEtPassword.getText().toString())==6){
+            if (EditTextUtil.passCases(mEtPassword.getText().toString()) == 6) {
                 mEtPassword.setError(getResources().getString(R.string.password_error));
                 return;
 
             }
-            if(EditTextUtil.phoneCases(mEtPhone.getText().toString())==10){
+            if (EditTextUtil.phoneCases(mEtPhone.getText().toString()) == 10) {
                 mEtPhone.setError(getResources().getString(R.string.phone_error));
                 return;
             }
-                registerPresenter.requestRegisterWithPhoto(
+            registerPresenter.requestRegisterWithPhoto(
                     mPart_image,
                     mActualImageFile,
                     mEtName.getText().toString(),

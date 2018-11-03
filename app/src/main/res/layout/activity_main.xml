@@ -8,25 +8,26 @@
     tools:openDrawer="start"
     tools:context=".ui.Main.MainActivity">
 
+    <include
+        layout="@layout/app_bar_main"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <android.support.design.widget.NavigationView
+        android:id="@+id/nav_view"
+        android:layout_width="@dimen/main_nav_width"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start"
+        android:fitsSystemWindows="true"
+        android:background="@drawable/nav_background"
+        app:headerLayout="@layout/nav_header_main"
+        android:layout_marginBottom="@dimen/main_nav_bottom_margin">
+
         <include
-            layout="@layout/app_bar_main"
+            layout="@layout/nave_contents"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 
-        <android.support.design.widget.NavigationView
-            android:id="@+id/nav_view"
-            android:layout_width="@dimen/main_nav_width"
-            android:layout_height="wrap_content"
-            android:layout_gravity="start"
-            android:fitsSystemWindows="true"
-            android:background="@drawable/nav_background"
-            app:headerLayout="@layout/nav_header_main"
-            android:layout_marginBottom="@dimen/main_nav_bottom_margin">
-            <include
-                layout="@layout/nave_contents"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+    </android.support.design.widget.NavigationView>
 
-        </android.support.design.widget.NavigationView>
-
-    </android.support.v4.widget.DrawerLayout>
+</android.support.v4.widget.DrawerLayout>

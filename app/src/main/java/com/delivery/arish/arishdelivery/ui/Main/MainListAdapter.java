@@ -30,7 +30,7 @@ public class MainListAdapter extends RecyclerView.Adapter<MainListAdapter.Holder
 
 
     public MainListAdapter(ArrayList<MainModel> mainModelArrayList, LayoutInflater inflater) {
-        this.mMainModelsList=mainModelArrayList;
+        this.mMainModelsList = mainModelArrayList;
         mLayoutInflater = inflater;
     }
 
@@ -59,12 +59,11 @@ public class MainListAdapter extends RecyclerView.Adapter<MainListAdapter.Holder
     }
 
 
-
     @SuppressWarnings("unused")
     public class Holder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private final Context mContext;
         @BindView(R.id.name_item)
-        protected  TextView titleView;
+        protected TextView titleView;
         @BindView(R.id.image_item)
         protected CircleImageView thumbnail;
         @BindView(R.id.main_linear_item_list_container)

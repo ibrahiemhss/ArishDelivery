@@ -7,8 +7,7 @@ import java.util.ArrayList;
 
 public class DetailsPresenter {
 
-    public static ArrayList<DetailsModel> getDetailsModel()
-    {
+    public static ArrayList<DetailsModel> getDetailsModel() {
 
 
         final String names_values[] = {
@@ -32,11 +31,11 @@ public class DetailsPresenter {
                 R.drawable.menu6,
                 R.drawable.menu8,
         };
-        ArrayList<DetailsModel> detailsModelArrayList=new ArrayList<>();
+        ArrayList<DetailsModel> detailsModelArrayList = new ArrayList<>();
 
 
-        for(int i=0;i<names_values.length;i++){
-            DetailsModel s=new DetailsModel();
+        for (int i = 0; i < names_values.length; i++) {
+            DetailsModel s = new DetailsModel();
             s.setName(names_values[i]);
             s.setImage(images_values[i]);
             detailsModelArrayList.add(s);

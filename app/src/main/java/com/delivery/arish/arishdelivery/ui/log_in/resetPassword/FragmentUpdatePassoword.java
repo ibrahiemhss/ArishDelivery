@@ -46,8 +46,8 @@ public class FragmentUpdatePassoword extends Fragment implements View.OnClickLis
 
     @Override
     public void onClick(View view) {
-        int id=view.getId();
-        switch (id){
+        int id = view.getId();
+        switch (id) {
             case R.id.btn_update_password:
                 ResetPasswordPresenter resetPasswordPresenter = new ResetPasswordPresenter(getActivity());
                /* if(EditTextUtil.passCases(mEtxtGetNewPass.getText().toString())==6) {
@@ -62,11 +62,11 @@ public class FragmentUpdatePassoword extends Fragment implements View.OnClickLis
                     return;
 
                 }*/
-               String email=SharedPrefManager.getInstance(getActivity()).getEmailOfUsers();
+                String email = SharedPrefManager.getInstance(getActivity()).getEmailOfUsers();
                 resetPasswordPresenter.requestUpdateWithCode(
-                               email,
-                                mEtxtGetNewPass.getText().toString(),
-                                mEtxtGetCode.getText().toString());
+                        email,
+                        mEtxtGetNewPass.getText().toString(),
+                        mEtxtGetCode.getText().toString());
         }
 
     }

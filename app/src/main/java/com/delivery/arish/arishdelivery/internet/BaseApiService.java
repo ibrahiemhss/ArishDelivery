@@ -29,7 +29,6 @@ public interface BaseApiService {
             @Field(Contract.LANG_COL) String lang);
 
 
-
     @FormUrlEncoded
     @POST(Contract.REGISTER_URL)
     Call<ResponseBody> registerRequest(

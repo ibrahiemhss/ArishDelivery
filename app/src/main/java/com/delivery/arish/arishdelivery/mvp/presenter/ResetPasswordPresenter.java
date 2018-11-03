@@ -43,20 +43,20 @@ public class ResetPasswordPresenter {
     }
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
-    public void requestResetPass(final String emailVal){
+    public void requestResetPass(final String emailVal) {
 
-        mLoading = ProgressDialog.show(mCtx, null,  mCtx.getResources().getString( R.string.creating_new), true, false);
+        mLoading = ProgressDialog.show(mCtx, null, mCtx.getResources().getString(R.string.creating_new), true, false);
 
-        mApiService.sendCodeToMail( emailVal, LangUtil.getCurrentLanguage(mCtx))
+        mApiService.sendCodeToMail(emailVal, LangUtil.getCurrentLanguage(mCtx))
 
                 // ,SharedPrefManager.getInstance( this ).getDeviceToken())
                 .enqueue(new Callback<ResponseBody>() {
                     @Override
                     public void onResponse(@NonNull Call<ResponseBody> call, @NonNull Response<ResponseBody> response) {
-                        if (response.isSuccessful()){
+                        if (response.isSuccessful()) {
                             mLoading.dismiss();
                             try {
-                                String remoteResponse= null;
+                                String remoteResponse = null;
                                 if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.KITKAT) {
                                     remoteResponse = Objects.requireNonNull(response.body()).string();
                                 }
@@ -64,16 +64,16 @@ public class ResetPasswordPresenter {
 
                                 JSONObject jsonRESULTS = new JSONObject(remoteResponse);
 
-                                if (jsonRESULTS.getString(Contract.ERROR).equals(Contract.FALSE_VAL)){
+                                if (jsonRESULTS.getString(Contract.ERROR).equals(Contract.FALSE_VAL)) {
 
 
                                     Toast.makeText(mCtx, jsonRESULTS.optString(Contract.ERROR_MSG), Toast.LENGTH_SHORT).show();
 
-                                    if(jsonRESULTS.optString(Contract.SUCCESS_MSG).equals(Contract.SUCCESS_MSG_VALUE)){
+                                    if (jsonRESULTS.optString(Contract.SUCCESS_MSG).equals(Contract.SUCCESS_MSG_VALUE)) {
                                         Log.d("checkValue", jsonRESULTS.optString(Contract.SUCCESS_MSG));
 
                                         Fragment fragmentUpdatePassword = new FragmentUpdatePassoword();
-                                        FragmentTransaction transaction = ((FragmentActivity)mCtx).
+                                        FragmentTransaction transaction = ((FragmentActivity) mCtx).
                                                 getSupportFragmentManager().beginTransaction();
                                         transaction.replace(R.id.contents_container, fragmentUpdatePassword);
                                         transaction.addToBackStack(null);
@@ -101,18 +101,18 @@ public class ResetPasswordPresenter {
     }
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
-    public void requestUpdateWithCode(String email, String newPass, String code){
+    public void requestUpdateWithCode(String email, String newPass, String code) {
 
-        mLoading = ProgressDialog.show(mCtx, null,  mCtx.getResources().getString( R.string.creating_new), true, false);
+        mLoading = ProgressDialog.show(mCtx, null, mCtx.getResources().getString(R.string.creating_new), true, false);
 
-        mApiService.updatePass( email, newPass, code,LangUtil.getCurrentLanguage(mCtx))
+        mApiService.updatePass(email, newPass, code, LangUtil.getCurrentLanguage(mCtx))
 
                 // ,SharedPrefManager.getInstance( this ).getDeviceToken())
                 .enqueue(new Callback<ResponseBody>() {
                     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
                     @Override
                     public void onResponse(@NonNull Call<ResponseBody> call, @NonNull Response<ResponseBody> response) {
-                        String remoteResponse= null;
+                        String remoteResponse = null;
                         try {
                             remoteResponse = Objects.requireNonNull(response.body()).string();
                         } catch (IOException e) {
@@ -120,7 +120,7 @@ public class ResetPasswordPresenter {
                         }
 
 
-                        if (response.isSuccessful()){
+                        if (response.isSuccessful()) {
                             mLoading.dismiss();
                             try {
 
@@ -129,12 +129,12 @@ public class ResetPasswordPresenter {
 
                                 Log.d("JSONString", remoteResponse);
 
-                                if (jsonRESULTS.getString(Contract.ERROR).equals(Contract.FALSE_VAL)){
+                                if (jsonRESULTS.getString(Contract.ERROR).equals(Contract.FALSE_VAL)) {
 
 
                                     Toast.makeText(mCtx, jsonRESULTS.optString(Contract.ERROR_MSG), Toast.LENGTH_SHORT).show();
 
-                                    if(jsonRESULTS.optString(Contract.SUCCESS_MSG).equals(Contract.SUCCESS_MSG_VALUE)){
+                                    if (jsonRESULTS.optString(Contract.SUCCESS_MSG).equals(Contract.SUCCESS_MSG_VALUE)) {
                                         Log.d("JSONScheckValue", jsonRESULTS.optString(Contract.SUCCESS_MSG));
 
                                         mCtx.startActivity(new Intent(mCtx, LogInActivity.class));

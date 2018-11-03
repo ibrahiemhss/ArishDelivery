@@ -27,7 +27,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.Main.MainActivity"
+        <activity
+            android:name=".ui.Main.MainActivity"
             tools:ignore="InnerclassSeparator" />
         <activity
             android:name=".ui.log_in.RegisterActivity"

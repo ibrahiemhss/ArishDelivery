@@ -72,7 +72,6 @@ public class LogInActivity extends BaseActivity {
     }
 
 
-
     private void onClickViews() {
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
@@ -82,7 +81,7 @@ public class LogInActivity extends BaseActivity {
 
                 LogInPresenter logInPresenter = new LogInPresenter(LogInActivity.this);
 
-                    logInPresenter.requestLogin(mEtEmail.getText().toString(), mEtPassword.getText().toString(), "ytyty");
+                logInPresenter.requestLogin(mEtEmail.getText().toString(), mEtPassword.getText().toString(), "ytyty");
             }
         });
 

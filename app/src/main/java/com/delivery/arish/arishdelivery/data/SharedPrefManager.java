@@ -143,6 +143,7 @@ public class SharedPrefManager {
         return pref.getBoolean(KEY_CCESS, false);
 
     }
+
     //fetch the device token
     public String getDeviceToken() {
         pref = mCtx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);

@@ -33,7 +33,7 @@ public class DetailsAdapter extends RecyclerView.Adapter<DetailsAdapter.Holder> 
 
 
     public DetailsAdapter(ArrayList<DetailsModel> detailsModelArrayList, LayoutInflater inflater) {
-        this.mDetailsModels=detailsModelArrayList;
+        this.mDetailsModels = detailsModelArrayList;
         mLayoutInflater = inflater;
     }
 
@@ -62,12 +62,11 @@ public class DetailsAdapter extends RecyclerView.Adapter<DetailsAdapter.Holder> 
     }
 
 
-
     @SuppressWarnings("unused")
     public class Holder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private final Context mContext;
         @BindView(R.id.name_details_item)
-        protected  TextView titleView;
+        protected TextView titleView;
         @BindView(R.id.image_details_item)
         protected ImageView thumbnail;
         @BindView(R.id.LinearListContainer)
@@ -90,10 +89,10 @@ public class DetailsAdapter extends RecyclerView.Adapter<DetailsAdapter.Holder> 
                             .placeholder(detailsModel.getImage()))
                     .into(thumbnail);
 
-          thumbnail.buildDrawingCache();
-            Bitmap bitmap = BitmapFactory.decodeResource(mContext.getResources(),detailsModel.getImage());
+            thumbnail.buildDrawingCache();
+            Bitmap bitmap = BitmapFactory.decodeResource(mContext.getResources(), detailsModel.getImage());
 
-        //    Bitmap bitmap = thumbnail.getDrawingCache();
+            //    Bitmap bitmap = thumbnail.getDrawingCache();
             if (bitmap != null) {
                 Palette p = Palette.generate(bitmap, 15000000);
                 int mMutedColor = p.getDarkMutedColor(0xFF333333);

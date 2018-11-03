@@ -37,7 +37,7 @@ public class ProfileActivity extends BaseActivity {
         isTablet = getResources().getBoolean(R.bool.isTablet);
 
         setupToolbar();
-       // AppBarLayout.LayoutParams params = (AppBarLayout.LayoutParams) mCollapsingToolbarLayout.getLayoutParams();
+        // AppBarLayout.LayoutParams params = (AppBarLayout.LayoutParams) mCollapsingToolbarLayout.getLayoutParams();
 
     }
 
@@ -60,7 +60,7 @@ public class ProfileActivity extends BaseActivity {
     protected void onRestart() {
         super.onRestart();
         mLocale = getResources().getConfiguration().locale.getDisplayName();
-        Log.d(TAG, "LanguageDevice onRestart is  "+mLocale);
+        Log.d(TAG, "LanguageDevice onRestart is  " + mLocale);
 
     }
 
@@ -68,7 +68,7 @@ public class ProfileActivity extends BaseActivity {
     protected void onResume() {
         super.onResume();
         mLocale = getResources().getConfiguration().locale.getDisplayName();
-        Log.d(TAG, "LanguageDevice onRestart is  "+mLocale);
+        Log.d(TAG, "LanguageDevice onRestart is  " + mLocale);
 
     }
 
@@ -76,7 +76,7 @@ public class ProfileActivity extends BaseActivity {
     protected void onStart() {
         super.onStart();
         mLocale = getResources().getConfiguration().locale.getDisplayName();
-        Log.d(TAG, "LanguageDevice onRestart is  "+mLocale);
+        Log.d(TAG, "LanguageDevice onRestart is  " + mLocale);
 
     }
 
@@ -94,14 +94,15 @@ public class ProfileActivity extends BaseActivity {
         }
 
 
-}
+    }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             // Respond to the action bar's Up/Home button
             case android.R.id.home:
-                Intent intent = new Intent( ProfileActivity.this, MainActivity.class );
-                startActivity( intent );
+                Intent intent = new Intent(ProfileActivity.this, MainActivity.class);
+                startActivity(intent);
                 return true;
 
         }

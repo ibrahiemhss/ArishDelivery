@@ -13,105 +13,112 @@
         android:background="@color/white"
         android:orientation="vertical"
         android:layout_height="wrap_content">
+
         <include
             layout="@layout/nav_header_main"
             android:layout_width="match_parent"
             android:layout_height="200dp" />
 
-    <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_below="@+id/lin1"
-        android:orientation="vertical"
-        android:layout_margin="@dimen/nav_child_view_side_margin"
-        android:layout_height="wrap_content">
-        <ImageView
-            android:id="@+id/nav_profile"
-            android:layout_width="@dimen/nav_item_view_size"
-            android:layout_height="@dimen/nav_item_view_size"
-            android:layout_marginTop="@dimen/nav_item_side_margin"
-            android:layout_marginBottom="@dimen/nav_item_side_margin"
-            android:src="@drawable/ic_profile"/>
-        <TextView
+        <RelativeLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/black"
-            android:layout_marginTop="@dimen/nav_item_side_margin"
-            android:layout_marginBottom="@dimen/nav_item_side_margin"
-            android:layout_alignParentEnd="true"
-            android:text="@string/personal_page"/>
-        <View
-            android:id="@+id/v1"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_below="@id/nav_profile"
-            android:layout_marginTop="@dimen/nav_item_side_margin"
-            android:layout_marginBottom="@dimen/nav_item_side_margin"
-            android:background="@color/grey"/>
+            android:layout_below="@+id/lin1"
+            android:orientation="vertical"
+            android:layout_margin="@dimen/nav_child_view_side_margin"
+            android:layout_height="wrap_content">
 
-        <ImageView
-            android:id="@+id/nav_share"
-            android:layout_width="@dimen/nav_item_view_size"
-            android:layout_height="@dimen/nav_item_view_size"
-            android:layout_marginTop="@dimen/nav_item_side_margin"
-            android:layout_marginBottom="@dimen/nav_item_side_margin"
-            android:layout_below="@+id/v1"
-            android:src="@drawable/ic_share"/>
+            <ImageView
+                android:id="@+id/nav_profile"
+                android:layout_width="@dimen/nav_item_view_size"
+                android:layout_height="@dimen/nav_item_view_size"
+                android:layout_marginTop="@dimen/nav_item_side_margin"
+                android:layout_marginBottom="@dimen/nav_item_side_margin"
+                android:src="@drawable/ic_profile" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/v1"
-            android:textColor="@color/black"
-            android:layout_marginTop="@dimen/nav_item_side_margin"
-            android:layout_marginBottom="@dimen/nav_item_side_margin"
-            android:layout_alignParentEnd="true"
-            android:text="@string/share"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:layout_marginTop="@dimen/nav_item_side_margin"
+                android:layout_marginBottom="@dimen/nav_item_side_margin"
+                android:layout_alignParentEnd="true"
+                android:text="@string/personal_page" />
 
-        <View
-            android:id="@+id/v2"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_below="@id/nav_share"
-            android:layout_marginTop="@dimen/nav_item_side_margin"
-            android:layout_marginBottom="@dimen/nav_item_side_margin"
-            android:background="@color/grey"/>
+            <View
+                android:id="@+id/v1"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@id/nav_profile"
+                android:layout_marginTop="@dimen/nav_item_side_margin"
+                android:layout_marginBottom="@dimen/nav_item_side_margin"
+                android:background="@color/grey" />
 
-        <ImageView
-            android:id="@+id/nav_signout"
-            android:layout_width="@dimen/nav_item_view_size"
-            android:layout_height="@dimen/nav_item_view_size"
-            android:layout_marginTop="@dimen/nav_item_side_margin"
-            android:layout_marginBottom="@dimen/nav_item_side_margin"
-            android:layout_below="@+id/v2"
-            android:src="@drawable/ic_log_out"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/v2"
-            android:textColor="@color/black"
-            android:layout_marginTop="@dimen/nav_item_side_margin"
-            android:layout_marginBottom="@dimen/nav_item_side_margin"
-            android:layout_alignParentEnd="true"
-            android:text="@string/Logout"/>
-        <View
-            android:id="@+id/v3"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_below="@id/nav_signout"
-            android:layout_marginTop="@dimen/nav_item_side_margin"
-            android:layout_marginBottom="@dimen/nav_item_side_margin"
-            android:background="@color/grey"/>
-        <TextView
-            android:layout_below="@+id/v3"
-            android:textColor="@color/black"
-            android:textSize="12dp"
-            android:textStyle="bold"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/privacy_policy"/>
+            <ImageView
+                android:id="@+id/nav_share"
+                android:layout_width="@dimen/nav_item_view_size"
+                android:layout_height="@dimen/nav_item_view_size"
+                android:layout_marginTop="@dimen/nav_item_side_margin"
+                android:layout_marginBottom="@dimen/nav_item_side_margin"
+                android:layout_below="@+id/v1"
+                android:src="@drawable/ic_share" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/v1"
+                android:textColor="@color/black"
+                android:layout_marginTop="@dimen/nav_item_side_margin"
+                android:layout_marginBottom="@dimen/nav_item_side_margin"
+                android:layout_alignParentEnd="true"
+                android:text="@string/share" />
+
+            <View
+                android:id="@+id/v2"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@id/nav_share"
+                android:layout_marginTop="@dimen/nav_item_side_margin"
+                android:layout_marginBottom="@dimen/nav_item_side_margin"
+                android:background="@color/grey" />
+
+            <ImageView
+                android:id="@+id/nav_signout"
+                android:layout_width="@dimen/nav_item_view_size"
+                android:layout_height="@dimen/nav_item_view_size"
+                android:layout_marginTop="@dimen/nav_item_side_margin"
+                android:layout_marginBottom="@dimen/nav_item_side_margin"
+                android:layout_below="@+id/v2"
+                android:src="@drawable/ic_log_out" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/v2"
+                android:textColor="@color/black"
+                android:layout_marginTop="@dimen/nav_item_side_margin"
+                android:layout_marginBottom="@dimen/nav_item_side_margin"
+                android:layout_alignParentEnd="true"
+                android:text="@string/Logout" />
+
+            <View
+                android:id="@+id/v3"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@id/nav_signout"
+                android:layout_marginTop="@dimen/nav_item_side_margin"
+                android:layout_marginBottom="@dimen/nav_item_side_margin"
+                android:background="@color/grey" />
+
+            <TextView
+                android:layout_below="@+id/v3"
+                android:textColor="@color/black"
+                android:textSize="12dp"
+                android:textStyle="bold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/privacy_policy" />
 
 
-    </RelativeLayout>
+        </RelativeLayout>
     </LinearLayout>
 
 </ScrollView>

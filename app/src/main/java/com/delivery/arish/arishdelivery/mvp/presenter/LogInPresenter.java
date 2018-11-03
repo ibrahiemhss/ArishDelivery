@@ -34,48 +34,48 @@ public class LogInPresenter {
     private final Context mCtx;
     private final BaseApiService mApiService;
     private ProgressDialog mLoading;
+
     public LogInPresenter(Context context) {
         mCtx = context;
         mApiService = UtilsApi.getAPIService();
     }
 
- @RequiresApi(api = Build.VERSION_CODES.KITKAT)
- public void requestLogin(String emailVal, String passVal, String tokenVal){
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+    public void requestLogin(String emailVal, String passVal, String tokenVal) {
 
-     mLoading = ProgressDialog.show(mCtx, null,  mCtx.getResources().getString( R.string.creating_new), true, false);
+        mLoading = ProgressDialog.show(mCtx, null, mCtx.getResources().getString(R.string.creating_new), true, false);
 
-        mApiService.loginRequest( emailVal,passVal,tokenVal,LangUtil.getCurrentLanguage(mCtx))
+        mApiService.loginRequest(emailVal, passVal, tokenVal, LangUtil.getCurrentLanguage(mCtx))
 
                 // ,SharedPrefManager.getInstance( this ).getDeviceToken())
                 .enqueue(new Callback<ResponseBody>() {
                     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
                     @Override
                     public void onResponse(@NonNull Call<ResponseBody> call, @NonNull Response<ResponseBody> response) {
-                        if (response.isSuccessful()){
+                        if (response.isSuccessful()) {
                             mLoading.dismiss();
                             try {
-                                String remoteResponse= Objects.requireNonNull(response.body()).string();
+                                String remoteResponse = Objects.requireNonNull(response.body()).string();
 
                                 Log.d("JSONString", remoteResponse);
 
                                 JSONObject jsonRESULTS = new JSONObject(remoteResponse);
 
-                                if (jsonRESULTS.getString(Contract.ERROR).equals(Contract.FALSE_VAL)){
+                                if (jsonRESULTS.getString(Contract.ERROR).equals(Contract.FALSE_VAL)) {
 
 
-                                    SharedPrefManager.getInstance( mCtx.getApplicationContext() ).setLoginUser(true);
+                                    SharedPrefManager.getInstance(mCtx.getApplicationContext()).setLoginUser(true);
 
 
                                     Toast.makeText(mCtx, jsonRESULTS.optString(Contract.ERROR_MSG), Toast.LENGTH_SHORT).show();
 
-                                    Log.d("JSONSValues", "id="+jsonRESULTS.optString(Contract.ID_COL)
-                                            +"\nuid="+
+                                    Log.d("JSONSValues", "id=" + jsonRESULTS.optString(Contract.ID_COL)
+                                            + "\nuid=" +
                                             jsonRESULTS.optString(Contract.UID_COL)
-                                            +"\nname="+
+                                            + "\nname=" +
                                             jsonRESULTS.getJSONObject(Contract.USER_COL).optString(Contract.NAME_COL)
-                                            +"\nemail="+
+                                            + "\nemail=" +
                                             jsonRESULTS.getJSONObject(Contract.USER_COL).optString(Contract.EMAIL_COL));
-
 
 
                                     String id = jsonRESULTS.optString(Contract.ID_COL);
@@ -87,13 +87,13 @@ public class LogInPresenter {
                                     //noinspection unused
                                     String created_at = jsonRESULTS.getJSONObject(Contract.USER_COL).optString(Contract.CREATED_AT_COL);
 
-                                    SharedPrefManager.getInstance( mCtx ).saveUserId( id );
-                                    SharedPrefManager.getInstance( mCtx ).saveNamesOfUsers( name );
-                                    SharedPrefManager.getInstance( mCtx ).saveEmailOfUsers( email );
-                                    SharedPrefManager.getInstance( mCtx ).savePhonefUsers( phone );
-                                    SharedPrefManager.getInstance( mCtx ).saveImagefUsers( imageURl );
-                                    if(jsonRESULTS.optString(Contract.SUCCESS_MSG).equals(Contract.SUCCESS_MSG_VALUE)){
-                                        Intent intent=new Intent(mCtx, MainActivity.class);
+                                    SharedPrefManager.getInstance(mCtx).saveUserId(id);
+                                    SharedPrefManager.getInstance(mCtx).saveNamesOfUsers(name);
+                                    SharedPrefManager.getInstance(mCtx).saveEmailOfUsers(email);
+                                    SharedPrefManager.getInstance(mCtx).savePhonefUsers(phone);
+                                    SharedPrefManager.getInstance(mCtx).saveImagefUsers(imageURl);
+                                    if (jsonRESULTS.optString(Contract.SUCCESS_MSG).equals(Contract.SUCCESS_MSG_VALUE)) {
+                                        Intent intent = new Intent(mCtx, MainActivity.class);
                                         mCtx.startActivity(intent);
                                     }
                                 } else {

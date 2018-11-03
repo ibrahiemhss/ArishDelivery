@@ -35,23 +35,23 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class MainPresenter {
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
-    public static void GetListByScreenSize(Context context, RecyclerView rv, LayoutInflater getLayoutInflater,MainListAdapter mainListAdapter) {
+    public static void GetListByScreenSize(Context context, RecyclerView rv, LayoutInflater getLayoutInflater, MainListAdapter mainListAdapter) {
 
         assert context.getSystemService(Context.WINDOW_SERVICE) != null;
         final int rotation = ((WindowManager) Objects.requireNonNull(context.getSystemService(Context.WINDOW_SERVICE))).getDefaultDisplay().getOrientation();
         switch (rotation) {
             case Surface.ROTATION_0:
                 if (isTablet(context)) {
-                    initialiseListWithsLargeSize(context,rv,getLayoutInflater,mainListAdapter);
+                    initialiseListWithsLargeSize(context, rv, getLayoutInflater, mainListAdapter);
                 } else {
-                    initialiseListWithPhoneScreen(context,rv,getLayoutInflater,mainListAdapter);
+                    initialiseListWithPhoneScreen(context, rv, getLayoutInflater, mainListAdapter);
                 }
                 break;
             case Surface.ROTATION_90:
-                initialiseListWithsLargeSize(context,rv,getLayoutInflater,mainListAdapter);
+                initialiseListWithsLargeSize(context, rv, getLayoutInflater, mainListAdapter);
                 break;
             case Surface.ROTATION_180:
-                initialiseListWithPhoneScreen(context,rv,getLayoutInflater,mainListAdapter);
+                initialiseListWithPhoneScreen(context, rv, getLayoutInflater, mainListAdapter);
                 break;
 
             case Surface.ROTATION_270:
@@ -78,7 +78,7 @@ public class MainPresenter {
         final OnItemListClickListener onItemListClickListener = new OnItemListClickListener() {
             @Override
             public void onlItemClick(int pos) {
-                launchDetailActivity(pos,context);
+                launchDetailActivity(pos, context);
 
             }
         };
@@ -101,13 +101,12 @@ public class MainPresenter {
         final OnItemListClickListener onItemListClickListener = new OnItemListClickListener() {
             @Override
             public void onlItemClick(int pos) {
-                launchDetailActivity(pos,context);
+                launchDetailActivity(pos, context);
 
             }
         };
 
         mainListAdapter.setOnItemListClickListener(onItemListClickListener);
-
 
 
     }
@@ -126,37 +125,34 @@ public class MainPresenter {
     }
 
 
-
-    private static   ArrayList<MainModel> getMainModel(Context context)
-    {
+    private static ArrayList<MainModel> getMainModel(Context context) {
 
 
-         final String names_values[] = {
-                 context.getString(R.string.restaurant),
-                 context.getString(R.string.libraries),
-                 context.getString(R.string.pharmacies),
-                 context.getString(R.string.architectural_tools),
-                 context.getString(R.string.other)
+        final String names_values[] = {
+                context.getString(R.string.restaurant),
+                context.getString(R.string.libraries),
+                context.getString(R.string.pharmacies),
+                context.getString(R.string.architectural_tools),
+                context.getString(R.string.other)
 
 
+        };
 
-         };
+        final int images_values[] = {
+                R.drawable.restaurant,
+                R.drawable.libraries,
+                R.drawable.pharmacies,
+                R.drawable.architectural_tools,
+                R.drawable.other
 
-         final int images_values[] = {
-                 R.drawable.restaurant,
-                 R.drawable.libraries,
-                 R.drawable.pharmacies,
-                 R.drawable.architectural_tools,
-                 R.drawable.other
-
-         };
-
-
-        ArrayList<MainModel> mainModelArrayList=new ArrayList<>();
+        };
 
 
-        for(int i=0;i<names_values.length;i++){
-            MainModel s=new MainModel();
+        ArrayList<MainModel> mainModelArrayList = new ArrayList<>();
+
+
+        for (int i = 0; i < names_values.length; i++) {
+            MainModel s = new MainModel();
             s.setName(names_values[i]);
             s.setImage(images_values[i]);
             mainModelArrayList.add(s);
@@ -165,25 +161,23 @@ public class MainPresenter {
     }
 
 
-
     @SuppressWarnings("unused")
-    public static void initNavigationDrawer(final Context context, NavigationView navigationView){
+    public static void initNavigationDrawer(final Context context, NavigationView navigationView) {
 
 
-
-        CircleImageView circleImageView =navigationView.findViewById(R.id.nav_image);
-        TextView txtName =navigationView.findViewById(R.id.nav_txtname);
-        CircleImageView txtEmail =navigationView.findViewById(R.id.nav_txtemail);
-        ImageView imgProfile=navigationView.findViewById(R.id.nav_profile);
-        ImageView imgShare=navigationView.findViewById(R.id.nav_share);
-        ImageView imgLogOut=navigationView.findViewById(R.id.nav_signout);
+        CircleImageView circleImageView = navigationView.findViewById(R.id.nav_image);
+        TextView txtName = navigationView.findViewById(R.id.nav_txtname);
+        CircleImageView txtEmail = navigationView.findViewById(R.id.nav_txtemail);
+        ImageView imgProfile = navigationView.findViewById(R.id.nav_profile);
+        ImageView imgShare = navigationView.findViewById(R.id.nav_share);
+        ImageView imgLogOut = navigationView.findViewById(R.id.nav_signout);
 
         imgProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 // Launching the login activity
-                Intent intent = new Intent( context, ProfileActivity.class );
-                context.startActivity( intent );
+                Intent intent = new Intent(context, ProfileActivity.class);
+                context.startActivity(intent);
             }
         });
 
@@ -201,16 +195,14 @@ public class MainPresenter {
         });
 
 
-
-
     }
 
     private static void logoutUser(Context context) {
 
-        SharedPrefManager.getInstance( context ).setLoginUser( false );
+        SharedPrefManager.getInstance(context).setLoginUser(false);
 
         // Launching the login activity
-        Intent intent = new Intent( context, LogInActivity.class );
-        context.startActivity( intent );
+        Intent intent = new Intent(context, LogInActivity.class);
+        context.startActivity(intent);
     }
 }

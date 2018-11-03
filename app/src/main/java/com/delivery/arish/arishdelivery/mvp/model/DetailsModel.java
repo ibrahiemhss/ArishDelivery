@@ -5,7 +5,7 @@ import android.os.Parcelable;
 
 public class DetailsModel implements Parcelable {
 
-   private String name;
+    private String name;
     private int image;
 
     public DetailsModel() {
