@@ -3,6 +3,7 @@ package com.delivery.arish.arishdelivery.data;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+@SuppressWarnings({"ALL", "UnusedReturnValue"})
 public class SharedPrefManager {
     private static final String USER_ID_KEY = "user_id";
     private static final String NAME_USERS_KEY = "name_users";

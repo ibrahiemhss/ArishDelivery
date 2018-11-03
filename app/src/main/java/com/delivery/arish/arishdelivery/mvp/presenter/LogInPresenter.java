@@ -3,6 +3,9 @@ package com.delivery.arish.arishdelivery.mvp.presenter;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
+import android.support.annotation.NonNull;
+import android.support.annotation.RequiresApi;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -18,6 +21,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.util.Objects;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -27,28 +31,30 @@ import retrofit2.Response;
 
 public class LogInPresenter {
 
-    private Context mCtx;
-    private BaseApiService mApiService;
+    private final Context mCtx;
+    private final BaseApiService mApiService;
     private ProgressDialog mLoading;
     public LogInPresenter(Context context) {
         mCtx = context;
         mApiService = UtilsApi.getAPIService();
     }
 
- public void requestLogin(String emailVal,String passVal,String tokenVal){
+ @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+ public void requestLogin(String emailVal, String passVal, String tokenVal){
 
-     mLoading = ProgressDialog.show(mCtx, null,  mCtx.getResources().getString( R.string.registring), true, false);
+     mLoading = ProgressDialog.show(mCtx, null,  mCtx.getResources().getString( R.string.creating_new), true, false);
 
-        mApiService.loginRequest( emailVal,passVal,tokenVal,LangUtil.getCurentLanguage(mCtx))
+        mApiService.loginRequest( emailVal,passVal,tokenVal,LangUtil.getCurrentLanguage(mCtx))
 
                 // ,SharedPrefManager.getInstance( this ).getDeviceToken())
                 .enqueue(new Callback<ResponseBody>() {
+                    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
                     @Override
-                    public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                    public void onResponse(@NonNull Call<ResponseBody> call, @NonNull Response<ResponseBody> response) {
                         if (response.isSuccessful()){
                             mLoading.dismiss();
                             try {
-                                String remoteResponse=response.body().string();
+                                String remoteResponse= Objects.requireNonNull(response.body()).string();
 
                                 Log.d("JSONString", remoteResponse);
 
@@ -73,11 +79,12 @@ public class LogInPresenter {
 
 
                                     String id = jsonRESULTS.optString(Contract.ID_COL);
-                                    String uid = jsonRESULTS.optString(Contract.UID_COL);
+                                    @SuppressWarnings("unused") String uid = jsonRESULTS.optString(Contract.UID_COL);
                                     String name = jsonRESULTS.getJSONObject(Contract.USER_COL).optString(Contract.NAME_COL);
                                     String email = jsonRESULTS.getJSONObject(Contract.USER_COL).optString(Contract.EMAIL_COL);
                                     String phone = jsonRESULTS.getJSONObject(Contract.USER_COL).optString(Contract.PHONE_COL);
                                     String imageURl = jsonRESULTS.getJSONObject(Contract.USER_COL).optString(Contract.IMAGE_COL);
+                                    //noinspection unused
                                     String created_at = jsonRESULTS.getJSONObject(Contract.USER_COL).optString(Contract.CREATED_AT_COL);
 
                                     SharedPrefManager.getInstance( mCtx ).saveUserId( id );
@@ -85,7 +92,7 @@ public class LogInPresenter {
                                     SharedPrefManager.getInstance( mCtx ).saveEmailOfUsers( email );
                                     SharedPrefManager.getInstance( mCtx ).savePhonefUsers( phone );
                                     SharedPrefManager.getInstance( mCtx ).saveImagefUsers( imageURl );
-                                    if(jsonRESULTS.optString(Contract.SUCESS_MSG).equals(Contract.SUCESS_MSG_VALUE)){
+                                    if(jsonRESULTS.optString(Contract.SUCCESS_MSG).equals(Contract.SUCCESS_MSG_VALUE)){
                                         Intent intent=new Intent(mCtx, MainActivity.class);
                                         mCtx.startActivity(intent);
                                     }
@@ -103,7 +110,7 @@ public class LogInPresenter {
                     }
 
                     @Override
-                    public void onFailure(Call<ResponseBody> call, Throwable t) {
+                    public void onFailure(@NonNull Call<ResponseBody> call, @NonNull Throwable t) {
                         Log.e("debugJSONS", "onFailure: ERROR > " + t.toString());
                     }
                 });

@@ -19,6 +19,7 @@ import java.io.OutputStream;
  * Name       : Zetra
  * GitHub     : https://github.com/zetbaitsu
  */
+@SuppressWarnings({"WeakerAccess", "unused"})
 public class FileUtil {
     private static final int EOF = -1;
     private static final int DEFAULT_BUFFER_SIZE = 1024 * 4;
@@ -102,6 +103,7 @@ public class FileUtil {
         return newFile;
     }
 
+    @SuppressWarnings("UnusedReturnValue")
     private static long copy(InputStream input, OutputStream output) throws IOException {
         long count = 0;
         int n;

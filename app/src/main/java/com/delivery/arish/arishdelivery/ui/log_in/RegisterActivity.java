@@ -1,85 +1,45 @@
 package com.delivery.arish.arishdelivery.ui.log_in;
 
 import android.Manifest;
-import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.Context;
-import android.content.ContextWrapper;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.drawable.AnimationDrawable;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Environment;
-import android.os.ParcelFileDescriptor;
 import android.provider.MediaStore;
-import android.provider.OpenableColumns;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
-import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.delivery.arish.arishdelivery.R;
-import com.delivery.arish.arishdelivery.data.Contract;
-import com.delivery.arish.arishdelivery.internet.BaseApiService;
-import com.delivery.arish.arishdelivery.internet.ProgressRequestBody;
-import com.delivery.arish.arishdelivery.internet.UtilsApi;
-import com.delivery.arish.arishdelivery.internet.model.ResponseApiModel;
 import com.delivery.arish.arishdelivery.mvp.presenter.RegisterPresenter;
-import com.delivery.arish.arishdelivery.util.EdetTextUtil;
-import com.delivery.arish.arishdelivery.util.FileUtil;
-import com.delivery.arish.arishdelivery.util.MyAnimation;
-import com.nabinbhandari.android.permissions.PermissionHandler;
-import com.nabinbhandari.android.permissions.Permissions;
+import com.delivery.arish.arishdelivery.util.EditTextUtil;
 
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileDescriptor;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.text.DecimalFormat;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 import de.hdodenhof.circleimageview.CircleImageView;
-import id.zelory.compressor.Compressor;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.functions.Consumer;
-import io.reactivex.schedulers.Schedulers;
-import okhttp3.MediaType;
-import okhttp3.MultipartBody;
-import okhttp3.RequestBody;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
+@RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
 public class RegisterActivity extends AppCompatActivity implements View.OnClickListener {
-    protected static final int REQUEST_CODE_MANUAL = 5;
+    private static final int REQUEST_CODE_MANUAL = 5;
     private static final int PICK_IMAGE_REQUEST = 1;
 
 
@@ -90,18 +50,25 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     @SuppressWarnings("WeakerAccess")
     @BindView(R.id.rv_container_register)
     protected RelativeLayout mRelativeLayout;
+    @SuppressWarnings("WeakerAccess")
     @BindView(R.id.etName)
     protected EditText mEtName;
+    @SuppressWarnings("WeakerAccess")
     @BindView(R.id.etEmail)
     protected EditText mEtEmail;
+    @SuppressWarnings("WeakerAccess")
     @BindView(R.id.etPhone)
     protected EditText mEtPhone;
+    @SuppressWarnings("WeakerAccess")
     @BindView(R.id.etPassword)
     protected EditText mEtPassword;
+    @SuppressWarnings("WeakerAccess")
     @BindView(R.id.addImage)
     protected ImageView mAddImage;
+    @SuppressWarnings("WeakerAccess")
     @BindView(R.id.btnRegister)
     protected Button mBtnRegister;
+    @SuppressWarnings("WeakerAccess")
     @BindView(R.id.imgHolder)
     protected CircleImageView mImgHolder;
 
@@ -122,6 +89,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
 
 
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -129,13 +97,13 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             case PICK_IMAGE_REQUEST:
                 if (resultCode == RESULT_OK) {
                     try {
-                        Uri dataimage = data.getData();
-                        String[] imageprojection = {MediaStore.Images.Media.DATA};
-                        Cursor cursor = getContentResolver().query(dataimage, imageprojection, null, null, null);
+                        Uri imageData = data.getData();
+                        String[] imageProjection = {MediaStore.Images.Media.DATA};
+                        Cursor cursor = getContentResolver().query(Objects.requireNonNull(imageData), imageProjection, null, null, null);
 
                         if (cursor != null) {
                             cursor.moveToFirst();
-                            int indexImage = cursor.getColumnIndex(imageprojection[0]);
+                            int indexImage = cursor.getColumnIndex(imageProjection[0]);
                             mPart_image = cursor.getString(indexImage);
 
                             if (mPart_image != null) {
@@ -143,7 +111,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                                 // mImgHolder.setImageBitmap( BitmapFactory.decodeFile( mActualImageFile.getAbsolutePath() ) );
                                 Glide.with(this).load(mActualImageFile).into(mImgHolder);
                                // customCompressImage();
-
+                                cursor.close();
 
                             }
                         }
@@ -158,13 +126,13 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
 
 
-    void openGallry() {
+    private void openGallery() {
         Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
         photoPickerIntent.setType("image/*");
         startActivityForResult(photoPickerIntent, PICK_IMAGE_REQUEST);
     }
 
-    void galleryPermissionDialog() {
+    private void galleryPermissionDialog() {
 
         int hasWriteContactsPermission = 0;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
@@ -172,15 +140,14 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                     Manifest.permission.READ_EXTERNAL_STORAGE);
         }
         if (hasWriteContactsPermission != PackageManager.PERMISSION_GRANTED) {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-                ActivityCompat.requestPermissions(RegisterActivity.this,
-                        new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
-                        REQUEST_CODE_ASK_PERMISSIONS);
-            }
+            ActivityCompat.requestPermissions(RegisterActivity.this,
+                    new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
+                    REQUEST_CODE_ASK_PERMISSIONS);
+            //noinspection UnnecessaryReturnStatement
             return;
 
         } else {
-            openGallry();
+            openGallery();
         }
     }
 
@@ -199,7 +166,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                     perms.put(permissions[i], grantResults[i]);
                 // Check for READ_EXTERNAL_STORAGE
 
-                boolean showRationale = false;
+                boolean showRationale;
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                     if (perms.get(Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
                         // All Permissions Granted
@@ -207,7 +174,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                     } else {
                         showRationale = ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.READ_EXTERNAL_STORAGE);
                         if (showRationale) {
-                            showMessageOKCancel(getString(R.string.read_storage_permisio_not),
+                            showMessageOKCancel(getString(R.string.read_storage_permission),
                                     new DialogInterface.OnClickListener() {
                                         @Override
                                         public void onClick(DialogInterface dialog, int which) {
@@ -216,11 +183,11 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                                         }
                                     });
                         } else {
-                            showMessageOKCancel(getString(R.string.read_storage_permisio_not),
+                            showMessageOKCancel(getString(R.string.read_storage_permission),
                                     new DialogInterface.OnClickListener() {
                                         @Override
                                         public void onClick(DialogInterface dialog, int which) {
-                                            Toast.makeText(RegisterActivity.this, getString(R.string.enable_permision), Toast.LENGTH_SHORT).show();
+                                            Toast.makeText(RegisterActivity.this, getString(R.string.enable_permission), Toast.LENGTH_SHORT).show();
                                             Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
                                             Uri uri = Uri.fromParts("package", getPackageName(), null);
                                             intent.setData(uri);
@@ -247,7 +214,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
     }
 
-    public void showMessageOKCancel(String message, DialogInterface.OnClickListener okListener) {
+    private void showMessageOKCancel(String message, DialogInterface.OnClickListener okListener) {
         new android.app.AlertDialog.Builder(RegisterActivity.this)
                 .setTitle(R.string.app_name)
                 .setMessage(message)
@@ -259,6 +226,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     }
 
 
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
     public void onClick(View view) {
         int id = view.getId();
@@ -273,36 +241,37 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         }
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     private void initRegister() {
         RegisterPresenter registerPresenter = new RegisterPresenter(this);
 
         if (mPart_image == null) {
 
 
-            if (EdetTextUtil.isNameCase(mEtName.getText().toString())==1) {
+            if (EditTextUtil.isNameCase(mEtName.getText().toString())==1) {
                 mEtName.setError(getResources().getString(R.string.name_error));
                 return;
 
             }
 
-            if (EdetTextUtil.isNameCase(mEtName.getText().toString())==2) {
+            if (EditTextUtil.isNameCase(mEtName.getText().toString())==2) {
                 mEtName.setError(getResources().getString(R.string.name_error_char));
                 return;
 
             }
 
-            if (!EdetTextUtil.isEmailValid(mEtEmail.getText().toString())) {
+            if (EditTextUtil.isEmailValid(mEtEmail.getText().toString())) {
                 mEtEmail.setError(getResources().getString(R.string.email_error));
                 return;
 
             }
 
-            if(EdetTextUtil.passCases(mEtPassword.getText().toString())==6){
+            if(EditTextUtil.passCases(mEtPassword.getText().toString())==6){
                 mEtPassword.setError(getResources().getString(R.string.password_error));
                 return;
 
             }
-            if(EdetTextUtil.phonCases(mEtPhone.getText().toString())==10){
+            if(EditTextUtil.phoneCases(mEtPhone.getText().toString())==10){
                 mEtPhone.setError(getResources().getString(R.string.phone_error));
                 return;
             }
@@ -314,34 +283,34 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
 
 
-            Log.d(TAG, "ImageUploaingCase = null");
-        } else if(mPart_image!=null) {
+            Log.d(TAG, "ImageUploadingCase = null");
+        } else {
 
 
-            if (EdetTextUtil.isNameCase(mEtName.getText().toString())==1) {
+            if (EditTextUtil.isNameCase(mEtName.getText().toString())==1) {
                 mEtName.setError(getResources().getString(R.string.name_error));
                 return;
 
             }
 
-            if (EdetTextUtil.isNameCase(mEtName.getText().toString())==2) {
+            if (EditTextUtil.isNameCase(mEtName.getText().toString())==2) {
                 mEtName.setError(getResources().getString(R.string.name_error_char));
                 return;
 
             }
 
-            if (!EdetTextUtil.isEmailValid(mEtEmail.getText().toString())) {
+            if (EditTextUtil.isEmailValid(mEtEmail.getText().toString())) {
                 mEtEmail.setError(getResources().getString(R.string.email_error));
                 return;
 
             }
 
-            if(EdetTextUtil.passCases(mEtPassword.getText().toString())==6){
+            if(EditTextUtil.passCases(mEtPassword.getText().toString())==6){
                 mEtPassword.setError(getResources().getString(R.string.password_error));
                 return;
 
             }
-            if(EdetTextUtil.phonCases(mEtPhone.getText().toString())==10){
+            if(EditTextUtil.phoneCases(mEtPhone.getText().toString())==10){
                 mEtPhone.setError(getResources().getString(R.string.phone_error));
                 return;
             }
@@ -354,7 +323,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                     mEtPhone.getText().toString());
 
 
-            Log.d(TAG, "ImageUploaingCase = Value");
+            Log.d(TAG, "ImageUploadingCase = Value");
 
         }
     }
@@ -366,7 +335,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
             galleryPermissionDialog();
 
-            openGallry();
+            openGallery();
 
             if (mPart_image == null) {
                 mImgHolder.setVisibility(View.VISIBLE);
@@ -376,7 +345,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
             galleryPermissionDialog();
 
-            openGallry();
+            openGallery();
             if (mPart_image == null) {
                 mImgHolder.setVisibility(View.VISIBLE);
             }
@@ -386,7 +355,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
             galleryPermissionDialog();
 
-            openGallry();
+            openGallery();
             if (mPart_image == null) {
                 mImgHolder.setVisibility(View.VISIBLE);
             }
@@ -394,7 +363,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
 
         } else {
-            openGallry();
+            openGallery();
             if (mPart_image == null) {
                 mImgHolder.setVisibility(View.VISIBLE);
             }

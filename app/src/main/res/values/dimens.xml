@@ -30,7 +30,7 @@
     <dimen name="nav_item_side_margin">4dp</dimen>
 
 
-    <!-- recyclerVeiw -->
+    <!-- recyclerView -->
     <dimen name="list_side_padding">5dp</dimen>
     <dimen name="list_top_padding">8dp</dimen>
     <dimen name="list_bottom_padding">24dp</dimen>
@@ -58,8 +58,8 @@
 
     <dimen name="order_layout_margin">16dp</dimen>
     <dimen name="order_views_margin">4dp</dimen>
-    <dimen name="odrer_views_padding">4dp</dimen>
-    <dimen name="odrer_img_size">48dp</dimen>
+    <dimen name="order_views_padding">4dp</dimen>
+    <dimen name="order_img_size">48dp</dimen>
     <!--TODO===== LogInActivity ============================ -->
     <!--  Linear Container View-->
     <dimen name="lgn_container_side_margin">48dp</dimen>

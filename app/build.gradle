@@ -51,7 +51,7 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
 
     //firebase
-    implementation 'com.google.firebase:firebase-core:16.0.4'
+    implementation 'com.google.firebase:firebase-core:16.0.5'
 
     //butterknife library
     implementation "com.jakewharton:butterknife:$butterknifeVersion"
@@ -71,7 +71,7 @@ dependencies {
     implementation 'net.gotev:uploadservice:2.1'
 
     //apache.httpcomponents library
-    implementation 'org.apache.httpcomponents:httpmime:4.4'
+    implementation 'org.apache.httpcomponents:httpmime:4.5.2'
 
     //compressor library compress image befor uploading
     implementation 'id.zelory:compressor:2.1.0'

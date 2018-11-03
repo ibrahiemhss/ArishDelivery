@@ -3,7 +3,6 @@ package com.delivery.arish.arishdelivery.internet;
 
 import com.delivery.arish.arishdelivery.data.Contract;
 import com.delivery.arish.arishdelivery.internet.model.ResponseApiModel;
-import com.google.gson.JsonObject;
 
 import java.util.Map;
 
@@ -63,26 +62,4 @@ public interface BaseApiService {
             @Field(Contract.LANG_COL) String lang);
 
 
-    @FormUrlEncoded
-    @POST("InsertData/insert_booking.php")
-    Call<ResponseBody> bookRequest(
-            @Field("user_id") String user_id,
-            @Field("face_id") String face_id,
-            @Field("car_id") String car_id,
-            @Field("traveTime") String traveTime,
-            @Field("start_latitude") String start_latitude,
-            @Field("start_longitude") String start_longitude,
-            @Field("end_latitude") String end_latitude,
-            @Field("end_longtude") String end_longtude,
-            @Field("start_location") String start_location,
-            @Field("end_location") String end_location,
-            @Field("status") String status);
-
-    @FormUrlEncoded
-    @POST("FCM/sendSinglePush.php")
-    Call<ResponseBody> sentMessagToDriverRequest(
-            @Field("title") String title,
-            @Field("from") String from,
-            @Field("to") String to,
-            @Field("name") String name);
 }

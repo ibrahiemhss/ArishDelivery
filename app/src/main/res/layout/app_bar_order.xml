@@ -30,16 +30,18 @@
         android:id="@+id/img_menu"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:src="@drawable/base_shap"
+        android:src="@drawable/base_shape"
         android:adjustViewBounds="true"
-        android:scaleType="centerInside"/>
+        android:scaleType="centerInside"
+        android:contentDescription="@string/img_orders_views_conten_description" />
         <ImageView
-            android:id="@+id/arraw_upp"
+            android:id="@+id/arrow_upp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|center"
             android:layout_margin="@dimen/order_views_margin"
-            android:background="@drawable/ic_arrow_upward_grey"/>
+            android:background="@drawable/ic_arrow_upward_grey"
+            android:contentDescription="@string/img_arrow_down_conten_description" />
 
     <RelativeLayout
         android:id="@+id/rv_container_orders"
@@ -48,26 +50,24 @@
         android:background="@color/color_group_a"
         android:layout_margin="@dimen/order_layout_margin"
         android:layout_gravity="bottom">
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            >
+
             <ImageView
-                android:id="@+id/arraw_down"
+                android:id="@+id/arrow_down"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:layout_alignParentTop="true"
                 android:layout_margin="@dimen/order_views_margin"
-                android:background="@drawable/ic_arrow_downward_grey"/>
+                android:background="@drawable/ic_arrow_downward_grey"
+                android:contentDescription="@string/img_arrow_up_conten_description" />
             <Button
                 android:id="@+id/btn_add_order"
                 android:layout_width="wrap_content"
                 android:background="@drawable/button_back"
                 android:layout_margin="@dimen/order_views_margin"
                 android:text="@string/add_your_order"
-                android:padding="@dimen/odrer_views_padding"
-                android:layout_below="@+id/arraw_down"
+                android:padding="@dimen/order_views_padding"
+                android:layout_below="@+id/arrow_down"
                 android:textColor="@color/white"
                 android:textAllCaps="false"
                 android:layout_height="wrap_content" />
@@ -77,34 +77,37 @@
                 android:layout_height="wrap_content"
                 android:hint="@string/type_order"
                 android:layout_margin="@dimen/order_views_margin"
-                android:layout_below="@+id/arraw_down"
+                android:layout_below="@+id/arrow_down"
                 android:layout_alignParentEnd="true"
                 android:layout_toRightOf="@+id/btn_add_order"
-                android:layout_alignParentRight="true" />
+                android:layout_alignParentRight="true"
+                android:layout_toEndOf="@+id/btn_add_order"
+                android:inputType="text" />
 
             <RelativeLayout
                 android:id="@+id/rv_direct_call"
                 android:layout_width="match_parent"
                 android:background="@drawable/button_back"
                 android:layout_margin="@dimen/order_views_margin"
-                android:padding="@dimen/odrer_views_padding"
+                android:padding="@dimen/order_views_padding"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/btn_add_order">
                 <ImageView
                     android:id="@+id/img_direct_call"
-                    android:layout_width="@dimen/odrer_img_size"
-                    android:layout_height="@dimen/odrer_img_size"
-                    android:background="@drawable/ic_phone_forwarded_white"/>
+                    android:layout_width="@dimen/order_img_size"
+                    android:layout_height="@dimen/order_img_size"
+                    android:background="@drawable/ic_phone_forwarded_white"
+                    android:contentDescription="@string/img_call_conten_conten_description" />
                 <Button
                     android:id="@+id/btn_call"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@color/color_transeparent"
+                    android:background="@color/color_transparent"
                     android:textAllCaps="false"
                     android:text="@string/direct_call"
                     android:layout_toRightOf="@+id/img_direct_call"
                     android:textColor="@color/white"
-                    />
+                    android:layout_toEndOf="@+id/img_direct_call" />
             </RelativeLayout>
 
             <RelativeLayout
@@ -112,27 +115,28 @@
                 android:layout_width="match_parent"
                 android:background="@drawable/btn_whatsapp"
                 android:layout_margin="@dimen/order_views_margin"
-                android:padding="@dimen/odrer_views_padding"
+                android:padding="@dimen/order_views_padding"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/rv_direct_call">
                 <ImageView
                     android:id="@+id/img_whatsapp"
-                    android:layout_width="@dimen/odrer_img_size"
-                    android:layout_height="@dimen/odrer_img_size"
+                    android:layout_width="@dimen/order_img_size"
+                    android:layout_height="@dimen/order_img_size"
                     android:textAllCaps="false"
-                    android:background="@drawable/whatsapp"/>
+                    android:background="@drawable/whatsapp"
+                    android:contentDescription="@string/img_whatsapp_conten_description" />
                 <Button
                     android:id="@+id/btn_whatssapp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@color/color_transeparent"
+                    android:background="@color/color_transparent"
                     android:layout_toRightOf="@+id/img_whatsapp"
                     android:text="@string/call_with_whatsapp"
                     android:textAllCaps="false"
-                    android:textColor="@color/white" />
+                    android:textColor="@color/white"
+                    android:layout_toEndOf="@+id/img_whatsapp" />
             </RelativeLayout>
 
-        </RelativeLayout>
 
     </RelativeLayout>
     </FrameLayout>

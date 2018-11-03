@@ -133,7 +133,7 @@
             android:textColor="@color/white" />
 
         <ProgressBar
-            android:id="@+id/rg_proressbar"
+            android:id="@+id/rg_progressbar"
             style="@android:style/Widget.Holo.Light.ProgressBar.Horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

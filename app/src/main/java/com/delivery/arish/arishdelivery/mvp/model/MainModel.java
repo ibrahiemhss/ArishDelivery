@@ -3,6 +3,7 @@ package com.delivery.arish.arishdelivery.mvp.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+@SuppressWarnings("unused")
 public class MainModel implements Parcelable{
 
     private String name;
@@ -20,7 +21,7 @@ public class MainModel implements Parcelable{
     public MainModel() {
 
     }
-    public MainModel(Parcel in) {
+    private MainModel(Parcel in) {
         name = in.readString();
         image = in.readInt();
     }

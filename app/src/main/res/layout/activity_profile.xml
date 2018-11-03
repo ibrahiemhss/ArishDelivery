@@ -8,7 +8,7 @@
     tools:context=".ui.log_in.ProfileActivity">
 
     <android.support.design.widget.AppBarLayout
-        android:id="@+id/aprofile_pp_bar"
+        android:id="@+id/profile_pp_bar"
         android:layout_width="match_parent"
         android:layout_height="@dimen/profile_app_bar_height"
         android:fitsSystemWindows="true"

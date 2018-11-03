@@ -18,12 +18,12 @@
     <string name="privacy_policy">Privacy policy</string>
     <string name="Logout">Log Out</string>
     <string name="share">Share</string>
-    <string name="loging_in">Loging in.......</string>
-    <string name="registring">Registering......</string>
+    <string name="signing_in">Signing in.......</string>
+    <string name="creating_new">Creating a new account......</string>
     <string name="ok">OK</string>
     <string name="cancel">Cancel</string>
-    <string name="enable_permision">Please Enable the Read Storage permission in permission</string>
-    <string name="read_storage_permisio_not">Read Storage Permission required for this app</string>
+    <string name="enable_permission">Please Enable the Read Storage permission in permission</string>
+    <string name="read_storage_permission">Read Storage Permission required for this app</string>
     <string name="restaurant">Restaurant</string>
     <string name="pharmacies">Pharmacies</string>
 
@@ -42,13 +42,22 @@
     <string name="nav_header_title">title</string>
     <string name="nav_header_subtitle">subtitle</string>
     <string name="code">Code from e-mail</string>
-    <string name="ubdate_password">New password</string>
-    <string name="copnfirm_password">Confirm password</string>
+    <string name="update_password">New password</string>
+    <string name="confirm_password">Confirm password</string>
     <string name="email_error">Please enter a valid e-mail address</string>
     <string name="password_error">Password must contain at least 8 characters</string>
     <string name="name_error">Username must contain at least 6 characters</string>
     <string name="phone_error">The phone number must consist of 10 digits</string>
     <string name="confirm_password_error">The password is not the same</string>
     <string name="name_error_char"><![CDATA[Make sure your UserName not contains this characters  ($&+,:;=\\\\?@#|/\'<>.^*()%!-])]]></string>
+    <string name="img_arrow_conten_description">Click here to hide the display buttons or click to show them again</string>
+    <string name="img_arrow_down_conten_description">Click here to return the order display buttons again</string>
+    <string name="img_orders_views_conten_description">This list of buttons to reserve a new order</string>
+    <string name="img_arrow_up_conten_description">Click here to hide the order display buttons</string>
+    <string name="img_call_conten_conten_description">Call directly to reserve a new order</string>
+    <string name="img_whatsapp_conten_description">to reserve a new order by whatsapp app</string>
+    <string name="img_prf_phone_conten_description">Here is the phone number you entered earlier while registering a new member</string>
+    <string name="img_prf_email_conten_description">Here is your e-mail that you entered earlier while registering a new member</string>
+    <string name="img_prf_location_conten_description">Here is where you are currently located. You can cancel this by setting the phone as you do not like it (:</string>
 
 </resources>

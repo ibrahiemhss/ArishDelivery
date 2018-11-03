@@ -9,7 +9,7 @@
     tools:context=".ui.log_in.resetPassword.ResetPasswordActivity">
 
     <FrameLayout
-        android:id="@+id/contents_containerdddddd"
+        android:id="@+id/contents_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
          />

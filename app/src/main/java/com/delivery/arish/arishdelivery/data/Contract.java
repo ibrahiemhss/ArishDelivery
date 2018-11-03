@@ -15,9 +15,9 @@ public class Contract {
     public static final String ERROR = "error";
     public static final String FALSE_VAL = "false";
     public static final String ERROR_MSG = "error_msg";
-    public static final String SUCESS_MSG = "success_msg";
-    public static final String SUCESS_MSG_VALUE = "success";
-    public static final String IMG_MSG = "photo_msg";
+    public static final String SUCCESS_MSG = "success_msg";
+    public static final String SUCCESS_MSG_VALUE = "success";
+    // --Commented out by Inspection (03/11/18 02:00 م):public static final String IMG_MSG = "photo_msg";
 
 
 

@@ -18,7 +18,6 @@ import com.bumptech.glide.request.RequestOptions;
 import com.delivery.arish.arishdelivery.R;
 import com.delivery.arish.arishdelivery.mvp.View.OnItemListClickListener;
 import com.delivery.arish.arishdelivery.mvp.model.DetailsModel;
-import com.delivery.arish.arishdelivery.mvp.model.MainModel;
 
 import java.util.ArrayList;
 
@@ -27,11 +26,10 @@ import butterknife.ButterKnife;
 
 public class DetailsAdapter extends RecyclerView.Adapter<DetailsAdapter.Holder> {
 
-    private static final String TAG = DetailsAdapter.class.toString();
-    private ArrayList<DetailsModel> mDetailsModels=new ArrayList<>();;
+    // --Commented out by Inspection (03/11/18 02:01 م):private static final String TAG = DetailsAdapter.class.toString();
+    private final ArrayList<DetailsModel> mDetailsModels;
     private OnItemListClickListener onItemListClickListener;
     private final LayoutInflater mLayoutInflater;
-    private int mMutedColor = 0xFF333333;
 
 
     public DetailsAdapter(ArrayList<DetailsModel> detailsModelArrayList, LayoutInflater inflater) {
@@ -82,6 +80,7 @@ public class DetailsAdapter extends RecyclerView.Adapter<DetailsAdapter.Holder> 
             ButterKnife.bind(this, itemView);
         }
 
+        @SuppressWarnings("deprecation")
         public void bind(DetailsModel detailsModel, int position) {
             titleView.setText(detailsModel.getName());
 
@@ -97,7 +96,7 @@ public class DetailsAdapter extends RecyclerView.Adapter<DetailsAdapter.Holder> 
         //    Bitmap bitmap = thumbnail.getDrawingCache();
             if (bitmap != null) {
                 Palette p = Palette.generate(bitmap, 15000000);
-                mMutedColor = p.getDarkMutedColor(0xFF333333);
+                int mMutedColor = p.getDarkMutedColor(0xFF333333);
                 LinearListContainer
                         .setBackgroundColor(mMutedColor);
 

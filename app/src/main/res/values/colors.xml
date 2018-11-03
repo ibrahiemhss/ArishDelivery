@@ -7,7 +7,7 @@
 
 
     <color name="white">#ffffff</color>
-    <color name="color_transeparent">#00ffffff</color>
+    <color name="color_transparent">#00ffffff</color>
 
     <color name="color_mountains_dark">#002202</color>
     <color name="color_mountains">#244a2c</color>
@@ -23,7 +23,7 @@
     <color name="lite_grey">#CFD8DC</color>
     <color name="WhiteTransparent">#8fff</color>
     <color name="color12">#ff7058</color>
-    <color name="color_graydr">#78909C</color>
+    <color name="color_greydr">#78909C</color>
     <color name="Ivory">#FFFFF0</color>
     <color name="blue_light">#9cd1fa</color>
     <color name="blue_light_transparent">#34B7F1</color>

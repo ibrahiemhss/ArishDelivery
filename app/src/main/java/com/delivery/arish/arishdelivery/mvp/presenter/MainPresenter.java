@@ -7,8 +7,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
 import android.support.design.widget.NavigationView;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -18,14 +16,12 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toolbar;
 
 import com.delivery.arish.arishdelivery.R;
 import com.delivery.arish.arishdelivery.data.Contract;
 import com.delivery.arish.arishdelivery.data.SharedPrefManager;
 import com.delivery.arish.arishdelivery.mvp.View.OnItemListClickListener;
 import com.delivery.arish.arishdelivery.mvp.model.MainModel;
-import com.delivery.arish.arishdelivery.ui.Main.MainActivity;
 import com.delivery.arish.arishdelivery.ui.Main.MainListAdapter;
 import com.delivery.arish.arishdelivery.ui.details.DetailsActivity;
 import com.delivery.arish.arishdelivery.ui.log_in.LogInActivity;
@@ -34,7 +30,6 @@ import com.delivery.arish.arishdelivery.ui.log_in.ProfileActivity;
 import java.util.ArrayList;
 import java.util.Objects;
 
-import butterknife.ButterKnife;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class MainPresenter {
@@ -70,6 +65,7 @@ public class MainPresenter {
                 >= Configuration.SCREENLAYOUT_SIZE_LARGE;
     }
 
+    @SuppressWarnings("ParameterCanBeLocal")
     private static void initialiseListWithPhoneScreen(final Context context, RecyclerView rv, LayoutInflater getLayoutInflater, MainListAdapter mainListAdapter) {
 
         rv.setHasFixedSize(true);
@@ -91,6 +87,7 @@ public class MainPresenter {
 
     }
 
+    @SuppressWarnings("ParameterCanBeLocal")
     private static void initialiseListWithsLargeSize(final Context context, RecyclerView rv, LayoutInflater getLayoutInflater, MainListAdapter mainListAdapter) {
 
 
@@ -169,6 +166,7 @@ public class MainPresenter {
 
 
 
+    @SuppressWarnings("unused")
     public static void initNavigationDrawer(final Context context, NavigationView navigationView){
 
 

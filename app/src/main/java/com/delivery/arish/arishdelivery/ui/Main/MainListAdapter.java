@@ -1,16 +1,11 @@
 package com.delivery.arish.arishdelivery.ui.Main;
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.support.annotation.NonNull;
-import android.support.v7.graphics.Palette;
-import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -28,11 +23,10 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class MainListAdapter extends RecyclerView.Adapter<MainListAdapter.Holder> {
 
-    private static final String TAG = MainListAdapter.class.toString();
-    private ArrayList<MainModel> mMainModelsList=new ArrayList<>();;
+    // --Commented out by Inspection (03/11/18 02:00 م):private static final String TAG = MainListAdapter.class.toString();
+    private final ArrayList<MainModel> mMainModelsList;
     private OnItemListClickListener onItemListClickListener;
     private final LayoutInflater mLayoutInflater;
-    private int mMutedColor = 0xFF333333;
 
 
     public MainListAdapter(ArrayList<MainModel> mainModelArrayList, LayoutInflater inflater) {

@@ -4,9 +4,6 @@ package com.delivery.arish.arishdelivery.internet;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-import java.util.concurrent.TimeUnit;
-
-import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -14,10 +11,11 @@ import retrofit2.converter.gson.GsonConverterFactory;
  * Created by ibrahim on 19/01/18.
  */
 
+@SuppressWarnings("ALL")
 public class RetrofitClient {
     private static Retrofit retrofit = null;
 
-    static Gson gson = new GsonBuilder()
+    private static final Gson gson = new GsonBuilder()
             .setLenient()
             .create();
 

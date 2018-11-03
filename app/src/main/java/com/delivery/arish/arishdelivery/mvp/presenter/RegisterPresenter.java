@@ -4,10 +4,11 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
+import android.os.Build;
 import android.os.Environment;
+import android.support.annotation.NonNull;
+import android.support.annotation.RequiresApi;
 import android.util.Log;
-import android.view.View;
 import android.widget.Toast;
 
 import com.delivery.arish.arishdelivery.R;
@@ -16,7 +17,6 @@ import com.delivery.arish.arishdelivery.internet.BaseApiService;
 import com.delivery.arish.arishdelivery.internet.UtilsApi;
 import com.delivery.arish.arishdelivery.internet.model.ResponseApiModel;
 import com.delivery.arish.arishdelivery.ui.log_in.LogInActivity;
-import com.delivery.arish.arishdelivery.ui.log_in.RegisterActivity;
 import com.delivery.arish.arishdelivery.util.LangUtil;
 
 import org.json.JSONException;
@@ -24,13 +24,10 @@ import org.json.JSONObject;
 
 import java.io.File;
 import java.io.IOException;
-import java.text.DecimalFormat;
 import java.util.HashMap;
+import java.util.Objects;
 
 import id.zelory.compressor.Compressor;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.functions.Consumer;
-import io.reactivex.schedulers.Schedulers;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
@@ -41,8 +38,8 @@ import retrofit2.Response;
 
 public class RegisterPresenter {
 
-    private Context mCtx;
-    private BaseApiService mApiService;
+    private final Context mCtx;
+    private final BaseApiService mApiService;
     private ProgressDialog mLoading;
 
     private static final String TAG = RegisterPresenter.class.getSimpleName();
@@ -54,6 +51,7 @@ public class RegisterPresenter {
 
 
 
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     public void requestRegisterWithPhoto(
             String old_part_img,
              File myfile,
@@ -61,22 +59,29 @@ public class RegisterPresenter {
             String emailval,
             String passval,
             String phoneval) {
-        mLoading = ProgressDialog.show(mCtx, null, mCtx.getResources().getString(R.string.registring), true, false);
+        mLoading = ProgressDialog.show(mCtx, null, mCtx.getResources().getString(R.string.creating_new), true, false);
 
 
         File imagefile = new File(old_part_img);
-        try {
-            imagefile = new Compressor(mCtx)
-                    .setMaxWidth(640)
-                    .setMaxHeight(480)
-                    .setQuality(75)
-                    .setCompressFormat(Bitmap.CompressFormat.WEBP)
-                    .setDestinationDirectoryPath(Environment.getExternalStoragePublicDirectory(
-                            Environment.DIRECTORY_PICTURES).getAbsolutePath())
-                    .compressToFile(myfile);
-        } catch (IOException e) {
-            e.printStackTrace();
+        if (myfile != null) {
+            try {
+                try {
+                    imagefile = new Compressor(mCtx)
+                            .setMaxWidth(640)
+                            .setMaxHeight(480)
+                            .setQuality(75)
+                            .setCompressFormat(Bitmap.CompressFormat.WEBP)
+                            .setDestinationDirectoryPath(Environment.getExternalStoragePublicDirectory(
+                                    Environment.DIRECTORY_PICTURES).getAbsolutePath())
+                            .compressToFile(myfile);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            } catch (NullPointerException e) {
+                e.printStackTrace();
+            }
         }
+
 
 
         RequestBody reqBody = RequestBody.create(MediaType.parse(Contract.MULTIPART_FILE_PATH), imagefile);
@@ -85,7 +90,7 @@ public class RegisterPresenter {
         RequestBody email = createPartFromString(emailval);
         RequestBody password = createPartFromString(passval);
         RequestBody phone = createPartFromString(phoneval);
-        RequestBody lang = createPartFromString(LangUtil.getCurentLanguage(mCtx));
+        RequestBody lang = createPartFromString(LangUtil.getCurrentLanguage(mCtx));
 
 
         HashMap<String, RequestBody> map = new HashMap<>();
@@ -97,33 +102,34 @@ public class RegisterPresenter {
 
         Call<ResponseApiModel> upload = mApiService.uploadImage(map, partImage);
         upload.enqueue(new Callback<ResponseApiModel>() {
+            @RequiresApi(api = Build.VERSION_CODES.KITKAT)
             @Override
-            public void onResponse(Call<ResponseApiModel> call, final Response<ResponseApiModel> response) {
+            public void onResponse(@NonNull Call<ResponseApiModel> call, @NonNull final Response<ResponseApiModel> response) {
 
                 Log.d(TAG,"myjson = : " +
-                        response.body().toString());
+                        Objects.requireNonNull(response.body()).toString());
 
-                if (response.body().getEerror().equals(Contract.FALSE_VAL)) {
+                if (Objects.requireNonNull(response.body()).getError().equals(Contract.FALSE_VAL)) {
                     //   mLoading.setMessage(response.body().getError_msg());
 
 
 
-                    Log.d(TAG, "server_message : " + response.body().getError_msg().toString()
-                                                   +"\n"+response.body().getSuccess_msg().toString());
+                    Log.d(TAG, "server_message : " + Objects.requireNonNull(response.body()).getError_msg()
+                                                   +"\n"+ Objects.requireNonNull(response.body()).getSuccess_msg());
 
                     //    mLoading.dismiss();
-                    if(response.body().getSuccess_msg().equals(Contract.SUCESS_MSG_VALUE)){
+                    if(Objects.requireNonNull(response.body()).getSuccess_msg().equals(Contract.SUCCESS_MSG_VALUE)){
                         Toast.makeText(mCtx,
-                                response.body().getError_msg()
+                                Objects.requireNonNull(response.body()).getError_msg()
                                 , Toast.LENGTH_SHORT).show();
                         mCtx.startActivity(new Intent(mCtx, LogInActivity.class));
                     }
                     mLoading.dismiss();
 
 
-                } else if (response.body().getEerror().equals("true")){
+                } else if (Objects.requireNonNull(response.body()).getError().equals("true")){
                     Toast.makeText(mCtx,
-                            response.body().getError_msg()
+                            Objects.requireNonNull(response.body()).getError_msg()
                             , Toast.LENGTH_SHORT).show();
                     mLoading.dismiss();
 
@@ -132,7 +138,7 @@ public class RegisterPresenter {
             }
 
             @Override
-            public void onFailure(Call<ResponseApiModel> call, Throwable t) {
+            public void onFailure(@NonNull Call<ResponseApiModel> call, @NonNull Throwable t) {
                 Log.d("RETRO", "ON FAILURE : " + t.getMessage());
             }
         });
@@ -147,32 +153,34 @@ public class RegisterPresenter {
 
 
 
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     public void requestRegister(String nameval,
                                 String emailval,
                                 String passval,
                                 String phoneval) {
 
-        mLoading = ProgressDialog.show(mCtx, null, mCtx.getResources().getString(R.string.registring), true, false);
+        mLoading = ProgressDialog.show(mCtx, null, mCtx.getResources().getString(R.string.creating_new), true, false);
 
         mApiService.registerRequest(
                 nameval,
                 emailval,
                 passval,
                 phoneval,
-                LangUtil.getCurentLanguage(mCtx))
+                LangUtil.getCurrentLanguage(mCtx))
                 .enqueue(new Callback<ResponseBody>() {
+                    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
                     @Override
-                    public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                    public void onResponse(@NonNull Call<ResponseBody> call, @NonNull Response<ResponseBody> response) {
                         if (response.isSuccessful()) {
                             try {
-                                String remoteResponse = response.body().string();
+                                String remoteResponse = Objects.requireNonNull(response.body()).string();
                                 JSONObject jsonRESULTS = new JSONObject(remoteResponse);
                                 Log.d("JSONString", remoteResponse);
 
                                 if (jsonRESULTS.getString(Contract.ERROR).equals(Contract.FALSE_VAL)) {
                                     mLoading.setMessage(jsonRESULTS.optString(Contract.ERROR_MSG));
                                     Toast.makeText(mCtx, jsonRESULTS.optString(Contract.ERROR_MSG), Toast.LENGTH_SHORT).show();
-                                    if(jsonRESULTS.optString(Contract.SUCESS_MSG).equals(Contract.SUCESS_MSG_VALUE)){
+                                    if(jsonRESULTS.optString(Contract.SUCCESS_MSG).equals(Contract.SUCCESS_MSG_VALUE)){
                                         mCtx.startActivity(new Intent(mCtx, LogInActivity.class));
                                     }
                                     mLoading.dismiss();
@@ -196,7 +204,7 @@ public class RegisterPresenter {
                     }
 
                     @Override
-                    public void onFailure(Call<ResponseBody> call, Throwable t) {
+                    public void onFailure(@NonNull Call<ResponseBody> call, @NonNull Throwable t) {
                         Log.e("JSONSdebug", "onFailure: ERROR > " + t.getMessage());
                     }
                 });

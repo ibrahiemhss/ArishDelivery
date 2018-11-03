@@ -11,7 +11,7 @@ public class DetailsModel implements Parcelable {
     public DetailsModel() {
     }
 
-    protected DetailsModel(Parcel in) {
+    private DetailsModel(Parcel in) {
         name = in.readString();
         image = in.readInt();
     }

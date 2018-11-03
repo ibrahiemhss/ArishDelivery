@@ -1,35 +1,30 @@
 package com.delivery.arish.arishdelivery.ui.log_in;
 
 import android.content.Intent;
-import android.graphics.drawable.AnimationDrawable;
-import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.RequiresApi;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
-import android.widget.RelativeLayout;
 
 import com.delivery.arish.arishdelivery.R;
 import com.delivery.arish.arishdelivery.base.BaseActivity;
 import com.delivery.arish.arishdelivery.ui.Main.MainActivity;
 
-import java.util.Objects;
-
 import butterknife.BindView;
-import butterknife.ButterKnife;
 
 public class ProfileActivity extends BaseActivity {
     private static final String TAG = ProfileActivity.class.getSimpleName();
 
+    @SuppressWarnings("WeakerAccess")
     @BindView(R.id.profile_toolbar)
     protected Toolbar mToolbar;
+    @SuppressWarnings("WeakerAccess")
     @BindView(R.id.profile_collapsing_toolbar)
     protected CollapsingToolbarLayout mCollapsingToolbarLayout;
-    @BindView(R.id.aprofile_pp_bar)
+    @SuppressWarnings("WeakerAccess")
+    @BindView(R.id.profile_pp_bar)
     protected AppBarLayout mAppBarLayout;
     private String mLocale;
 
@@ -42,8 +37,7 @@ public class ProfileActivity extends BaseActivity {
         isTablet = getResources().getBoolean(R.bool.isTablet);
 
         setupToolbar();
-        AppBarLayout.LayoutParams params = (AppBarLayout.LayoutParams) mCollapsingToolbarLayout.getLayoutParams();
-        Log.d(TAG, "LanguageDevice oncreate is  "+mLocale);
+       // AppBarLayout.LayoutParams params = (AppBarLayout.LayoutParams) mCollapsingToolbarLayout.getLayoutParams();
 
     }
 

@@ -1,16 +1,13 @@
 package com.delivery.arish.arishdelivery.mvp.presenter;
 
-import android.content.Context;
-
 import com.delivery.arish.arishdelivery.R;
 import com.delivery.arish.arishdelivery.mvp.model.DetailsModel;
-import com.delivery.arish.arishdelivery.mvp.model.MainModel;
 
 import java.util.ArrayList;
 
 public class DetailsPresenter {
 
-    public static ArrayList<DetailsModel> getDetailsModel(Context context)
+    public static ArrayList<DetailsModel> getDetailsModel()
     {
 
 

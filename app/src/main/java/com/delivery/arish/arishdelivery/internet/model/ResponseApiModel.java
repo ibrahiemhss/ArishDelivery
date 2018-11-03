@@ -7,14 +7,33 @@ import com.google.gson.annotations.SerializedName;
  * Created by ibrahim on 21/01/18.
  */
 
+@SuppressWarnings("unused")
 public class ResponseApiModel {
     @SerializedName(Contract.ERROR)
+    private
     String error;
     @SerializedName(Contract.ERROR_MSG)
+    private
     String error_msg;
-    @SerializedName(Contract.SUCESS_MSG)
+    @SerializedName(Contract.SUCCESS_MSG)
+    private
     String success_msg;
+
+    public String getError() {
+        return error;
+    }
+
+    public String getError_msg() {
+        return error_msg;
+    }
+
+    public String getSuccess_msg() {
+        return success_msg;
+    }
+
     @SerializedName(Contract.IMG_MSG)
+
+    private
     String image_msg;
 
     public String getLang() {
@@ -26,6 +45,7 @@ public class ResponseApiModel {
     }
 
     @SerializedName(Contract.LANG_COL)
+    private
 
     String lang;
 
@@ -33,31 +53,5 @@ public class ResponseApiModel {
         return image_msg;
     }
 
-    public void setImage_msg(String image_msg) {
-        this.image_msg = image_msg;
-    }
 
-    public String getSuccess_msg() {
-        return success_msg;
-    }
-
-    public void setSuccess_msg(String success_msg) {
-        this.success_msg = success_msg;
-    }
-
-    public String getEerror() {
-        return error;
-    }
-
-    public void setError(String error) {
-        this.error = error;
-    }
-
-    public String getError_msg() {
-        return error_msg;
-    }
-
-    public void setError_msg(String error_msg) {
-        this.error_msg = error_msg;
-    }
 }

@@ -1,21 +1,13 @@
 package com.delivery.arish.arishdelivery.ui.order;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
-import android.view.animation.AccelerateInterpolator;
 import android.view.animation.AnimationUtils;
-import android.view.animation.DecelerateInterpolator;
-import android.view.animation.TranslateAnimation;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -27,39 +19,44 @@ import com.delivery.arish.arishdelivery.data.Contract;
 import com.delivery.arish.arishdelivery.mvp.model.DetailsModel;
 import com.delivery.arish.arishdelivery.ui.Main.MainActivity;
 import com.delivery.arish.arishdelivery.ui.details.DetailsActivity;
-import com.delivery.arish.arishdelivery.util.CustomImageVIew;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 import butterknife.BindView;
-import butterknife.OnTouch;
 import uk.co.senab.photoview.PhotoViewAttacher;
 
 public class OrdersActivity extends BaseActivity {
 
+    @SuppressWarnings("WeakerAccess")
     @BindView(R.id.img_menu)
     protected ImageView mImgMenu;
+    @SuppressWarnings("WeakerAccess")
     @BindView(R.id.rv_container_orders)
     protected RelativeLayout mRvContainerOrders;
+    @SuppressWarnings("WeakerAccess")
     @BindView(R.id.btn_add_order)
     protected Button mAddOrder;
+    @SuppressWarnings("WeakerAccess")
     @BindView(R.id.etx_add_order)
     protected TextView mEtxAddOrder;
+    @SuppressWarnings("WeakerAccess")
     @BindView(R.id.rv_direct_call)
     protected RelativeLayout mDirectCall;
+    @SuppressWarnings("WeakerAccess")
     @BindView(R.id.rv_whatsapp)
     protected RelativeLayout mWhatsApp;
+    @SuppressWarnings("WeakerAccess")
     @BindView(R.id.order_toolbar)
     protected Toolbar mToolbar;
-    @BindView(R.id.arraw_down)
-    protected ImageView mArrawDown;
-    @BindView(R.id.arraw_upp)
-    protected ImageView mArrawUpp;
+    @SuppressWarnings("WeakerAccess")
+    @BindView(R.id.arrow_down)
+    protected ImageView mArrowDown;
+    @SuppressWarnings("WeakerAccess")
+    @BindView(R.id.arrow_upp)
+    protected ImageView mArrowUpp;
 
-    private boolean isHide;
     private boolean isInterActivity=true;
-    private int mPosition;
-    private ArrayList<DetailsModel> mDetailsModelArrayList;
 
     @Override
     protected int getResourceLayout() {
@@ -85,13 +82,12 @@ public class OrdersActivity extends BaseActivity {
         assert extras != null;
         if(extras.containsKey(Contract.EXTRA_DETAILS_LIST_POSITION)
                 &&extras.containsKey(Contract.EXTRA_DETAILS_LIST)){
-            mPosition = extras.getInt(Contract.EXTRA_DETAILS_LIST_POSITION,0);
-            mDetailsModelArrayList=
-                    extras.getParcelableArrayList(Contract.EXTRA_DETAILS_LIST);
-            mArrawDown.setVisibility(View.VISIBLE);
+            int mPosition = extras.getInt(Contract.EXTRA_DETAILS_LIST_POSITION, 0);
+            ArrayList<DetailsModel> mDetailsModelArrayList = extras.getParcelableArrayList(Contract.EXTRA_DETAILS_LIST);
+            mArrowDown.setVisibility(View.VISIBLE);
 
 
-            mImgMenu.setImageResource(mDetailsModelArrayList.get(mPosition).getImage());
+            mImgMenu.setImageResource(Objects.requireNonNull(mDetailsModelArrayList).get(mPosition).getImage());
             mRvContainerOrders.setElevation(12);
             mRvContainerOrders.setBackgroundColor(getResources().getColor(R.color.white));
             PhotoViewAttacher photoAttacher;
@@ -101,8 +97,8 @@ public class OrdersActivity extends BaseActivity {
 
         }else if(extras.containsKey(Contract.EXTRA_INTER_ACTIVITY)) {
             isInterActivity=extras.getBoolean(Contract.EXTRA_INTER_ACTIVITY);
-            mArrawDown.setVisibility(View.GONE);
-            mArrawUpp.setVisibility(View.GONE);
+            mArrowDown.setVisibility(View.GONE);
+            mArrowUpp.setVisibility(View.GONE);
         }
     }
 
@@ -110,19 +106,19 @@ public class OrdersActivity extends BaseActivity {
     protected void setListener() {
 
 
-        mArrawDown.setOnClickListener(new View.OnClickListener() {
+        mArrowDown.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 slideDown(mRvContainerOrders);
-                mArrawUpp.setVisibility(View.VISIBLE);
+                mArrowUpp.setVisibility(View.VISIBLE);
             }
         });
 
-        mArrawUpp.setOnClickListener(new View.OnClickListener() {
+        mArrowUpp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 slideUp(mRvContainerOrders);
-                mArrawUpp.setVisibility(View.GONE);
+                mArrowUpp.setVisibility(View.GONE);
 
             }
         });
@@ -166,14 +162,14 @@ public class OrdersActivity extends BaseActivity {
     }
 
 
-    public void slideUp(View view){
+    private void slideUp(View view){
         view.startAnimation(AnimationUtils.loadAnimation(this,
                 R.anim.push_up_in));
         mRvContainerOrders.setVisibility(View.VISIBLE);
     }
 
     // slide the view from its current position to below itself
-    public void slideDown(View view){
+    private void slideDown(View view){
         view.startAnimation(AnimationUtils.loadAnimation(this,
                 R.anim.push_down_out));
         mRvContainerOrders.setVisibility(View.GONE);

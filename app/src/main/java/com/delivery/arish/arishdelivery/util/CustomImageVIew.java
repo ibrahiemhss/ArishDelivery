@@ -1,5 +1,6 @@
 package com.delivery.arish.arishdelivery.util;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Matrix;
@@ -10,11 +11,12 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.support.v7.widget.AppCompatImageView;
 
+@SuppressWarnings("WeakerAccess")
 public class CustomImageVIew extends AppCompatImageView implements View.OnTouchListener {
 
 
-    private Matrix matrix = new Matrix();
-    private Matrix savedMatrix = new Matrix();
+    private final Matrix matrix = new Matrix();
+    private final Matrix savedMatrix = new Matrix();
 
     static final int NONE = 0;
     static final int DRAG = 1;
@@ -22,13 +24,12 @@ public class CustomImageVIew extends AppCompatImageView implements View.OnTouchL
 
     private int mode = NONE;
 
-    private PointF mStartPoint = new PointF();
-    private PointF mMiddlePoint = new PointF();
-    private Point mBitmapMiddlePoint = new Point();
+    private final PointF mStartPoint = new PointF();
+    private final PointF mMiddlePoint = new PointF();
+    private final Point mBitmapMiddlePoint = new Point();
 
     private float oldDist = 1f;
-    private float matrixValues[] = {0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f};
-    private float scale;
+    private final float[] matrixValues = {0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f};
     private float oldEventX = 0;
     private float oldEventY = 0;
     private float oldStartPointX = 0;
@@ -48,6 +49,7 @@ public class CustomImageVIew extends AppCompatImageView implements View.OnTouchL
         this(context, attrs, 0);
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     public CustomImageVIew(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
         this.setOnTouchListener(this);
@@ -60,6 +62,7 @@ public class CustomImageVIew extends AppCompatImageView implements View.OnTouchL
         mViewHeight = h;
     }
 
+    @SuppressWarnings("unused")
     public void setBitmap(Bitmap bitmap){
         if(bitmap != null){
             setImageBitmap(bitmap);
@@ -167,17 +170,13 @@ public class CustomImageVIew extends AppCompatImageView implements View.OnTouchL
         if(!in && matrixValues[0] < 1){
             return;
         }
-        if(bitmapWidth > mViewWidth || bimtapHeight > mViewHeight){
-            mDraggable = true;
-        } else{
-            mDraggable = false;
-        }
+        mDraggable = bitmapWidth > mViewWidth || bimtapHeight > mViewHeight;
 
         float midX = (mViewWidth / 2);
         float midY = (mViewHeight / 2);
 
         matrix.set(savedMatrix);
-        scale = newDist / oldDist;
+        float scale = newDist / oldDist;
         matrix.postScale(scale, scale, bitmapWidth > mViewWidth ? mMiddlePoint.x : midX, bimtapHeight > mViewHeight ? mMiddlePoint.y : midY);
 
         this.setImageMatrix(matrix);

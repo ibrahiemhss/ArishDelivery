@@ -3,34 +3,27 @@ package com.delivery.arish.arishdelivery.ui.details;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
-import android.support.design.widget.NavigationView;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.AppCompatActivity;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.RequiresApi;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.Surface;
-import android.view.View;
 import android.view.WindowManager;
-import android.widget.ImageView;
 
 import com.delivery.arish.arishdelivery.R;
 import com.delivery.arish.arishdelivery.base.BaseActivity;
 import com.delivery.arish.arishdelivery.data.Contract;
 import com.delivery.arish.arishdelivery.mvp.View.OnItemListClickListener;
 import com.delivery.arish.arishdelivery.mvp.model.DetailsModel;
-import com.delivery.arish.arishdelivery.mvp.model.MainModel;
 import com.delivery.arish.arishdelivery.mvp.presenter.DetailsPresenter;
-import com.delivery.arish.arishdelivery.mvp.presenter.MainPresenter;
 import com.delivery.arish.arishdelivery.ui.Main.MainActivity;
-import com.delivery.arish.arishdelivery.ui.Main.MainListAdapter;
-import com.delivery.arish.arishdelivery.ui.log_in.ProfileActivity;
 import com.delivery.arish.arishdelivery.ui.order.OrdersActivity;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -38,15 +31,14 @@ import butterknife.ButterKnife;
 public class DetailsActivity extends BaseActivity {
 
 
-    //bind RecyclerView
+    @SuppressWarnings("WeakerAccess")
     @BindView(R.id.details_recycler_view)
     protected RecyclerView mRv;
     private ArrayList<DetailsModel> mDetailsModelArrayList;
     private DetailsAdapter mDetailsAdapter;
+    @SuppressWarnings("WeakerAccess")
     @BindView(R.id.detailstoolbar)
     protected Toolbar mToolbar;
-
-    private boolean isTablet;
 
 
     private final OnItemListClickListener onItemListClickListener = new OnItemListClickListener() {
@@ -76,12 +68,13 @@ public class DetailsActivity extends BaseActivity {
         return R.layout.activity_details;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
     protected void init() {
 
         Bundle extras = getIntent().getExtras();
         assert extras != null;
-        if(extras !=null&&extras.containsKey(Contract.EXTRA_MAIN_LIST_POSITION)){
+        if(extras.containsKey(Contract.EXTRA_MAIN_LIST_POSITION)){
             int id = extras.getInt(Contract.EXTRA_MAIN_LIST_POSITION,0);
             mDetailsModelArrayList=
                     extras.getParcelableArrayList(Contract.EXTRA_DETAILS_LIST);
@@ -95,7 +88,7 @@ public class DetailsActivity extends BaseActivity {
 
             }
         }
-        mDetailsModelArrayList= DetailsPresenter.getDetailsModel(this);
+        mDetailsModelArrayList= DetailsPresenter.getDetailsModel();
 
         GetListByScreenSize();
     }
@@ -120,10 +113,11 @@ public class DetailsActivity extends BaseActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void GetListByScreenSize() {
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+    private void GetListByScreenSize() {
 
         assert this.getSystemService(Context.WINDOW_SERVICE) != null;
-        final int rotation = ((WindowManager) this.getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay().getOrientation();
+        final int rotation = ((WindowManager) Objects.requireNonNull(this.getSystemService(Context.WINDOW_SERVICE))).getDefaultDisplay().getOrientation();
         switch (rotation) {
             case Surface.ROTATION_0:
                 if (isTablet()) {
@@ -144,7 +138,7 @@ public class DetailsActivity extends BaseActivity {
         }
     }
 
-    public boolean isTablet() {
+    private boolean isTablet() {
         return (DetailsActivity.this.getResources().getConfiguration().screenLayout
                 & Configuration.SCREENLAYOUT_SIZE_MASK)
                 >= Configuration.SCREENLAYOUT_SIZE_LARGE;
