@@ -60,5 +60,24 @@ public interface BaseApiService {
             @Field(Contract.CODE_COL) String phone,
             @Field(Contract.LANG_COL) String lang);
 
+    @FormUrlEncoded
+    @POST(Contract.PROFILE_INFO_URL)
+    Call<ResponseBody> getUserInfo(
+            @Field(Contract.EMAIL_COL) String email);
+
+    @FormUrlEncoded
+    @POST(Contract.UPDATE_INFO_URL)
+    Call<ResponseBody> updateUserInfo(
+           @Field(Contract.EMAIL_COL) String email,
+           @Field(Contract.PASSWORD_COL) String password,
+           @Field(Contract.NEW_NAME_COL) String new_name,
+           @Field(Contract.NEW_EMAIL_COL) String new_mail,
+           @Field(Contract.NEW_PHONE_COL) String new_phone,
+           @Field(Contract.LANG_COL) String lang);
+
+
+
+
+
 
 }

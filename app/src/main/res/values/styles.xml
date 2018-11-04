@@ -56,4 +56,10 @@
         <item name="android:background">@drawable/bg_rectangle_button</item>
         <item name="background">@drawable/sp_grey</item>
     </style>
+
+    <style name="Theme_Dialog">
+        <item name="android:windowEnterAnimation">@anim/push_down_in</item>
+        <item name="android:windowExitAnimation">@anim/push_down_out</item>
+
+    </style>
 </resources>

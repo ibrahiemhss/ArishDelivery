@@ -1,20 +1,42 @@
 package com.delivery.arish.arishdelivery.ui.log_in;
 
+import android.app.Dialog;
+import android.content.ContentValues;
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.DatabaseUtils;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.RequiresApi;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.delivery.arish.arishdelivery.R;
 import com.delivery.arish.arishdelivery.base.BaseActivity;
+import com.delivery.arish.arishdelivery.data.Contract;
+import com.delivery.arish.arishdelivery.mvp.presenter.ProfilePresenter;
 import com.delivery.arish.arishdelivery.ui.Main.MainActivity;
+import com.delivery.arish.arishdelivery.util.EditTextUtil;
+
+import java.util.Objects;
 
 import butterknife.BindView;
 
-public class ProfileActivity extends BaseActivity {
+import static android.view.Gravity.BOTTOM;
+import static android.view.Gravity.CENTER;
+
+public class ProfileActivity extends BaseActivity implements View.OnClickListener {
     private static final String TAG = ProfileActivity.class.getSimpleName();
 
     @SuppressWarnings("WeakerAccess")
@@ -26,6 +48,43 @@ public class ProfileActivity extends BaseActivity {
     @SuppressWarnings("WeakerAccess")
     @BindView(R.id.profile_pp_bar)
     protected AppBarLayout mAppBarLayout;
+
+    @SuppressWarnings("WeakerAccess")
+    @BindView(R.id.extxt_prf_name)
+    protected EditText mEtxtName;
+    @SuppressWarnings("WeakerAccess")
+    @BindView(R.id.txt_prf_name)
+    protected TextView mTxtName;
+    @SuppressWarnings("WeakerAccess")
+    @BindView(R.id.extxt_prf_email)
+    protected EditText mEtxtEmail;
+    @SuppressWarnings("WeakerAccess")
+    @BindView(R.id.txt_prf_email)
+    protected TextView mTxtEmail;
+    @SuppressWarnings("WeakerAccess")
+    @BindView(R.id.extxt_prf_phone)
+    protected EditText mEtxtPhone;
+    @SuppressWarnings("WeakerAccess")
+    @BindView(R.id.txt_prf_phone)
+    protected TextView mTxtPhone;
+    @SuppressWarnings("WeakerAccess")
+    @BindView(R.id.txt_prf_location)
+    protected TextView mTxtLocation;
+    @SuppressWarnings("WeakerAccess")
+    @BindView(R.id.btn_prf_edit)
+    protected Button mBtnEdit;
+    @SuppressWarnings("WeakerAccess")
+    @BindView(R.id.btn_prf_confirm)
+    protected Button mBtnCofirmChanges;
+
+    private Boolean isClick=false;
+
+
+    private ProfilePresenter mProfilePresenter;
+    private Dialog mUpdateDialog;
+    private EditText mEdtxtGetConfirmPass;
+    private String mConfPass;
+
     private String mLocale;
 
 
@@ -35,7 +94,7 @@ public class ProfileActivity extends BaseActivity {
     protected void onViewReady(Bundle savedInstanceState, Intent intent) {
         super.onViewReady(savedInstanceState, intent);
         isTablet = getResources().getBoolean(R.bool.isTablet);
-
+        mProfilePresenter=new ProfilePresenter(this);
         setupToolbar();
         // AppBarLayout.LayoutParams params = (AppBarLayout.LayoutParams) mCollapsingToolbarLayout.getLayoutParams();
 
@@ -46,39 +105,21 @@ public class ProfileActivity extends BaseActivity {
         return R.layout.activity_profile;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
     protected void init() {
 
+
+        mProfilePresenter.getUserInfo(mTxtName,mTxtEmail,mTxtPhone);
     }
 
     @Override
     protected void setListener() {
-
+        mBtnEdit.setOnClickListener(this);
+        mBtnCofirmChanges.setOnClickListener(this);
     }
 
-    @Override
-    protected void onRestart() {
-        super.onRestart();
-        mLocale = getResources().getConfiguration().locale.getDisplayName();
-        Log.d(TAG, "LanguageDevice onRestart is  " + mLocale);
 
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        mLocale = getResources().getConfiguration().locale.getDisplayName();
-        Log.d(TAG, "LanguageDevice onRestart is  " + mLocale);
-
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        mLocale = getResources().getConfiguration().locale.getDisplayName();
-        Log.d(TAG, "LanguageDevice onRestart is  " + mLocale);
-
-    }
 
     private void setupToolbar() {
         setSupportActionBar(mToolbar);
@@ -110,4 +151,126 @@ public class ProfileActivity extends BaseActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+    @Override
+    public void onClick(View view) {
+        int id=view.getId();
+        switch (id){
+            case R.id.btn_prf_edit:
+                if(!isClick){
+                    mEtxtName.setVisibility(View.VISIBLE);
+                    mTxtName.setVisibility(View.GONE);
+                    mEtxtEmail.setVisibility(View.VISIBLE);
+                    mTxtEmail.setVisibility(View.GONE);
+                    mEtxtPhone.setVisibility(View.VISIBLE);
+                    mTxtPhone.setVisibility(View.GONE);
+
+
+                    if (EditTextUtil.isNameCase(mEtxtName.getText().toString()) == 1) {
+                        mEtxtName.setError(getResources().getString(R.string.name_error));
+                        return;
+
+                    }
+
+                    if (EditTextUtil.isNameCase(mEtxtName.getText().toString()) == 2) {
+                        mEtxtName.setError(getResources().getString(R.string.name_error_char));
+                        return;
+
+                    }
+                    if (EditTextUtil.isEmailValid(mEtxtEmail.getText().toString())) {
+                        mEtxtEmail.setError(getResources().getString(R.string.email_error));
+                        return;
+
+                    }
+
+
+                    if (EditTextUtil.phoneCases(mEtxtPhone.getText().toString()) == 10) {
+                        mEtxtPhone.setError(getResources().getString(R.string.phone_error));
+                        return;
+                    }
+
+                    mBtnCofirmChanges.setVisibility(View.VISIBLE);
+                    Log.e(TAG, "emailValue_in_profile 1= " + mEtxtEmail.getText().toString());
+
+                    isClick=true;
+                }else {
+
+                    isClick=false;
+                }
+                break;
+            case R.id.btn_prf_confirm:
+                launchAddDialog(
+                        mEtxtName.getText().toString(),
+                        mEtxtEmail.getText().toString(),
+                        mEtxtPhone.getText().toString());
+                break;
+        }
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+    private void launchAddDialog( final String newName,final String newEmail, final String newPhone) {
+
+        mUpdateDialog = new Dialog(Objects.requireNonNull(this));
+        WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
+        lp.copyFrom(Objects.requireNonNull(mUpdateDialog.getWindow()).getAttributes());
+        lp.width = 48;
+        lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
+        lp.gravity =  CENTER;
+        lp.windowAnimations = R.style.Theme_Dialog;
+        mUpdateDialog.getWindow().setAttributes(lp);
+
+        mUpdateDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        mUpdateDialog.setContentView(R.layout.custom_dialog_cofirm_password);
+
+        TextView mAdd = mUpdateDialog.findViewById(R.id.txt_add);
+        TextView mCancel = mUpdateDialog.findViewById(R.id.txt_cancel);
+        mEdtxtGetConfirmPass = mUpdateDialog.findViewById(R.id.etxt_get_pass);
+
+        Log.e(TAG, "emailValue_in_profile 2= " + newEmail);
+
+
+        mConfPass = Objects.requireNonNull(mEdtxtGetConfirmPass.getText()).toString();
+
+        mCancel.setOnClickListener(new View.OnClickListener() {
+                                       @Override
+                                       public void onClick(View view) {
+
+
+
+
+                                           mUpdateDialog.dismiss();
+                                       }
+                                   });
+
+
+                mAdd.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+
+                        Log.d(TAG,"confirm_passV="+mEdtxtGetConfirmPass.getText().toString());
+                        Toast.makeText(ProfileActivity.this, "confirm_passV="+mEdtxtGetConfirmPass.getText().toString(), Toast.LENGTH_SHORT).show();
+
+                        mProfilePresenter.updateUserInfo(
+                                mEdtxtGetConfirmPass.getText().toString(),
+                                newName,
+                                newEmail
+                                ,newPhone,mTxtName,mTxtEmail,mTxtPhone);
+
+                        Log.e(TAG, "emailValue_in_profile 3= " + newEmail);
+
+
+                        mEtxtName.setVisibility(View.GONE);
+                        mTxtName.setVisibility(View.VISIBLE);
+                        mEtxtEmail.setVisibility(View.GONE);
+                        mTxtEmail.setVisibility(View.VISIBLE);
+                        mEtxtPhone.setVisibility(View.GONE);
+                        mTxtPhone.setVisibility(View.VISIBLE);
+                        mBtnCofirmChanges.setVisibility(View.GONE);
+                        mUpdateDialog.dismiss();
+                    }
+                });
+
+        mUpdateDialog.show();
+
+    }
 }

@@ -13,6 +13,7 @@ import android.widget.EditText;
 import com.delivery.arish.arishdelivery.R;
 import com.delivery.arish.arishdelivery.data.SharedPrefManager;
 import com.delivery.arish.arishdelivery.mvp.presenter.ResetPasswordPresenter;
+import com.delivery.arish.arishdelivery.util.EditTextUtil;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -50,7 +51,7 @@ public class FragmentUpdatePassoword extends Fragment implements View.OnClickLis
         switch (id) {
             case R.id.btn_update_password:
                 ResetPasswordPresenter resetPasswordPresenter = new ResetPasswordPresenter(getActivity());
-               /* if(EditTextUtil.passCases(mEtxtGetNewPass.getText().toString())==6) {
+                if(EditTextUtil.passCases(mEtxtGetNewPass.getText().toString())==6) {
                     mEtxtGetNewPass.setError(getResources().getString(R.string.password_error));
                     return;
 
@@ -61,7 +62,7 @@ public class FragmentUpdatePassoword extends Fragment implements View.OnClickLis
 
                     return;
 
-                }*/
+                }
                 String email = SharedPrefManager.getInstance(getActivity()).getEmailOfUsers();
                 resetPasswordPresenter.requestUpdateWithCode(
                         email,

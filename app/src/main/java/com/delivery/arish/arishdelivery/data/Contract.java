@@ -3,13 +3,15 @@ package com.delivery.arish.arishdelivery.data;
 public class Contract {
 
 
-    public static final String BAS_URL = "https://ibrhimhssss.000webhostapp.com/";
+    public static final String BAS_URL = "https://ibrhimhssss.000webhostapp.com/dvr/";
 
     public static final String LOGIN_URL = "login/loginUser.php";
     public static final String REGISTER_URL = "login/registerUser.php";
     public static final String REGISTER_WITH_IMAGE_URL = "login/registerUserWithImage.php";
     public static final String FORGET_PASSWORD_URL = "login/forgot-password.php";
     public static final String UPDATE_PASSWORD_URL = "login/update-password.php";
+    public static final String PROFILE_INFO_URL = "login/getUserInfo.php";
+    public static final String UPDATE_INFO_URL = "login/updateUserInfo.php";
 
 
     public static final String ERROR = "error";
@@ -17,7 +19,7 @@ public class Contract {
     public static final String ERROR_MSG = "error_msg";
     public static final String SUCCESS_MSG = "success_msg";
     public static final String SUCCESS_MSG_VALUE = "success";
-    // --Commented out by Inspection (03/11/18 02:00 م):public static final String IMG_MSG = "photo_msg";
+    public static final String IMG_MSG = "photo_msg";
 
 
     public static final String ID_COL = "id";
@@ -32,6 +34,10 @@ public class Contract {
     public static final String TOKEN_COL = "token";
     public static final String CODE_COL = "lost";
     public static final String LANG_COL = "lang";
+    public static final String NEW_NAME_COL = "nname";
+    public static final String NEW_EMAIL_COL = "nemail";
+    public static final String NEW_PHONE_COL = "nphone";
+
 
 
     public static final String PIC_TO_LOAD = "pic";
@@ -41,7 +47,6 @@ public class Contract {
     public static final String EXTRA_MAIN_LIST_POSITION = "main_list_position";
     public static final String EXTRA_DETAILS_LIST_POSITION = "details_list_position";
     public static final String EXTRA_INTER_ACTIVITY = "inter_activity";
-
     public static final String EXTRA_DETAILS_LIST = "details_list";
 
 

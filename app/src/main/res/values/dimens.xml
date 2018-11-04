@@ -17,17 +17,18 @@
     <dimen name="main_fab_elevation">12dp</dimen>
     <!--nav_header-->
     <dimen name="nav_elevation">16dp</dimen>
-    <dimen name="nav_header_height">160dp</dimen>
+    <dimen name="nav_header_height">216dp</dimen>
     <dimen name="nav_header_vertical_spacing">8dp</dimen>
-    <dimen name="nav_width">216dp</dimen>
+    <dimen name="nav_width">360dp</dimen>
     <dimen name="nav_header_width">@dimen/match_parent</dimen>
-    <dimen name="nav_header_side_margin">8dp</dimen>
+    <dimen name="nav_header_side_margin">16dp</dimen>
     <dimen name="nav_header_circleimageview_width">96dp</dimen>
     <dimen name="nav_header_txt_bottom_margin">2dp</dimen>
     <dimen name="nav_header_txt_padding">2dp</dimen>
     <dimen name="nav_child_view_side_margin">16dp</dimen>
     <dimen name="nav_item_view_size">32dp</dimen>
     <dimen name="nav_item_side_margin">4dp</dimen>
+    <dimen name="nav_item_include_height">240</dimen>
 
 
     <!-- recyclerView -->
@@ -125,4 +126,12 @@
     <dimen name="profile_btn_width">56dp</dimen>
     <dimen name="profile_btn_height">32dp</dimen>
 
+    <!--confirm password dialog-->
+    <dimen name="conf_dialog_width">264dp</dimen>
+    <dimen name="conf_dialog_etext_content_size">16sp</dimen>
+    <dimen name="conf_dialog_text_margin">8dp</dimen>
+    <dimen name="conf_dialog_text_size">12sp</dimen>
+    <dimen name="conf_dialog_text_padding">8dp</dimen>
+    <dimen name="conf_dialog_text_width">120dp</dimen>
+    <dimen name="profile_ptn_conf_padding">8dp</dimen>
 </resources>

@@ -3,13 +3,17 @@ package com.delivery.arish.arishdelivery.mvp.presenter;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
 import android.support.design.widget.NavigationView;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.Surface;
 import android.view.View;
@@ -33,6 +37,7 @@ import java.util.Objects;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class MainPresenter {
+   private final static String TAG = MainPresenter.class.getSimpleName();
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     public static void GetListByScreenSize(Context context, RecyclerView rv, LayoutInflater getLayoutInflater, MainListAdapter mainListAdapter) {
@@ -162,8 +167,22 @@ public class MainPresenter {
 
 
     @SuppressWarnings("unused")
-    public static void initNavigationDrawer(final Context context, NavigationView navigationView) {
+    public static void initNavigationDrawer(final Context context, final NavigationView navigationView) {
 
+        Configuration configuration = context.getResources().getConfiguration();
+        final int screenWidthDp = configuration.screenWidthDp; //The current width of the available screen space, in dp units, corresponding to screen width resource qualifier.
+        navigationView.post(new Runnable() {
+            @Override
+            public void run() {
+                Resources resources = context.getResources();
+                float width = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, (int) (screenWidthDp*0.83), resources.getDisplayMetrics());
+                DrawerLayout.LayoutParams params = (DrawerLayout.LayoutParams) navigationView.getLayoutParams();
+                params.width = (int) (width);
+                navigationView.setLayoutParams(params);
+            }
+        });
+
+        Log.d(TAG,"allWidthOfScreen ="+String.valueOf(screenWidthDp)+"\n with after div ="+String.valueOf((int) (screenWidthDp*0.83)));
 
         CircleImageView circleImageView = navigationView.findViewById(R.id.nav_image);
         TextView txtName = navigationView.findViewById(R.id.nav_txtname);

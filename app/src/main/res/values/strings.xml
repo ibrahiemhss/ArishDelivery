@@ -59,5 +59,10 @@
     <string name="img_prf_phone_conten_description">Here is the phone number you entered earlier while registering a new member</string>
     <string name="img_prf_email_conten_description">Here is your e-mail that you entered earlier while registering a new member</string>
     <string name="img_prf_location_conten_description">Here is where you are currently located. You can cancel this by setting the phone as you do not like it (:</string>
+    <string name="edit_profile">Edit personal information</string>
+    <string name="conf_dialog">OK</string>
+    <string name="cancel_dialog">@android:string/cancel</string>
+    <string name="txt_conf_password">Enter your password</string>
+    <string name="confirm_changes">Confirm Changes</string>
 
 </resources>
