@@ -12,6 +12,8 @@ public class Contract {
     public static final String UPDATE_PASSWORD_URL = "login/update-password.php";
     public static final String PROFILE_INFO_URL = "login/getUserInfo.php";
     public static final String UPDATE_INFO_URL = "login/updateUserInfo.php";
+    public static final String UPDATE_INFO_WITH_IMAGE_URL = "login/updateUserInfoWithImage.php";
+    public static final String GET_IMAGE_USER_URL ="login/get_image_user.php";
 
 
     public static final String ERROR = "error";

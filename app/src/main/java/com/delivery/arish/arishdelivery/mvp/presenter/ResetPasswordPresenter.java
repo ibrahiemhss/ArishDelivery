@@ -127,7 +127,7 @@ public class ResetPasswordPresenter {
 
                                 JSONObject jsonRESULTS = new JSONObject(remoteResponse);
 
-                                Log.d("JSONString", remoteResponse);
+                                Log.d("JSONStringUpdate", remoteResponse);
 
                                 if (jsonRESULTS.getString(Contract.ERROR).equals(Contract.FALSE_VAL)) {
 
@@ -135,7 +135,7 @@ public class ResetPasswordPresenter {
                                     Toast.makeText(mCtx, jsonRESULTS.optString(Contract.ERROR_MSG), Toast.LENGTH_SHORT).show();
 
                                     if (jsonRESULTS.optString(Contract.SUCCESS_MSG).equals(Contract.SUCCESS_MSG_VALUE)) {
-                                        Log.d("JSONScheckValue", jsonRESULTS.optString(Contract.SUCCESS_MSG));
+                                        Log.d("JSONScheckValueUpdate", jsonRESULTS.optString(Contract.SUCCESS_MSG));
 
                                         mCtx.startActivity(new Intent(mCtx, LogInActivity.class));
 

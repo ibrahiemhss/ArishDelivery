@@ -34,6 +34,7 @@ public class MainActivity extends BaseActivity {
     @BindView(R.id.nav_view)
     protected NavigationView mNavigationView;
 
+    private MainPresenter mainPresenter;
     @Override
     protected int getResourceLayout() {
         return R.layout.activity_main;
@@ -42,15 +43,16 @@ public class MainActivity extends BaseActivity {
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
     protected void init() {
+        mainPresenter=new MainPresenter(this);
         LayoutInflater layoutInflater = getLayoutInflater();
-        MainPresenter.GetListByScreenSize(this, mRv, layoutInflater, null);
+        mainPresenter.GetListByScreenSize(this, mRv, layoutInflater, null);
         setSupportActionBar(mToolbar);
         mToolbar.setLogoDescription(getResources().getString(R.string.app_name));
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, mDrawerLayout, mToolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         mDrawerLayout.addDrawerListener(toggle);
         toggle.syncState();
-        MainPresenter.initNavigationDrawer(this, mNavigationView);
+        mainPresenter.initNavigationDrawer(this, mNavigationView);
 
     }
 

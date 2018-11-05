@@ -14,11 +14,11 @@
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/nav_image"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="96dp"
+        android:layout_height="96dp"
         android:contentDescription="@string/nav_header_desc"
         android:paddingTop="@dimen/nav_header_vertical_spacing"
-        android:src="@drawable/bas"
+        android:src="@drawable/plank"
         app:civ_border_width="2dp"
         app:civ_border_color="@color/white" />
 

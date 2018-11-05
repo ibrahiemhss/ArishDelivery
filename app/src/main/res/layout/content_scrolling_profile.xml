@@ -52,6 +52,8 @@
                 android:layout_marginStart="@dimen/profile_side_margin"
                 android:layout_toEndOf="@id/ivContactItem0"
                 android:layout_toRightOf="@id/ivContactItem0"
+                android:hint="@string/user_name"
+                android:background="@drawable/bg_rectangle_edittext"
                 android:visibility="gone"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
 
@@ -104,6 +106,8 @@
                 android:layout_marginStart="@dimen/profile_side_margin"
                 android:layout_toEndOf="@id/ivContactItem1"
                 android:layout_toRightOf="@id/ivContactItem1"
+                android:hint="@string/phone"
+                android:background="@drawable/bg_rectangle_edittext"
                 android:visibility="gone"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
 
@@ -156,7 +160,9 @@
                 android:layout_marginLeft="@dimen/profile_side_margin"
                 android:layout_marginStart="@dimen/profile_side_margin"
                 android:layout_toEndOf="@id/ivContactItem3"
+                android:hint="@string/email"
                 android:layout_toRightOf="@id/ivContactItem3"
+                android:background="@drawable/bg_rectangle_edittext"
                 android:ellipsize="end"
                 android:maxLines="1"
                 android:visibility="gone"
@@ -226,17 +232,25 @@
             android:layout_marginTop="8dp"
             android:background="@color/grey" />
 
-
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?attr/selectableItemBackground"
+            android:clickable="true"
+            android:padding="@dimen/profile_side_margin"
+            android:focusable="true">
         <Button
             android:id="@+id/btn_prf_edit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/profile_side_margin"
             android:background="@drawable/bg_rectangle_button"
-            android:layout_marginTop="@dimen/profile_side_margin"
             android:textAllCaps="false"
+            android:layout_marginLeft="@dimen/profile_side_margin"
+            android:layout_marginStart="@dimen/profile_side_margin"
             android:textColor="@color/white"
             android:text="@string/edit_profile" />
+        </RelativeLayout>
+
     </LinearLayout>
 
 </ScrollView>

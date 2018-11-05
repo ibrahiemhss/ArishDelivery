@@ -314,7 +314,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                     mPart_image,
                     mActualImageFile,
                     mEtName.getText().toString(),
-                    mEtName.getText().toString(),
+                    mEtEmail.getText().toString(),
                     mEtPassword.getText().toString(),
                     mEtPhone.getText().toString());
 

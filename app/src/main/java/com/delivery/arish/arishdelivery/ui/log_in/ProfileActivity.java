@@ -5,9 +5,11 @@ import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.DatabaseUtils;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.annotation.RequiresApi;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
@@ -19,25 +21,32 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.delivery.arish.arishdelivery.R;
 import com.delivery.arish.arishdelivery.base.BaseActivity;
 import com.delivery.arish.arishdelivery.data.Contract;
 import com.delivery.arish.arishdelivery.mvp.presenter.ProfilePresenter;
 import com.delivery.arish.arishdelivery.ui.Main.MainActivity;
 import com.delivery.arish.arishdelivery.util.EditTextUtil;
+import com.delivery.arish.arishdelivery.util.FileUtil;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.Objects;
 
 import butterknife.BindView;
+import de.hdodenhof.circleimageview.CircleImageView;
 
 import static android.view.Gravity.BOTTOM;
 import static android.view.Gravity.CENTER;
 
 public class ProfileActivity extends BaseActivity implements View.OnClickListener {
     private static final String TAG = ProfileActivity.class.getSimpleName();
+    private static final int PICK_IMAGE_REQUEST = 1;
 
     @SuppressWarnings("WeakerAccess")
     @BindView(R.id.profile_toolbar)
@@ -48,7 +57,6 @@ public class ProfileActivity extends BaseActivity implements View.OnClickListene
     @SuppressWarnings("WeakerAccess")
     @BindView(R.id.profile_pp_bar)
     protected AppBarLayout mAppBarLayout;
-
     @SuppressWarnings("WeakerAccess")
     @BindView(R.id.extxt_prf_name)
     protected EditText mEtxtName;
@@ -76,6 +84,12 @@ public class ProfileActivity extends BaseActivity implements View.OnClickListene
     @SuppressWarnings("WeakerAccess")
     @BindView(R.id.btn_prf_confirm)
     protected Button mBtnCofirmChanges;
+    @SuppressWarnings("WeakerAccess")
+    @BindView(R.id.img_holder_profile)
+    protected CircleImageView mCircleImageViewHolder;
+    @SuppressWarnings("WeakerAccess")
+    @BindView(R.id.img_edit_prf)
+    protected ImageView mImgEdit;
 
     private Boolean isClick=false;
 
@@ -84,7 +98,8 @@ public class ProfileActivity extends BaseActivity implements View.OnClickListene
     private Dialog mUpdateDialog;
     private EditText mEdtxtGetConfirmPass;
     private String mConfPass;
-
+    private String mPart_image;
+    private File mActualImageFile;
     private String mLocale;
 
 
@@ -110,16 +125,54 @@ public class ProfileActivity extends BaseActivity implements View.OnClickListene
     protected void init() {
 
 
-        mProfilePresenter.getUserInfo(mTxtName,mTxtEmail,mTxtPhone);
+        mProfilePresenter.getUserInfo(mTxtName,mTxtEmail,mTxtPhone,mCircleImageViewHolder);
     }
+
 
     @Override
     protected void setListener() {
         mBtnEdit.setOnClickListener(this);
         mBtnCofirmChanges.setOnClickListener(this);
+        mImgEdit.setOnClickListener(this);
     }
 
+    public void chooseImage() {
+        Intent intent = new Intent(Intent.ACTION_PICK);
+        intent.setType("image/*");
+        startActivityForResult(intent, PICK_IMAGE_REQUEST);
+    }
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK) {
+            if (data == null) {
+                return;
+            }
+            try {
+                Uri imageData = data.getData();
+                String[] imageProjection = {MediaStore.Images.Media.DATA};
+                Cursor cursor = getContentResolver().query(Objects.requireNonNull(imageData), imageProjection, null, null, null);
 
+                if (cursor != null) {
+                    cursor.moveToFirst();
+                    int indexImage = cursor.getColumnIndex(imageProjection[0]);
+                    mPart_image = cursor.getString(indexImage);
+
+                    if (mPart_image != null) {
+                        mActualImageFile = FileUtil.from(this, data.getData());
+                        Glide.with(this).load(mActualImageFile).into(mCircleImageViewHolder);
+
+                       // mCircleImageViewHolder.setImageBitmap(BitmapFactory.decodeFile(mActualImageFile.getAbsolutePath()));
+                    }
+                }
+
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
 
     private void setupToolbar() {
         setSupportActionBar(mToolbar);
@@ -164,6 +217,7 @@ public class ProfileActivity extends BaseActivity implements View.OnClickListene
                     mTxtEmail.setVisibility(View.GONE);
                     mEtxtPhone.setVisibility(View.VISIBLE);
                     mTxtPhone.setVisibility(View.GONE);
+                    mImgEdit.setVisibility(View.VISIBLE);
 
 
                     if (EditTextUtil.isNameCase(mEtxtName.getText().toString()) == 1) {
@@ -204,6 +258,11 @@ public class ProfileActivity extends BaseActivity implements View.OnClickListene
                         mEtxtEmail.getText().toString(),
                         mEtxtPhone.getText().toString());
                 break;
+
+            case R.id.img_edit_prf:
+                chooseImage();
+                break;
+
         }
     }
 
@@ -234,10 +293,6 @@ public class ProfileActivity extends BaseActivity implements View.OnClickListene
         mCancel.setOnClickListener(new View.OnClickListener() {
                                        @Override
                                        public void onClick(View view) {
-
-
-
-
                                            mUpdateDialog.dismiss();
                                        }
                                    });
@@ -250,11 +305,25 @@ public class ProfileActivity extends BaseActivity implements View.OnClickListene
                         Log.d(TAG,"confirm_passV="+mEdtxtGetConfirmPass.getText().toString());
                         Toast.makeText(ProfileActivity.this, "confirm_passV="+mEdtxtGetConfirmPass.getText().toString(), Toast.LENGTH_SHORT).show();
 
-                        mProfilePresenter.updateUserInfo(
-                                mEdtxtGetConfirmPass.getText().toString(),
-                                newName,
-                                newEmail
-                                ,newPhone,mTxtName,mTxtEmail,mTxtPhone);
+                        if (mPart_image != null) {
+                            Log.e(TAG, "mPart_image_in_profile= " + mPart_image);
+
+                            mProfilePresenter.requestUpdateInfoWithImg(
+                                    mPart_image,
+                                    mActualImageFile,
+                                    mEdtxtGetConfirmPass.getText().toString(),
+                                    newName,
+                                    newEmail
+                                    ,newPhone,mTxtName,mTxtEmail,mTxtPhone,mCircleImageViewHolder);
+
+                        }else {
+                            mProfilePresenter.updateUserInfo(
+                                    mEdtxtGetConfirmPass.getText().toString(),
+                                    newName,
+                                    newEmail
+                                    ,newPhone,mTxtName,mTxtEmail,mTxtPhone,mCircleImageViewHolder);
+
+                        }
 
                         Log.e(TAG, "emailValue_in_profile 3= " + newEmail);
 
@@ -266,6 +335,8 @@ public class ProfileActivity extends BaseActivity implements View.OnClickListene
                         mEtxtPhone.setVisibility(View.GONE);
                         mTxtPhone.setVisibility(View.VISIBLE);
                         mBtnCofirmChanges.setVisibility(View.GONE);
+                        mImgEdit.setVisibility(View.GONE);
+
                         mUpdateDialog.dismiss();
                     }
                 });

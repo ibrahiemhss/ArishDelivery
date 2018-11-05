@@ -19,33 +19,50 @@
         android:orientation="vertical"
         tools:ignore="UselessParent">
 
-
-        <EditText
-            android:id="@+id/etEmail"
+        <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/lgn_edit_txt_top_margin"
-            android:background="@drawable/bg_rectangle_edittext"
-            android:drawableRight="@drawable/ic_email"
-            android:inputType="textEmailAddress"
-            android:padding="@dimen/lgn_edit_txt_padding"
-            android:textColor="@color/colorPrimaryDark"
-            tools:ignore="LabelFor"
-            android:drawableEnd="@drawable/ic_email" />
+            android:layout_gravity="bottom"
+            android:layout_marginBottom="@dimen/rg_txt_input_bottom_margin">
 
+            <EditText
+                android:id="@+id/etEmail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/lgn_edit_txt_top_margin"
+                android:background="@drawable/bg_rectangle_edittext"
+                android:drawableRight="@drawable/ic_email"
+                android:inputType="textEmailAddress"
+                android:padding="@dimen/lgn_edit_txt_padding"
+                android:textColor="@color/colorPrimaryDark"
+                tools:ignore="LabelFor"
+                android:hint="@string/email"
+                android:drawableEnd="@drawable/ic_email" />
 
-        <EditText
-            android:id="@+id/etPassword"
+        </android.support.design.widget.TextInputLayout>
+        <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/lgn_edit_txt_top_margin"
-            android:background="@drawable/bg_rectangle_edittext"
-            android:drawableRight="@drawable/ic_key"
-            android:inputType="textPassword"
-            android:padding="@dimen/lgn_edit_txt_padding"
-            android:textColor="@color/colorPrimaryDark"
-            android:drawableEnd="@drawable/ic_key"
-            tools:ignore="LabelFor" />
+            android:layout_gravity="bottom"
+            android:layout_marginBottom="@dimen/rg_txt_input_bottom_margin">
+
+            <EditText
+                android:id="@+id/etPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/lgn_edit_txt_top_margin"
+                android:background="@drawable/bg_rectangle_edittext"
+                android:drawableRight="@drawable/ic_key"
+                android:inputType="textPassword"
+                android:hint="@string/password"
+                android:padding="@dimen/lgn_edit_txt_padding"
+                android:textColor="@color/colorPrimaryDark"
+                android:drawableEnd="@drawable/ic_key"
+                tools:ignore="LabelFor" />
+
+        </android.support.design.widget.TextInputLayout>
+
+
 
         <Button
             android:id="@+id/btnLogin"

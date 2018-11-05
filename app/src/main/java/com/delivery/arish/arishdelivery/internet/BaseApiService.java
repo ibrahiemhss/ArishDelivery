@@ -63,7 +63,8 @@ public interface BaseApiService {
     @FormUrlEncoded
     @POST(Contract.PROFILE_INFO_URL)
     Call<ResponseBody> getUserInfo(
-            @Field(Contract.EMAIL_COL) String email);
+            @Field(Contract.EMAIL_COL) String email,
+            @Field(Contract.LANG_COL) String lang);
 
     @FormUrlEncoded
     @POST(Contract.UPDATE_INFO_URL)
@@ -74,6 +75,12 @@ public interface BaseApiService {
            @Field(Contract.NEW_EMAIL_COL) String new_mail,
            @Field(Contract.NEW_PHONE_COL) String new_phone,
            @Field(Contract.LANG_COL) String lang);
+
+    @Multipart
+    @POST(Contract.UPDATE_INFO_WITH_IMAGE_URL)
+    Call<ResponseApiModel> updateUserInfoWithImg(
+            @PartMap() Map<String, RequestBody> partMap,
+            @Part MultipartBody.Part image);
 
 
 

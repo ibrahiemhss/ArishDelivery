@@ -22,19 +22,33 @@
             app:contentScrim="?attr/colorPrimary"
             app:layout_scrollFlags="scroll|enterAlways|enterAlwaysCollapsed">
 
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
             <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/imgHolderProfile"
+                android:id="@+id/img_holder_profile"
                 android:layout_width="@dimen/profile_circleimageview_width"
                 android:layout_height="@dimen/profile_circleimageview_height"
                 android:layout_marginTop="?android:attr/actionBarSize"
                 android:layout_marginBottom="@dimen/lgn_container_bottom_margin"
+                android:layout_centerInParent="true"
                 android:layout_marginLeft="@dimen/profile_circleimageview_side_margin"
                 android:layout_marginRight="@dimen/profile_circleimageview_side_margin"
-                android:src="@drawable/bas"
                 app:civ_border_width="2dp"
                 android:layout_gravity="center"
                 app:civ_border_color="@color/white" />
-
+            <ImageView
+                android:id="@+id/img_edit_prf"
+                android:layout_width="@dimen/profile_img_edit_width"
+                android:layout_height="@dimen/profile_img_edit_height"
+                android:layout_below="@+id/img_holder_profile"
+                android:layout_marginTop="?android:attr/actionBarSize"
+                android:layout_toRightOf="@+id/img_holder_profile"
+                android:layout_alignParentTop="true"
+                android:visibility="gone"
+                android:src="@drawable/ic_camera"
+                android:layout_toEndOf="@+id/img_holder_profile" />
+            </RelativeLayout>
 
             <android.support.v7.widget.Toolbar
                 android:id="@+id/profile_toolbar"

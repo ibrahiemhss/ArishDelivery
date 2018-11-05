@@ -119,6 +119,8 @@
     <dimen name="profile_circleimageview_height">96dp</dimen>
     <dimen name="profile_circleimageview_side_margin">10dp</dimen>
     <dimen name="profile_circleimageview_bottom_margin">8dp</dimen>
+    <dimen name="profile_img_edit_width">24dp</dimen>
+    <dimen name="profile_img_edit_height">24dp</dimen>
     <!--  content activity_profile -->
     <dimen name="profile_side_margin">16dp</dimen>
     <dimen name="profile_txt_top_margin">8dp</dimen>
@@ -129,6 +131,7 @@
     <!--confirm password dialog-->
     <dimen name="conf_dialog_width">264dp</dimen>
     <dimen name="conf_dialog_etext_content_size">16sp</dimen>
+    <dimen name="conf_dialog_etext_content_height">40dp</dimen>
     <dimen name="conf_dialog_text_margin">8dp</dimen>
     <dimen name="conf_dialog_text_size">12sp</dimen>
     <dimen name="conf_dialog_text_padding">8dp</dimen>

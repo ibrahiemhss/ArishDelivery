@@ -1,11 +1,14 @@
 package com.delivery.arish.arishdelivery.mvp.presenter;
 
+import android.annotation.TargetApi;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
@@ -20,43 +23,66 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.delivery.arish.arishdelivery.R;
 import com.delivery.arish.arishdelivery.data.Contract;
 import com.delivery.arish.arishdelivery.data.SharedPrefManager;
+import com.delivery.arish.arishdelivery.internet.BaseApiService;
+import com.delivery.arish.arishdelivery.internet.UtilsApi;
 import com.delivery.arish.arishdelivery.mvp.View.OnItemListClickListener;
 import com.delivery.arish.arishdelivery.mvp.model.MainModel;
 import com.delivery.arish.arishdelivery.ui.Main.MainListAdapter;
 import com.delivery.arish.arishdelivery.ui.details.DetailsActivity;
 import com.delivery.arish.arishdelivery.ui.log_in.LogInActivity;
 import com.delivery.arish.arishdelivery.ui.log_in.ProfileActivity;
+import com.delivery.arish.arishdelivery.util.DynamicHeightNetworkImageView;
+import com.delivery.arish.arishdelivery.util.ImageLoaderHelper;
+import com.delivery.arish.arishdelivery.util.LangUtil;
+import com.squareup.picasso.Picasso;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Objects;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class MainPresenter {
    private final static String TAG = MainPresenter.class.getSimpleName();
+    private final Context mCtx;
+    private final BaseApiService mApiService;
+    private ProgressDialog mLoading;
 
+    public MainPresenter(Context context) {
+        mCtx = context;
+        mApiService = UtilsApi.getAPIService();
+    }
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
-    public static void GetListByScreenSize(Context context, RecyclerView rv, LayoutInflater getLayoutInflater, MainListAdapter mainListAdapter) {
+    public void GetListByScreenSize(Context context, RecyclerView rv, LayoutInflater getLayoutInflater, MainListAdapter mainListAdapter) {
 
         assert context.getSystemService(Context.WINDOW_SERVICE) != null;
         final int rotation = ((WindowManager) Objects.requireNonNull(context.getSystemService(Context.WINDOW_SERVICE))).getDefaultDisplay().getOrientation();
         switch (rotation) {
             case Surface.ROTATION_0:
                 if (isTablet(context)) {
-                    initialiseListWithsLargeSize(context, rv, getLayoutInflater, mainListAdapter);
+                    initialiseListWithsLargeSize( rv, getLayoutInflater, mainListAdapter);
                 } else {
-                    initialiseListWithPhoneScreen(context, rv, getLayoutInflater, mainListAdapter);
+                    initialiseListWithPhoneScreen(rv, getLayoutInflater, mainListAdapter);
                 }
                 break;
             case Surface.ROTATION_90:
-                initialiseListWithsLargeSize(context, rv, getLayoutInflater, mainListAdapter);
+                initialiseListWithsLargeSize(rv, getLayoutInflater, mainListAdapter);
                 break;
             case Surface.ROTATION_180:
-                initialiseListWithPhoneScreen(context, rv, getLayoutInflater, mainListAdapter);
+                initialiseListWithPhoneScreen(rv, getLayoutInflater, mainListAdapter);
                 break;
 
             case Surface.ROTATION_270:
@@ -64,26 +90,26 @@ public class MainPresenter {
         }
     }
 
-    private static boolean isTablet(Context context) {
+    private  boolean isTablet(Context context) {
         return (context.getResources().getConfiguration().screenLayout
                 & Configuration.SCREENLAYOUT_SIZE_MASK)
                 >= Configuration.SCREENLAYOUT_SIZE_LARGE;
     }
 
     @SuppressWarnings("ParameterCanBeLocal")
-    private static void initialiseListWithPhoneScreen(final Context context, RecyclerView rv, LayoutInflater getLayoutInflater, MainListAdapter mainListAdapter) {
+    private  void initialiseListWithPhoneScreen(RecyclerView rv, LayoutInflater getLayoutInflater, MainListAdapter mainListAdapter) {
 
         rv.setHasFixedSize(true);
-        rv.setLayoutManager(new LinearLayoutManager(context,
+        rv.setLayoutManager(new LinearLayoutManager(mCtx,
                 LinearLayoutManager.VERTICAL, false));
-        mainListAdapter = new MainListAdapter(getMainModel(context), getLayoutInflater);
+        mainListAdapter = new MainListAdapter(getMainModel(mCtx), getLayoutInflater);
         rv.setAdapter(mainListAdapter);
         mainListAdapter.notifyDataSetChanged();
 
         final OnItemListClickListener onItemListClickListener = new OnItemListClickListener() {
             @Override
             public void onlItemClick(int pos) {
-                launchDetailActivity(pos, context);
+                launchDetailActivity(pos, mCtx);
 
             }
         };
@@ -93,20 +119,20 @@ public class MainPresenter {
     }
 
     @SuppressWarnings("ParameterCanBeLocal")
-    private static void initialiseListWithsLargeSize(final Context context, RecyclerView rv, LayoutInflater getLayoutInflater, MainListAdapter mainListAdapter) {
+    private  void initialiseListWithsLargeSize( RecyclerView rv, LayoutInflater getLayoutInflater, MainListAdapter mainListAdapter) {
 
 
         rv.setHasFixedSize(true);
-        rv.setLayoutManager(new GridLayoutManager(context, 2,
+        rv.setLayoutManager(new GridLayoutManager(mCtx, 2,
                 GridLayoutManager.VERTICAL, false));
-        mainListAdapter = new MainListAdapter(getMainModel(context), getLayoutInflater);
+        mainListAdapter = new MainListAdapter(getMainModel(mCtx), getLayoutInflater);
         rv.setAdapter(mainListAdapter);
         mainListAdapter.notifyDataSetChanged();
 
         final OnItemListClickListener onItemListClickListener = new OnItemListClickListener() {
             @Override
             public void onlItemClick(int pos) {
-                launchDetailActivity(pos, context);
+                launchDetailActivity(pos, mCtx);
 
             }
         };
@@ -166,8 +192,10 @@ public class MainPresenter {
     }
 
 
+    @TargetApi(Build.VERSION_CODES.KITKAT)
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @SuppressWarnings("unused")
-    public static void initNavigationDrawer(final Context context, final NavigationView navigationView) {
+    public  void initNavigationDrawer(final Context context, final NavigationView navigationView) {
 
         Configuration configuration = context.getResources().getConfiguration();
         final int screenWidthDp = configuration.screenWidthDp; //The current width of the available screen space, in dp units, corresponding to screen width resource qualifier.
@@ -186,11 +214,11 @@ public class MainPresenter {
 
         CircleImageView circleImageView = navigationView.findViewById(R.id.nav_image);
         TextView txtName = navigationView.findViewById(R.id.nav_txtname);
-        CircleImageView txtEmail = navigationView.findViewById(R.id.nav_txtemail);
+        TextView txtEmail = navigationView.findViewById(R.id.nav_txtemail);
         ImageView imgProfile = navigationView.findViewById(R.id.nav_profile);
         ImageView imgShare = navigationView.findViewById(R.id.nav_share);
         ImageView imgLogOut = navigationView.findViewById(R.id.nav_signout);
-
+        getUserImage(circleImageView,txtName,txtEmail);
         imgProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -224,4 +252,83 @@ public class MainPresenter {
         Intent intent = new Intent(context, LogInActivity.class);
         context.startActivity(intent);
     }
+
+
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+    private   void getUserImage(final CircleImageView circleImageView, final TextView tvName, final TextView tvEmail) {
+
+      mLoading = ProgressDialog.show(mCtx, null, mCtx.getResources().getString(R.string.creating_new), true, false);
+
+        String emailVal
+                =SharedPrefManager.
+                getInstance(mCtx)
+                .getEmailOfUsers();
+
+
+        mApiService.getUserInfo(emailVal,LangUtil.getCurrentLanguage(mCtx))
+
+                .enqueue(new Callback<ResponseBody>() {
+                    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+                    @Override
+                    public void onResponse(@NonNull Call<ResponseBody> call, @NonNull Response<ResponseBody> response) {
+                        if (response.isSuccessful()) {
+
+                            try {
+                                String remoteResponse = Objects.requireNonNull(response.body()).string();
+
+                                Log.d("JSONStringNav", remoteResponse);
+
+                                final JSONObject jsonRESULTS = new JSONObject(remoteResponse);
+
+
+                                if (jsonRESULTS.optString(Contract.ERROR).equals(Contract.FALSE_VAL)) {
+                                    String name = jsonRESULTS.getJSONObject(Contract.USER_COL).optString(Contract.NAME_COL);
+                                    String email = jsonRESULTS.getJSONObject(Contract.USER_COL).optString(Contract.EMAIL_COL);
+                                    String imgUrl=jsonRESULTS.getJSONObject(Contract.USER_COL).optString(Contract.IMAGE_COL);
+                                    tvEmail.setText(mCtx.getResources().getString(R.string.email)+" :"+email);
+                                    tvName.setText(mCtx.getResources().getString(R.string.name)+" :"+name);
+
+                                    if (imgUrl != null) {
+
+                                        Toast.makeText(mCtx,
+                                                imgUrl,
+                                                Toast.LENGTH_LONG).show();
+
+                                        Glide.with(mCtx).load(imgUrl).into(circleImageView);
+                                        Log.d(TAG,"JSONStringPrfImagUrl ="+imgUrl);
+                                        mLoading.dismiss();
+
+
+                                    }else {
+                                        circleImageView.setImageResource(R.drawable.blank_profile_picture);
+                                    }
+                                    Toast.makeText(mCtx, jsonRESULTS.optString(Contract.ERROR_MSG), Toast.LENGTH_SHORT).show();
+
+                                    mLoading.dismiss();
+                                } else {
+                                    circleImageView.setImageResource(R.drawable.blank_profile_picture);
+
+                                    Toast.makeText(mCtx, jsonRESULTS.optString(Contract.ERROR_MSG), Toast.LENGTH_SHORT).show();
+                                   mLoading.dismiss();
+
+                                }
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                        mLoading.dismiss();
+
+                    }
+
+                    @Override
+                    public void onFailure(@NonNull Call<ResponseBody> call, @NonNull Throwable t) {
+                        Log.e("debugJSONS", "onFailure: ERROR > " + t.toString());
+                    }
+                });
+    }
+
+
+
 }

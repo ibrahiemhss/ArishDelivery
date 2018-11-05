@@ -19,7 +19,7 @@ public class ResetPasswordActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reset_paswword);
 
-        Fragment mContentListFragment = new FragmentUpdatePassoword();
+        Fragment mContentListFragment = new FragmentSenEmail();
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction()
                 .add(R.id.contents_container, mContentListFragment)
