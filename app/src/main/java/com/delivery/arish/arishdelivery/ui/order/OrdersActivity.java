@@ -57,7 +57,7 @@ public class OrdersActivity extends BaseActivity {
     protected ImageView mArrowUpp;
 
     private boolean isInterActivity = true;
-
+    @SuppressWarnings("SameReturnValue")
     @Override
     protected int getResourceLayout() {
         return R.layout.activity_orders;

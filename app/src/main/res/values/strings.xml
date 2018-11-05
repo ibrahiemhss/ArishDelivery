@@ -64,5 +64,6 @@
     <string name="cancel_dialog">@android:string/cancel</string>
     <string name="txt_conf_password">Enter your password</string>
     <string name="confirm_changes">Confirm Changes</string>
+    <string name="img_update_prf_content_description">Add the image you want if you want to update the old image</string>
 
 </resources>

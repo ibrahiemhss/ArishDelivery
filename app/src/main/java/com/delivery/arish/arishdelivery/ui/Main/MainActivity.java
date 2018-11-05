@@ -34,7 +34,6 @@ public class MainActivity extends BaseActivity {
     @BindView(R.id.nav_view)
     protected NavigationView mNavigationView;
 
-    private MainPresenter mainPresenter;
     @Override
     protected int getResourceLayout() {
         return R.layout.activity_main;
@@ -43,7 +42,7 @@ public class MainActivity extends BaseActivity {
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
     protected void init() {
-        mainPresenter=new MainPresenter(this);
+        MainPresenter mainPresenter = new MainPresenter(this);
         LayoutInflater layoutInflater = getLayoutInflater();
         mainPresenter.GetListByScreenSize(this, mRv, layoutInflater, null);
         setSupportActionBar(mToolbar);

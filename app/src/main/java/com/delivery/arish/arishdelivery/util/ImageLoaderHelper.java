@@ -9,6 +9,7 @@ import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.Volley;
 
 public class ImageLoaderHelper {
+    @SuppressWarnings("unused")
     private static ImageLoaderHelper sInstance;
     private final LruCache<String, Bitmap> mImageCache = new LruCache<>(20);
     private final ImageLoader mImageLoader;

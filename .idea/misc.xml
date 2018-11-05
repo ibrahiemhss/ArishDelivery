@@ -1,7 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="EntryPointsManager">
-    <pattern value="com.delivery.arish.arishdelivery.internet.CheckInternetConnection" method="checkInternet" />
+    <entry_points version="2.0">
+      <entry_point TYPE="field" FQNAME="com.delivery.arish.arishdelivery.ui.details.DetailsAdapter.Holder LinearListContainer" />
+      <entry_point TYPE="field" FQNAME="com.delivery.arish.arishdelivery.ui.details.DetailsAdapter.Holder thumbnail" />
+      <entry_point TYPE="field" FQNAME="com.delivery.arish.arishdelivery.ui.details.DetailsAdapter.Holder titleView" />
+      <entry_point TYPE="field" FQNAME="com.delivery.arish.arishdelivery.ui.details.DetailsAdapter.Holder mContext" />
+      <entry_point TYPE="field" FQNAME="com.delivery.arish.arishdelivery.util.ImageLoaderHelper mImageLoader" />
+      <entry_point TYPE="field" FQNAME="com.delivery.arish.arishdelivery.util.ImageLoaderHelper mImageCache" />
+    </entry_points>
+    <pattern value="com.delivery.arish.arishdelivery.util.ImageLoaderHelper" method="ImageLoaderHelper" />
+    <pattern value="com.delivery.arish.arishdelivery.util.CustomImageVIew" method="CustomImageVIew" />
+    <pattern value="com.delivery.arish.arishdelivery.ui.details.DetailsAdapter.Holder" method="onClick" />
+    <pattern value="com.delivery.arish.arishdelivery.ui.details.DetailsAdapter.Holder" method="bind" />
+    <pattern value="com.delivery.arish.arishdelivery.ui.details.DetailsAdapter.Holder" method="Holder" />
+    <pattern value="com.delivery.arish.arishdelivery.ui.details.DetailsAdapter.Holder" />
+    <pattern value="com.delivery.arish.arishdelivery.ui.details.DetailsAdapter" />
+    <pattern value="com.delivery.arish.arishdelivery.util.DynamicHeightNetworkImageView" method="setAspectRatio" />
+    <pattern value="com.delivery.arish.arishdelivery.util.DynamicHeightNetworkImageView" method="DynamicHeightNetworkImageView" />
+    <pattern value="com.delivery.arish.arishdelivery.util.DynamicHeightNetworkImageView" />
+    <pattern value="com.delivery.arish.arishdelivery.util.ImageLoaderHelper" method="getImageLoader" />
+    <pattern value="com.delivery.arish.arishdelivery.util.ImageLoaderHelper" method="getInstance" />
+    <pattern value="com.delivery.arish.arishdelivery.util.ImageLoaderHelper" />
+    <pattern value="com.delivery.arish.arishdelivery.ui.Main.MainListAdapter.Holder" method="Holder" />
+    <pattern value="com.delivery.arish.arishdelivery.mvp.model.MainModel" method="MainModel" />
+    <pattern value="com.delivery.arish.arishdelivery.data.SharedPrefManager" method="SharedPrefManager" />
   </component>
   <component name="NullableNotNullManager">
     <option name="myDefaultNullable" value="android.support.annotation.Nullable" />

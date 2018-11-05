@@ -63,6 +63,7 @@ public class DetailsActivity extends BaseActivity {
     }
 
 
+    @SuppressWarnings("SameReturnValue")
     @Override
     protected int getResourceLayout() {
         return R.layout.activity_details;
@@ -93,11 +94,13 @@ public class DetailsActivity extends BaseActivity {
         GetListByScreenSize();
     }
 
+    @SuppressWarnings("EmptyMethod")
     @Override
     protected void setListener() {
 
     }
 
+    @SuppressWarnings("SameReturnValue")
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {

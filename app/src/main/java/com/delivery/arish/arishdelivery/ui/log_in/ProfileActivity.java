@@ -1,11 +1,8 @@
 package com.delivery.arish.arishdelivery.ui.log_in;
 
 import android.app.Dialog;
-import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
-import android.database.DatabaseUtils;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -28,7 +25,6 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.delivery.arish.arishdelivery.R;
 import com.delivery.arish.arishdelivery.base.BaseActivity;
-import com.delivery.arish.arishdelivery.data.Contract;
 import com.delivery.arish.arishdelivery.mvp.presenter.ProfilePresenter;
 import com.delivery.arish.arishdelivery.ui.Main.MainActivity;
 import com.delivery.arish.arishdelivery.util.EditTextUtil;
@@ -41,7 +37,6 @@ import java.util.Objects;
 import butterknife.BindView;
 import de.hdodenhof.circleimageview.CircleImageView;
 
-import static android.view.Gravity.BOTTOM;
 import static android.view.Gravity.CENTER;
 
 public class ProfileActivity extends BaseActivity implements View.OnClickListener {
@@ -83,7 +78,7 @@ public class ProfileActivity extends BaseActivity implements View.OnClickListene
     protected Button mBtnEdit;
     @SuppressWarnings("WeakerAccess")
     @BindView(R.id.btn_prf_confirm)
-    protected Button mBtnCofirmChanges;
+    protected Button mBtnConfirmChanges;
     @SuppressWarnings("WeakerAccess")
     @BindView(R.id.img_holder_profile)
     protected CircleImageView mCircleImageViewHolder;
@@ -97,10 +92,8 @@ public class ProfileActivity extends BaseActivity implements View.OnClickListene
     private ProfilePresenter mProfilePresenter;
     private Dialog mUpdateDialog;
     private EditText mEdtxtGetConfirmPass;
-    private String mConfPass;
     private String mPart_image;
     private File mActualImageFile;
-    private String mLocale;
 
 
     private boolean isTablet;
@@ -114,7 +107,7 @@ public class ProfileActivity extends BaseActivity implements View.OnClickListene
         // AppBarLayout.LayoutParams params = (AppBarLayout.LayoutParams) mCollapsingToolbarLayout.getLayoutParams();
 
     }
-
+    @SuppressWarnings("SameReturnValue")
     @Override
     protected int getResourceLayout() {
         return R.layout.activity_profile;
@@ -132,11 +125,11 @@ public class ProfileActivity extends BaseActivity implements View.OnClickListene
     @Override
     protected void setListener() {
         mBtnEdit.setOnClickListener(this);
-        mBtnCofirmChanges.setOnClickListener(this);
+        mBtnConfirmChanges.setOnClickListener(this);
         mImgEdit.setOnClickListener(this);
     }
 
-    public void chooseImage() {
+    private void chooseImage() {
         Intent intent = new Intent(Intent.ACTION_PICK);
         intent.setType("image/*");
         startActivityForResult(intent, PICK_IMAGE_REQUEST);
@@ -162,6 +155,7 @@ public class ProfileActivity extends BaseActivity implements View.OnClickListene
                     if (mPart_image != null) {
                         mActualImageFile = FileUtil.from(this, data.getData());
                         Glide.with(this).load(mActualImageFile).into(mCircleImageViewHolder);
+                        cursor.close();
 
                        // mCircleImageViewHolder.setImageBitmap(BitmapFactory.decodeFile(mActualImageFile.getAbsolutePath()));
                     }
@@ -189,7 +183,7 @@ public class ProfileActivity extends BaseActivity implements View.OnClickListene
 
 
     }
-
+    @SuppressWarnings("SameReturnValue")
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -243,7 +237,7 @@ public class ProfileActivity extends BaseActivity implements View.OnClickListene
                         return;
                     }
 
-                    mBtnCofirmChanges.setVisibility(View.VISIBLE);
+                    mBtnConfirmChanges.setVisibility(View.VISIBLE);
                     Log.e(TAG, "emailValue_in_profile 1= " + mEtxtEmail.getText().toString());
 
                     isClick=true;
@@ -288,7 +282,6 @@ public class ProfileActivity extends BaseActivity implements View.OnClickListene
         Log.e(TAG, "emailValue_in_profile 2= " + newEmail);
 
 
-        mConfPass = Objects.requireNonNull(mEdtxtGetConfirmPass.getText()).toString();
 
         mCancel.setOnClickListener(new View.OnClickListener() {
                                        @Override
@@ -334,7 +327,7 @@ public class ProfileActivity extends BaseActivity implements View.OnClickListene
                         mTxtEmail.setVisibility(View.VISIBLE);
                         mEtxtPhone.setVisibility(View.GONE);
                         mTxtPhone.setVisibility(View.VISIBLE);
-                        mBtnCofirmChanges.setVisibility(View.GONE);
+                        mBtnConfirmChanges.setVisibility(View.GONE);
                         mImgEdit.setVisibility(View.GONE);
 
                         mUpdateDialog.dismiss();

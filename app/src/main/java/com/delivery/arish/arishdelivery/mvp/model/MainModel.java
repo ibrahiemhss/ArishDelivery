@@ -54,7 +54,7 @@ public class MainModel implements Parcelable {
     public void setImage(int image) {
         this.image = image;
     }
-
+    @SuppressWarnings("SameReturnValue")
     @Override
     public int describeContents() {
         return 0;

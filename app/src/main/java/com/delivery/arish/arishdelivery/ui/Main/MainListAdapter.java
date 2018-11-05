@@ -34,20 +34,23 @@ public class MainListAdapter extends RecyclerView.Adapter<MainListAdapter.Holder
         mLayoutInflater = inflater;
     }
 
+    @SuppressWarnings("unused")
     @NonNull
     @Override
-    public Holder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public Holder onCreateViewHolder(@NonNull ViewGroup parent, @SuppressWarnings("unused") int viewType) {
         View view = mLayoutInflater.inflate(R.layout.main_list_item, parent, false);
 
         return new Holder(view);
     }
 
+    @SuppressWarnings("unused")
     @Override
     public void onBindViewHolder(@NonNull Holder holder, int position) {
 
         holder.bind(mMainModelsList.get(position), position);
     }
 
+    @SuppressWarnings("unused")
     @Override
     public int getItemCount() {
         return mMainModelsList.size();

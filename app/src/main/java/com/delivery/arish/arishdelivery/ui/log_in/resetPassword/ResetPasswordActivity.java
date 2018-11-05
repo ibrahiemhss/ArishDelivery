@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.delivery.arish.arishdelivery.R;
 
+@SuppressWarnings("unused")
 @SuppressLint("Registered")
 public class ResetPasswordActivity extends AppCompatActivity {
 

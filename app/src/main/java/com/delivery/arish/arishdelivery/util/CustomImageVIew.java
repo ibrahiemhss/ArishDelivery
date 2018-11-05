@@ -11,7 +11,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.support.v7.widget.AppCompatImageView;
 
-@SuppressWarnings("WeakerAccess")
+@SuppressWarnings("ALL")
 public class CustomImageVIew extends AppCompatImageView implements View.OnTouchListener {
 
 

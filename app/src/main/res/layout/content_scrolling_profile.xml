@@ -7,7 +7,6 @@
     android:padding="@dimen/profile_side_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".ui.log_in.ProfileActivity"
-    android:background="@color/white"
     tools:showIn="@layout/activity_profile">
 
     <LinearLayout
@@ -55,7 +54,8 @@
                 android:hint="@string/user_name"
                 android:background="@drawable/bg_rectangle_edittext"
                 android:visibility="gone"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:inputType="textPersonName" />
 
 
             <TextView
@@ -109,7 +109,8 @@
                 android:hint="@string/phone"
                 android:background="@drawable/bg_rectangle_edittext"
                 android:visibility="gone"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:inputType="phone" />
 
 
             <TextView
@@ -167,7 +168,7 @@
                 android:maxLines="1"
                 android:visibility="gone"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                />
+                android:inputType="textEmailAddress" />
 
             <TextView
                 android:id="@+id/txt_prf_email"

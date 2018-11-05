@@ -1,5 +1,6 @@
 package com.delivery.arish.arishdelivery.mvp.presenter;
 
+import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -37,10 +38,7 @@ import com.delivery.arish.arishdelivery.ui.Main.MainListAdapter;
 import com.delivery.arish.arishdelivery.ui.details.DetailsActivity;
 import com.delivery.arish.arishdelivery.ui.log_in.LogInActivity;
 import com.delivery.arish.arishdelivery.ui.log_in.ProfileActivity;
-import com.delivery.arish.arishdelivery.util.DynamicHeightNetworkImageView;
-import com.delivery.arish.arishdelivery.util.ImageLoaderHelper;
 import com.delivery.arish.arishdelivery.util.LangUtil;
-import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -56,6 +54,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class MainPresenter {
+   @SuppressWarnings("unused")
    private final static String TAG = MainPresenter.class.getSimpleName();
     private final Context mCtx;
     private final BaseApiService mApiService;
@@ -107,6 +106,7 @@ public class MainPresenter {
         mainListAdapter.notifyDataSetChanged();
 
         final OnItemListClickListener onItemListClickListener = new OnItemListClickListener() {
+            @SuppressWarnings("unused")
             @Override
             public void onlItemClick(int pos) {
                 launchDetailActivity(pos, mCtx);
@@ -130,6 +130,7 @@ public class MainPresenter {
         mainListAdapter.notifyDataSetChanged();
 
         final OnItemListClickListener onItemListClickListener = new OnItemListClickListener() {
+            @SuppressWarnings("unused")
             @Override
             public void onlItemClick(int pos) {
                 launchDetailActivity(pos, mCtx);
@@ -244,6 +245,7 @@ public class MainPresenter {
 
     }
 
+    @SuppressWarnings("unused")
     private static void logoutUser(Context context) {
 
         SharedPrefManager.getInstance(context).setLoginUser(false);
@@ -254,6 +256,7 @@ public class MainPresenter {
     }
 
 
+    @SuppressWarnings("unused")
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     private   void getUserImage(final CircleImageView circleImageView, final TextView tvName, final TextView tvEmail) {
 
@@ -268,6 +271,7 @@ public class MainPresenter {
         mApiService.getUserInfo(emailVal,LangUtil.getCurrentLanguage(mCtx))
 
                 .enqueue(new Callback<ResponseBody>() {
+                    @SuppressLint("SetTextI18n")
                     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
                     @Override
                     public void onResponse(@NonNull Call<ResponseBody> call, @NonNull Response<ResponseBody> response) {
@@ -295,7 +299,7 @@ public class MainPresenter {
                                                 Toast.LENGTH_LONG).show();
 
                                         Glide.with(mCtx).load(imgUrl).into(circleImageView);
-                                        Log.d(TAG,"JSONStringPrfImagUrl ="+imgUrl);
+                                        Log.d(TAG,"JSONStringPrfImageUrl ="+imgUrl);
                                         mLoading.dismiss();
 
 

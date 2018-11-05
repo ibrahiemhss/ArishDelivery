@@ -4,8 +4,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    android:background="@color/color_group_a"
-
     tools:context=".ui.order.OrdersActivity">
 
     <android.support.design.widget.AppBarLayout

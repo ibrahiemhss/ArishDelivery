@@ -13,6 +13,7 @@ public class Contract {
     public static final String PROFILE_INFO_URL = "login/getUserInfo.php";
     public static final String UPDATE_INFO_URL = "login/updateUserInfo.php";
     public static final String UPDATE_INFO_WITH_IMAGE_URL = "login/updateUserInfoWithImage.php";
+    @SuppressWarnings("unused")
     public static final String GET_IMAGE_USER_URL ="login/get_image_user.php";
 
 
@@ -21,6 +22,7 @@ public class Contract {
     public static final String ERROR_MSG = "error_msg";
     public static final String SUCCESS_MSG = "success_msg";
     public static final String SUCCESS_MSG_VALUE = "success";
+    @SuppressWarnings("unused")
     public static final String IMG_MSG = "photo_msg";
 
 

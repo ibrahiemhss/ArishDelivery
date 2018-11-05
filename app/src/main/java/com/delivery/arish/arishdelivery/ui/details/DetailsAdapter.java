@@ -36,21 +36,21 @@ public class DetailsAdapter extends RecyclerView.Adapter<DetailsAdapter.Holder> 
         this.mDetailsModels = detailsModelArrayList;
         mLayoutInflater = inflater;
     }
-
+    @SuppressWarnings("unused")
     @NonNull
     @Override
-    public Holder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public Holder onCreateViewHolder(@NonNull ViewGroup parent, @SuppressWarnings("unused") int viewType) {
         View view = mLayoutInflater.inflate(R.layout.details_list_item, parent, false);
 
         return new Holder(view);
     }
-
+    @SuppressWarnings("unused")
     @Override
     public void onBindViewHolder(@NonNull Holder holder, int position) {
 
         holder.bind(mDetailsModels.get(position), position);
     }
-
+    @SuppressWarnings("unused")
     @Override
     public int getItemCount() {
         return mDetailsModels.size();

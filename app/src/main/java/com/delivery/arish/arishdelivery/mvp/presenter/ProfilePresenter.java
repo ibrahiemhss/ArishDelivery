@@ -2,7 +2,6 @@ package com.delivery.arish.arishdelivery.mvp.presenter;
 
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Build;
 import android.os.Environment;
@@ -19,12 +18,7 @@ import com.delivery.arish.arishdelivery.data.SharedPrefManager;
 import com.delivery.arish.arishdelivery.internet.BaseApiService;
 import com.delivery.arish.arishdelivery.internet.UtilsApi;
 import com.delivery.arish.arishdelivery.internet.model.ResponseApiModel;
-import com.delivery.arish.arishdelivery.ui.Main.MainActivity;
-import com.delivery.arish.arishdelivery.ui.log_in.LogInActivity;
-import com.delivery.arish.arishdelivery.util.DynamicHeightNetworkImageView;
-import com.delivery.arish.arishdelivery.util.ImageLoaderHelper;
 import com.delivery.arish.arishdelivery.util.LangUtil;
-import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -105,7 +99,7 @@ public class ProfilePresenter {
                                                 Toast.LENGTH_LONG).show();
 
                                         Glide.with(mCtx).load(imgUrl).into(circlImg);
-                                        Log.d(TAG,"JSONStringPrfImagUrl ="+imgUrl);
+                                        Log.d(TAG,"JSONStringPrfImageUrl ="+imgUrl);
 
 
                                     }else {
@@ -192,7 +186,7 @@ public class ProfilePresenter {
                                                 Toast.LENGTH_LONG).show();
 
                                         Glide.with(mCtx).load(imgUrl).into(circlImg);
-                                        Log.d(TAG,"JSONStringPrfImagUrl ="+imgUrl);
+                                        Log.d(TAG,"JSONStringPrfImageUrl ="+imgUrl);
 
 
                                     }else {
@@ -317,7 +311,7 @@ public class ProfilePresenter {
                                     Toast.LENGTH_LONG).show();
 
                             Glide.with(mCtx).load(imgUrl).into(circlImg);
-                            Log.d(TAG,"JSONStringPrfImagUrl ="+imgUrl);
+                            Log.d(TAG,"JSONStringPrfImageUrl ="+imgUrl);
 
 
                         }else {
