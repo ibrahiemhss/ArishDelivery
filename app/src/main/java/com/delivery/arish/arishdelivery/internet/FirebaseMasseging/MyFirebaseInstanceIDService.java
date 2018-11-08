@@ -6,9 +6,7 @@ import com.delivery.arish.arishdelivery.data.SharedPrefManager;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.iid.FirebaseInstanceIdService;
 
-/**
- * Created by ibrahim on 24/12/17.
- */
+
 
 public class MyFirebaseInstanceIDService extends FirebaseInstanceIdService {
 

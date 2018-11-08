@@ -20,15 +20,15 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-/**
- * Created by ibrahim on 24/12/17.
- */
 
 public class MyNotificationManager {
     public static final int ID_SMALL_NOTIFICATION = 235;
 
     private Context mCtx;
 
+    public MyNotificationManager(Context mCtx) {
+        this.mCtx = mCtx;
+    }
 
     //the method will show a small notification
     //parameters are title for message title, message for message text and an intent that will open
