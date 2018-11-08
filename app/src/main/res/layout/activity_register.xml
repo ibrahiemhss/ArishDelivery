@@ -25,7 +25,7 @@
 
     <LinearLayout
         android:id="@+id/linearLayout"
-        android:layout_width="match_parent"
+        android:layout_width="@dimen/rg_container_width"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:layout_marginLeft="@dimen/rg_container_side_margin"

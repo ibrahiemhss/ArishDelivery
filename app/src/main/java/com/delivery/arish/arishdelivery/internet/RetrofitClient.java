@@ -8,8 +8,8 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
- * Created by ibrahim on 19/01/18.
- */
+ * Class uses to get data that come as a Json format from server
+ * */
 
 @SuppressWarnings("ALL")
 public class RetrofitClient {

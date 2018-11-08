@@ -17,7 +17,12 @@ import retrofit2.http.POST;
 import retrofit2.http.Part;
 import retrofit2.http.PartMap;
 
-
+/**
+ * Class uses Queries  the first part of the Internet address
+ **named BASE_URL that found in {@linkplain com.delivery.arish.arishdelivery.data.Contract}
+ **to go to {@linkplain com.delivery.arish.arishdelivery.internet.RetrofitClient}
+ **here tare these Urls here to build final second part of urls here for every request of url wanted
+ * */
 public interface BaseApiService {
 
     @FormUrlEncoded

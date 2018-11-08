@@ -41,9 +41,14 @@ public class LogInPresenter {
     }
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+    /**pass path the file of image as string from MainActivity
+     *@param  emailVal string  email come from editText from LogInActivity
+     *@param  passVal string  email come from editText from LogInActivity
+     *@param  tokenVal string  email come from editText from LogInActivity
+     */
     public void requestLogin(String emailVal, String passVal, String tokenVal) {
-
-        mLoading = ProgressDialog.show(mCtx, null, mCtx.getResources().getString(R.string.creating_new), true, false);
+        //initialize ProgressDialog status message
+        mLoading = ProgressDialog.show(mCtx, null, mCtx.getResources().getString(R.string.logging_in), true, false);
 
         mApiService.loginRequest(emailVal, passVal, tokenVal, LangUtil.getCurrentLanguage(mCtx))
 
@@ -54,6 +59,8 @@ public class LogInPresenter {
                     public void onResponse(@NonNull Call<ResponseBody> call, @NonNull Response<ResponseBody> response) {
                         if (response.isSuccessful()) {
                             mLoading.dismiss();
+                            /*get value from JsonObjects come from server*/
+
                             try {
                                 String remoteResponse = Objects.requireNonNull(response.body()).string();
 

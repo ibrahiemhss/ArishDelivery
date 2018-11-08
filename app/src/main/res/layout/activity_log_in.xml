@@ -7,9 +7,9 @@
     android:background="@drawable/background_gradient"
     tools:context=".ui.log_in.LogInActivity">
 
-
     <LinearLayout
-        android:layout_width="match_parent"
+        android:id="@+id/linearLayout"
+        android:layout_width="@dimen/rg_container_width"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerInParent="true"
@@ -19,9 +19,11 @@
         android:orientation="vertical"
         tools:ignore="UselessParent">
 
+
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1"
             android:layout_gravity="bottom"
             android:layout_marginBottom="@dimen/rg_txt_input_bottom_margin">
 
@@ -42,7 +44,8 @@
         </android.support.design.widget.TextInputLayout>
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1"
             android:layout_gravity="bottom"
             android:layout_marginBottom="@dimen/rg_txt_input_bottom_margin">
 
@@ -67,7 +70,8 @@
         <Button
             android:id="@+id/btnLogin"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1"
             android:layout_marginTop="@dimen/lgn_btn_top_margin"
             android:background="@drawable/bg_rectangle_button"
             android:text="@string/log_in"
@@ -79,7 +83,8 @@
         <Button
             android:id="@+id/btnRegister"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1"
             android:layout_marginTop="@dimen/lgn_btn_top_margin"
             android:background="@drawable/bg_rectangle_button"
             android:text="@string/register"
@@ -90,7 +95,8 @@
         <TextView
             android:id="@+id/txt_reset_password"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1"
             android:layout_gravity="center"
             android:layout_marginBottom="6dp"
             android:layout_marginTop="18dp"

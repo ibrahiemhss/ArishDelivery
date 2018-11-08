@@ -51,18 +51,24 @@ public class RegisterPresenter {
 
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+    /*this method work when user select image while registering*/
     public void requestRegisterWithPhoto(
-            String old_part_img,
-            File myfile,
-            String nameval,
-            String emailval,
-            String passval,
-            String phoneval) {
+            String old_part_img,//pass path the file of image as string from MainActivity
+            File myfile,//pass file  from MainActivity
+            String nameval,//pass name come from editText from RegisterActivity
+            String emailval,//pass email come from editText from RegisterActivity
+            String passval,//pass password come from editText from RegisterActivity
+            String phoneval//pass phone come from editText from RegisterActivity
+    ) {
+        //initialize ProgressDialog status message
         mLoading = ProgressDialog.show(mCtx, null, mCtx.getResources().getString(R.string.creating_new), true, false);
 
+        File imagefile = new File(old_part_img);//initialize new file as file that come from string old_part_img this string come from parameter
 
-        File imagefile = new File(old_part_img);
-        if (myfile != null) {
+
+        if (myfile != null) {/*all codes below inside this if statement
+                              to use file come from parameters to compress the size of
+                              the file of our image before uploading to server*/
             try {
                 try {
                     imagefile = new Compressor(mCtx)
@@ -82,23 +88,31 @@ public class RegisterPresenter {
         }
 
 
+        /*initialize new request created fom device files */
         RequestBody reqBody = RequestBody.create(MediaType.parse(Contract.MULTIPART_FILE_PATH), imagefile);
+        /*make multipart request with our image file and our initialized requestBody*/
         MultipartBody.Part partImage = MultipartBody.Part.createFormData(Contract.PIC_TO_LOAD, imagefile.getName(), reqBody);
-        RequestBody name = createPartFromString(nameval);
-        RequestBody email = createPartFromString(emailval);
-        RequestBody password = createPartFromString(passval);
-        RequestBody phone = createPartFromString(phoneval);
-        RequestBody lang = createPartFromString(LangUtil.getCurrentLanguage(mCtx));
 
+        RequestBody name = createPartFromString(nameval);/*initialize new request created fom string value of name */
+        RequestBody email = createPartFromString(emailval);/*initialize new request created fom string value of email*/
+        RequestBody password = createPartFromString(passval);/*initialize new request created fom string value of password*/
+        RequestBody phone = createPartFromString(phoneval);/*initialize new request created fom string value of phone*/
+        RequestBody lang = createPartFromString(LangUtil.getCurrentLanguage(mCtx));/*initailize new request created fom string value of language device*/
 
+        //create new HashMap with string and RequestBody
         HashMap<String, RequestBody> map = new HashMap<>();
-        map.put(Contract.NAME_COL, name);
-        map.put(Contract.EMAIL_COL, email);
-        map.put(Contract.PASSWORD_COL, password);
-        map.put(Contract.PHONE_COL, phone);
-        map.put(Contract.LANG_COL, lang);
+        map.put(Contract.NAME_COL, name);//add RequestBody name to initialized HashMap
+        map.put(Contract.EMAIL_COL, email);//add RequestBody email to initialized HashMap
+        map.put(Contract.PASSWORD_COL, password);//add RequestBody password to initialized HashMap
+        map.put(Contract.PHONE_COL, phone);//add RequestBody phone to initialized HashMap
+        map.put(Contract.LANG_COL, lang);//add RequestBody lang to initialized HashMap
 
+       /*call ApiService class to make Multipart request with uploadImage method
+        pass two params first is our  HashMap that carry all
+         requests body with strings and second params is MultipartBody that carry image file value * */
         Call<ResponseApiModel> upload = mApiService.uploadImage(map, partImage);
+        /*call ApiService class to make request with registerRequest method to register new user with no image*/
+
         upload.enqueue(new Callback<ResponseApiModel>() {
             @RequiresApi(api = Build.VERSION_CODES.KITKAT)
             @Override
@@ -106,7 +120,7 @@ public class RegisterPresenter {
 
                 Log.d(TAG, "myjson = : " +
                         Objects.requireNonNull(response.body()).toString());
-
+                //get value from json value if value is false all things good and successful request no error
                 if (Objects.requireNonNull(response.body()).getError().equals(Contract.FALSE_VAL)) {
                     //   mLoading.setMessage(response.body().getError_msg());
 
@@ -114,7 +128,7 @@ public class RegisterPresenter {
                     Log.d(TAG, "server_message : " + Objects.requireNonNull(response.body()).getError_msg()
                             + "\n" + Objects.requireNonNull(response.body()).getSuccess_msg());
 
-                    //    mLoading.dismiss();
+                    /*if JsonObject get Success message will do this code*/
                     if (Objects.requireNonNull(response.body()).getSuccess_msg().equals(Contract.SUCCESS_MSG_VALUE)) {
                         Toast.makeText(mCtx,
                                 Objects.requireNonNull(response.body()).getError_msg()
@@ -123,6 +137,7 @@ public class RegisterPresenter {
                     }
                     mLoading.dismiss();
 
+                    //get value from json value if value is true there are error that come inside error_message JsonObject
 
                 } else if (Objects.requireNonNull(response.body()).getError().equals("true")) {
                     Toast.makeText(mCtx,
@@ -149,13 +164,17 @@ public class RegisterPresenter {
 
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
-    public void requestRegister(String nameval,
-                                String emailval,
-                                String passval,
-                                String phoneval) {
+    /*this method work when user not select image while registering*/
+    public void requestRegister(String nameval, //pass name come from editText from RegisterActivity
+                                String emailval,//pass email come from editText from RegisterActivity
+                                String passval,//pass password come from editText from RegisterActivity
+                                String phoneval//pass phone come from editText from RegisterActivity
+
+    ) {
 
         mLoading = ProgressDialog.show(mCtx, null, mCtx.getResources().getString(R.string.creating_new), true, false);
 
+        /*call ApiService class to make request with registerRequest method to register new user with no image*/
         mApiService.registerRequest(
                 nameval,
                 emailval,
@@ -167,14 +186,19 @@ public class RegisterPresenter {
                     @Override
                     public void onResponse(@NonNull Call<ResponseBody> call, @NonNull Response<ResponseBody> response) {
                         if (response.isSuccessful()) {
+                            /*get value from JsonObjects come from server*/
                             try {
                                 String remoteResponse = Objects.requireNonNull(response.body()).string();
                                 JSONObject jsonRESULTS = new JSONObject(remoteResponse);
                                 Log.d("JSONString", remoteResponse);
 
+                                /*Json Objects come from server to get true or false message to status of correct loading*/
+
                                 if (jsonRESULTS.getString(Contract.ERROR).equals(Contract.FALSE_VAL)) {
                                     mLoading.setMessage(jsonRESULTS.optString(Contract.ERROR_MSG));
                                     Toast.makeText(mCtx, jsonRESULTS.optString(Contract.ERROR_MSG), Toast.LENGTH_SHORT).show();
+                                    /*if JsonObject get Success message will do this code*/
+
                                     if (jsonRESULTS.optString(Contract.SUCCESS_MSG).equals(Contract.SUCCESS_MSG_VALUE)) {
                                         mCtx.startActivity(new Intent(mCtx, LogInActivity.class));
                                     }

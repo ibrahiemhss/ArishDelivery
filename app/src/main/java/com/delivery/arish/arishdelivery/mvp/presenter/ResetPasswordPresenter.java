@@ -96,6 +96,8 @@ public class ResetPasswordPresenter {
                     @Override
                     public void onFailure(@NonNull Call<ResponseBody> call, @NonNull Throwable t) {
                         Log.e("debugJSONS", "onFailure: ERROR > " + t.toString());
+                        mLoading.dismiss();
+
                     }
                 });
     }
@@ -103,7 +105,7 @@ public class ResetPasswordPresenter {
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     public void requestUpdateWithCode(String email, String newPass, String code) {
 
-        mLoading = ProgressDialog.show(mCtx, null, mCtx.getResources().getString(R.string.creating_new), true, false);
+        mLoading = ProgressDialog.show(mCtx, null, mCtx.getResources().getString(R.string.updating_password), true, false);
 
         mApiService.updatePass(email, newPass, code, LangUtil.getCurrentLanguage(mCtx))
 
@@ -155,6 +157,8 @@ public class ResetPasswordPresenter {
                     @Override
                     public void onFailure(@NonNull Call<ResponseBody> call, @NonNull Throwable t) {
                         Log.e("debugJSONS", "onFailure: ERROR > " + t.toString());
+                        mLoading.dismiss();
+
                     }
                 });
     }

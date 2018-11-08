@@ -212,7 +212,15 @@ public class ProfileActivity extends BaseActivity implements View.OnClickListene
                     mEtxtPhone.setVisibility(View.VISIBLE);
                     mTxtPhone.setVisibility(View.GONE);
                     mImgEdit.setVisibility(View.VISIBLE);
+                    if(!mTxtName.getText().toString().equals("")&&
+                       !mTxtEmail.getText().toString().equals("")&&
+                       !mTxtPhone.getText().toString().equals("")){
 
+                        mEtxtName.setText(mTxtName.getText().toString());
+                        mEtxtEmail.setText(mTxtEmail.getText().toString());
+                        mEtxtPhone.setText(mTxtPhone.getText().toString());
+
+                    }
 
                     if (EditTextUtil.isNameCase(mEtxtName.getText().toString()) == 1) {
                         mEtxtName.setError(getResources().getString(R.string.name_error));
@@ -237,11 +245,11 @@ public class ProfileActivity extends BaseActivity implements View.OnClickListene
                         return;
                     }
 
-                    mBtnConfirmChanges.setVisibility(View.VISIBLE);
-                    Log.e(TAG, "emailValue_in_profile 1= " + mEtxtEmail.getText().toString());
 
                     isClick=true;
                 }else {
+                    mBtnConfirmChanges.setVisibility(View.VISIBLE);
+                    Log.e(TAG, "emailValue_in_profile 1= " + mEtxtEmail.getText().toString());
 
                     isClick=false;
                 }

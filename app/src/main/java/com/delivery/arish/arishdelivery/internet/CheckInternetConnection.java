@@ -6,8 +6,7 @@ import android.net.NetworkInfo;
 
 import java.util.Objects;
 
-/**
- * Created by ibrahim on 23/12/17.
+/** Class uses Check of the Internet Connection
  */
 
 @SuppressWarnings("ALL")

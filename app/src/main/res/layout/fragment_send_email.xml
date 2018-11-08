@@ -8,7 +8,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.log_in.resetPassword.ResetPasswordActivity">
-
     <TextView
         android:id="@+id/txt_title"
         android:text="@string/app_name"
@@ -19,10 +18,17 @@
         android:layout_alignParentTop="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
+    <LinearLayout
+        android:id="@+id/lin1"
+        android:layout_below="@+id/txt_title"
+        android:layout_centerInParent="true"
+        android:layout_width="@dimen/reset_container_width"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
 
 
     <android.support.design.widget.TextInputLayout
-        android:layout_below="@+id/txt_title"
         android:id="@+id/txt_input"
         android:layout_marginTop="@dimen/reset_txt_input_top_margin"
         android:layout_marginBottom="@dimen/reset_txt_input_top_margin"
@@ -45,25 +51,27 @@
 
     </android.support.design.widget.TextInputLayout>
 
-    <Button
-        android:layout_below="@+id/txt_input"
-        android:id="@+id/btn_send_code"
-        android:layout_marginTop="@dimen/reset_btn_top_margin"
-        android:layout_marginBottom="@dimen/reset_btn_bottom_margin"
-        android:layout_marginLeft="@dimen/reset_btn_side_margin"
-        android:layout_marginRight="@dimen/reset_btn_side_margin"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textColor="@color/white"
-        android:text="@string/send_pass_to_email"
-        android:textAllCaps="false"
-        android:background="@drawable/bg_rectangle_button" />
+        <Button
+            android:id="@+id/btn_send_code"
+            android:layout_marginTop="@dimen/reset_btn_top_margin"
+            android:layout_marginBottom="@dimen/reset_btn_bottom_margin"
+            android:layout_marginLeft="@dimen/reset_btn_side_margin"
+            android:layout_marginRight="@dimen/reset_btn_side_margin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:text="@string/send_pass_to_email"
+            android:textAllCaps="false"
+            android:background="@drawable/bg_rectangle_button" />
+    </LinearLayout>
+
 
     <ProgressBar
+
         style="@style/Base.Widget.AppCompat.ProgressBar"
         android:id="@+id/progress_reset"
         android:visibility="invisible"
-        android:layout_below="@+id/btn_send_code"
+        android:layout_below="@+id/lin1"
         android:layout_marginTop="@dimen/reset_prgrsbar_top_margin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

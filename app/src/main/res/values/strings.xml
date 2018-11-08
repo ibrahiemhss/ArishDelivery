@@ -20,6 +20,10 @@
     <string name="share">Share</string>
     <string name="signing_in">Signing in.......</string>
     <string name="creating_new">Creating a new account......</string>
+    <string name="logging_in">Signing in .............</string>
+    <string name="loading_user_data">Loading user data......</string>
+    <string name="updating_data">Updating user data......</string>
+    <string name="updating_password">Updating password ....</string>
     <string name="ok">OK</string>
     <string name="cancel">Cancel</string>
     <string name="enable_permission">Please Enable the Read Storage permission in permission</string>

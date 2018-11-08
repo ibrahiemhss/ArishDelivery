@@ -64,6 +64,7 @@
     <!--TODO===== LogInActivity ============================ -->
     <!--  Linear Container View-->
     <dimen name="lgn_container_side_margin">48dp</dimen>
+    <dimen name="lgn_container_width">336dp</dimen>
     <dimen name="lgn_container_bottom_margin">24dp</dimen>
     <!--  EditText  -->
     <dimen name="lgn_edit_txt_top_margin">8dp</dimen>
@@ -76,6 +77,7 @@
 
     <!--TODO===== RegisterActivity ============================ -->
     <!--  CircleImageView-->
+    <dimen name="rg_container_width">336dp</dimen>
     <dimen name="rg_circleimageview_width">120dp</dimen>
     <dimen name="rg_circleimageview_height">96dp</dimen>
     <dimen name="rg_circleimageview_side_margin">16dp</dimen>
@@ -96,6 +98,7 @@
 
     <!--TODO===== ResetPasswordActivity ============================ -->
     <!--TextView-->
+    <dimen name="reset_container_width">336dp</dimen>
     <dimen name="reset_txt_title_size">24sp</dimen>
     <!--  TextInputLayout-->
     <dimen name="reset_txt_input_bottom_margin">8dp</dimen>
@@ -122,6 +125,8 @@
     <dimen name="profile_img_edit_width">24dp</dimen>
     <dimen name="profile_img_edit_height">24dp</dimen>
     <!--  content activity_profile -->
+    <dimen name="profile_ptn_conf_padding">8dp</dimen>
+    <dimen name="profile_container_width">@dimen/match_parent</dimen>
     <dimen name="profile_side_margin">16dp</dimen>
     <dimen name="profile_txt_top_margin">8dp</dimen>
     <dimen name="profile_btn_padding">8dp</dimen>
@@ -136,5 +141,5 @@
     <dimen name="conf_dialog_text_size">12sp</dimen>
     <dimen name="conf_dialog_text_padding">8dp</dimen>
     <dimen name="conf_dialog_text_width">120dp</dimen>
-    <dimen name="profile_ptn_conf_padding">8dp</dimen>
+
 </resources>
