@@ -30,6 +30,7 @@
     <string name="read_storage_permission">Read Storage Permission required for this app</string>
     <string name="restaurant">Restaurant</string>
     <string name="pharmacies">Pharmacies</string>
+    <string name="default_notification_channel_id">default</string>
 
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
@@ -69,5 +70,8 @@
     <string name="txt_conf_password">Enter your password</string>
     <string name="confirm_changes">Confirm Changes</string>
     <string name="img_update_prf_content_description">Add the image you want if you want to update the old image</string>
+    <string name="notification_sub_text">Tap to see details of this order</string>
+    <string name="or">OR</string>
+    <string name="order_across_app">Send your order across the app</string>
 
 </resources>

@@ -20,7 +20,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
@@ -48,9 +47,9 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     private static final String[] INITIAL_PERMS = {android.Manifest.permission.READ_EXTERNAL_STORAGE};
     final private int REQUEST_CODE_ASK_PERMISSIONS = 123;//intent value used in ask permissions
 
-    @SuppressWarnings("WeakerAccess")
+   /* @SuppressWarnings("WeakerAccess")
     @BindView(R.id.rv_container_register)
-    protected RelativeLayout mRelativeLayout;
+    protected RelativeLayout mRelativeLayout;*/
     @SuppressWarnings("WeakerAccess")
     @BindView(R.id.etName)
     protected EditText mEtName;
@@ -99,7 +98,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                     try {
                         Uri imageData = data.getData();//url get path of selected file
 
-
+                        @SuppressWarnings("DanglingJavadoc")
                         /**all action of cursor to return string value of selected file from storage to send this value to
                          * requestRegisterWithPhoto method inside class
                          ** {@linkplain com.samples.webserver.webserversamples.log_in_system.mvp.presenter.RegisterPresenter */

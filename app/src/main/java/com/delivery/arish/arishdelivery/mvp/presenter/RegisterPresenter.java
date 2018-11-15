@@ -97,7 +97,7 @@ public class RegisterPresenter {
         RequestBody email = createPartFromString(emailval);/*initialize new request created fom string value of email*/
         RequestBody password = createPartFromString(passval);/*initialize new request created fom string value of password*/
         RequestBody phone = createPartFromString(phoneval);/*initialize new request created fom string value of phone*/
-        RequestBody lang = createPartFromString(LangUtil.getCurrentLanguage(mCtx));/*initailize new request created fom string value of language device*/
+        RequestBody lang = createPartFromString(LangUtil.getCurrentLanguage(mCtx));/*initialize new request created fom string value of language device*/
 
         //create new HashMap with string and RequestBody
         HashMap<String, RequestBody> map = new HashMap<>();

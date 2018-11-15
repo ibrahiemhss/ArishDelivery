@@ -1,21 +1,11 @@
 package com.delivery.arish.arishdelivery.internet.FirebaseMasseging;
 
-import android.app.AlertDialog;
-import android.app.NotificationManager;
-import android.app.PendingIntent;
-import android.content.ContentResolver;
-import android.content.Context;
 import android.content.Intent;
-import android.media.AudioManager;
-import android.media.MediaPlayer;
-import android.media.Ringtone;
-import android.media.RingtoneManager;
-import android.net.Uri;
-import android.support.v4.app.NotificationCompat;
+import android.os.Build;
 import android.util.Log;
 
-import com.delivery.arish.arishdelivery.R;
 import com.delivery.arish.arishdelivery.data.Contract;
+import com.delivery.arish.arishdelivery.data.SharedPrefManager;
 import com.delivery.arish.arishdelivery.ui.Main.MainActivity;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
@@ -26,7 +16,17 @@ import org.json.JSONObject;
 public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
     private static final String TAG = "MyFirebaseMsgService";
+    @Override//get FirebaseMessaging token of current device
+    public void onNewToken(String s) {
+        super.onNewToken(s);
+        Log.d(TAG,"NEW_TOKEN"+s);
+        storeToken(s);
+    }
+    private void storeToken(String token) {
+        //saving the token on shared preferences
+        SharedPrefManager.getInstance(getApplicationContext()).saveDeviceToken(token);
 
+    }
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
         super.onMessageReceived(remoteMessage);
@@ -63,7 +63,9 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
             //creating an intent for the notification
             Intent intent = new Intent(getApplicationContext(), MainActivity.class);
 
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
                 mNotificationManager.showSmallNotification(title, message, intent);
+            }
         } catch (JSONException e) {
             Log.e(TAG, "Json Exception: " + e.getMessage());
         } catch (Exception e) {

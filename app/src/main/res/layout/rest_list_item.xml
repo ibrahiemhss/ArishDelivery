@@ -8,7 +8,7 @@
     android:foreground="?android:attr/selectableItemBackground">
 
     <LinearLayout
-        android:id="@+id/LinearListContainer"
+        android:id="@+id/LinearListRestContainer"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/white"
@@ -16,7 +16,7 @@
 
         <!--suppress AndroidLintContentDescription -->
         <ImageView
-            android:id="@+id/image_details_item"
+            android:id="@+id/image_rest_item"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/details_itemlist_layout_margin"
@@ -26,7 +26,7 @@
             android:scaleType="centerInside" />
 
         <TextView
-            android:id="@+id/name_details_item"
+            android:id="@+id/name_rest_item"
             style="@style/TextAppearance.AppCompat.Subhead"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

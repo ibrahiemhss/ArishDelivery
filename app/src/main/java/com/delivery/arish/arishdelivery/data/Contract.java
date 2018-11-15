@@ -17,6 +17,10 @@ public class Contract {
     @SuppressWarnings("unused")
     public static final String GET_IMAGE_USER_URL = "login/get_image_user.php";
 
+    /////fetch data Urls/////////////////////
+    public static final String GET_CATEGORIES_URL = "fetch_data/getAllCategories.php";
+    public static final String GET_RESTAURANTS_URL = "fetch_data/getAllRestuarants.php";
+
 
     /*this json fields come from server as warning message*/
     public static final String ERROR = "error";//JSONObject error
@@ -54,13 +58,19 @@ public class Contract {
     public static final String NEW_PHONE_COL = "nphone";
     public static final String PIC_TO_LOAD = "pic";
     public static final String MULTIPART_FILE_PATH = "multipart/form-file";
-
+    public static final String AR_NAME_COL = "ar_name";
+    public static final String EN_NAME_COL = "en_name";
+    public static final String RESTAURANT_COL = "restaurant";
+    public static final String CATEGORY_COL = "categories";
 
     /*this final static strings as a value of extra strings passes with bundles
      *to save status of app or sharedpreferences etce..... */
     public static final String EXTRA_MAIN_LIST_POSITION = "main_list_position";//used to save value of position of listview when inter details class
-    public static final String EXTRA_DETAILS_LIST_POSITION = "details_list_position";//not used yet
-    public static final String EXTRA_INTER_ACTIVITY = "inter_activity";
+    public static final String EXTRA_RESTAURANT_LIST_POSITION = "restaurant_list_position";//pas resturant position
+    public static final String EXTRA_RESTAURANT_ID_ITEM = "restaurant_list_id_item";//key to pass resturant id value from list resturant
+    public static final String EXTRA_RESTAURANT_IMAGE_URL_ITEM = "restaurant_img_url_item";//key to pass resturant image url value from list resturant
+
+    public static final String EXTRA_INTER_FROM_MAIN_ACTIVITY = "inter_main_activity";
     public static final String EXTRA_DETAILS_LIST = "details_list";
     /**sharedpreferences keys
      ** {@linkplain com.delivery.arish.arishdelivery.data.SharedPrefManager}*/
@@ -71,7 +81,7 @@ public class Contract {
     public static final String IMAGE_USERS_KEY = "image_users";//key used to save image in bundle of sharedpreferences
     public static final String SHARED_PREF_NAME = "save_contents";//key main key of  of sharedpreferences
     public static final String KEY_IS_USER_LOGGEDIN = "isUserLoggedIn";//key used to save boolean of log in status in bundle of sharedpreferences
-    public static final String KEY_DEVICE_TOKEN = "devic_token";//used to save device token in bundle of sharedpreferences
+    public static final String KEY_DEVICE_TOKEN = "device_token";//used to save device token in bundle of sharedpreferences
     public static final String KEY_ACCESS = "key_access";//used to save ............
 
 

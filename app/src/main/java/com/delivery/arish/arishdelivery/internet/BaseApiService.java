@@ -88,6 +88,15 @@ public interface BaseApiService {
             @Part MultipartBody.Part image);
 
 
+    @FormUrlEncoded
+    @POST(Contract.GET_RESTAURANTS_URL)
+    Call<ResponseBody> getRestaurant(
+            @Field(Contract.LANG_COL) String lang);
+
+    @FormUrlEncoded
+    @POST(Contract.GET_CATEGORIES_URL)
+    Call<ResponseBody> getCategory(
+            @Field(Contract.LANG_COL) String lang);
 
 
 

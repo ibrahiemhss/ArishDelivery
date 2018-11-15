@@ -49,7 +49,7 @@ public class ProfileActivity extends BaseActivity implements View.OnClickListene
     @SuppressWarnings("WeakerAccess")
     @BindView(R.id.profile_collapsing_toolbar)
     protected CollapsingToolbarLayout mCollapsingToolbarLayout;
-    @SuppressWarnings("WeakerAccess")
+    @SuppressWarnings({"WeakerAccess", "unused"})
     @BindView(R.id.profile_pp_bar)
     protected AppBarLayout mAppBarLayout;
     @SuppressWarnings("WeakerAccess")
@@ -70,7 +70,7 @@ public class ProfileActivity extends BaseActivity implements View.OnClickListene
     @SuppressWarnings("WeakerAccess")
     @BindView(R.id.txt_prf_phone)
     protected TextView mTxtPhone;
-    @SuppressWarnings("WeakerAccess")
+    @SuppressWarnings({"WeakerAccess", "unused"})
     @BindView(R.id.txt_prf_location)
     protected TextView mTxtLocation;
     @SuppressWarnings("WeakerAccess")

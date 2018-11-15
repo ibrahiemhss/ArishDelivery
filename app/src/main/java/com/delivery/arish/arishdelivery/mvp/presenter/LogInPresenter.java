@@ -40,6 +40,7 @@ public class LogInPresenter {
         mApiService = UtilsApi.getAPIService();
     }
 
+    @SuppressWarnings("DanglingJavadoc")
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     /**pass path the file of image as string from MainActivity
      *@param  emailVal string  email come from editText from LogInActivity

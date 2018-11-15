@@ -11,15 +11,11 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.LayoutInflater;
-import android.widget.Toast;
 
 import com.delivery.arish.arishdelivery.R;
 import com.delivery.arish.arishdelivery.base.BaseActivity;
-import com.delivery.arish.arishdelivery.data.SharedPrefManager;
 import com.delivery.arish.arishdelivery.mvp.presenter.MainPresenter;
-import com.google.firebase.iid.FirebaseInstanceId;
 
 import butterknife.BindView;
 
@@ -57,7 +53,7 @@ public class MainActivity extends BaseActivity {
         MainPresenter mainPresenter = new MainPresenter(this);
 
         LayoutInflater layoutInflater = getLayoutInflater();
-        mainPresenter.GetListByScreenSize(this, mRv, layoutInflater, null);
+        mainPresenter.getCategoriesArrayList( mRv, layoutInflater);
 
         setSupportActionBar(mToolbar);
         mToolbar.setLogoDescription(getResources().getString(R.string.app_name));//to show title inside  toolbar

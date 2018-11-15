@@ -14,14 +14,11 @@ import android.support.annotation.RequiresApi;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
-import android.view.Surface;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -32,12 +29,13 @@ import com.delivery.arish.arishdelivery.data.Contract;
 import com.delivery.arish.arishdelivery.data.SharedPrefManager;
 import com.delivery.arish.arishdelivery.internet.BaseApiService;
 import com.delivery.arish.arishdelivery.internet.UtilsApi;
-import com.delivery.arish.arishdelivery.mvp.View.OnItemListClickListener;
-import com.delivery.arish.arishdelivery.mvp.model.MainModel;
-import com.delivery.arish.arishdelivery.ui.Main.MainListAdapter;
+import com.delivery.arish.arishdelivery.mvp.View.OnMainItemListClickListener;
+import com.delivery.arish.arishdelivery.mvp.model.CategoryModel;
+import com.delivery.arish.arishdelivery.ui.Main.CategoryAdapter;
 import com.delivery.arish.arishdelivery.ui.details.DetailsActivity;
 import com.delivery.arish.arishdelivery.ui.log_in.LogInActivity;
 import com.delivery.arish.arishdelivery.ui.log_in.ProfileActivity;
+import com.delivery.arish.arishdelivery.util.JsonUtils;
 import com.delivery.arish.arishdelivery.util.LangUtil;
 
 import org.json.JSONException;
@@ -59,139 +57,36 @@ public class MainPresenter {
     private final Context mCtx;
     private final BaseApiService mApiService;
     private ProgressDialog mLoading;
+    private RecyclerView mRCategory;
+
+    private LayoutInflater mLayoutInflater;
+    private String mArraySort;
+
+    private ArrayList<CategoryModel> mCategoryArrayList;
 
     public MainPresenter(Context context) {
         mCtx = context;
         mApiService = UtilsApi.getAPIService();
-    }
-    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
-    public void GetListByScreenSize(Context context, RecyclerView rv, LayoutInflater getLayoutInflater, MainListAdapter mainListAdapter) {
+        if (mCategoryArrayList != null) {
+            mCategoryArrayList.clear();
 
-        assert context.getSystemService(Context.WINDOW_SERVICE) != null;
-        final int rotation = ((WindowManager) Objects.requireNonNull(context.getSystemService(Context.WINDOW_SERVICE))).getDefaultDisplay().getOrientation();
-        switch (rotation) {
-            case Surface.ROTATION_0:
-                if (isTablet(context)) {
-                    initialiseListWithsLargeSize( rv, getLayoutInflater, mainListAdapter);
-                } else {
-                    initialiseListWithPhoneScreen(rv, getLayoutInflater, mainListAdapter);
-                }
-                break;
-            case Surface.ROTATION_90:
-                initialiseListWithsLargeSize(rv, getLayoutInflater, mainListAdapter);
-                break;
-            case Surface.ROTATION_180:
-                initialiseListWithPhoneScreen(rv, getLayoutInflater, mainListAdapter);
-                break;
-
-            case Surface.ROTATION_270:
-                break;
         }
     }
+    private final OnMainItemListClickListener onMainItemListClickListener = this::launchDetailActivity;
 
-    private  boolean isTablet(Context context) {
-        return (context.getResources().getConfiguration().screenLayout
-                & Configuration.SCREENLAYOUT_SIZE_MASK)
-                >= Configuration.SCREENLAYOUT_SIZE_LARGE;
-    }
+    private void launchDetailActivity( int i, String s) {
 
-    @SuppressWarnings("ParameterCanBeLocal")
-    private  void initialiseListWithPhoneScreen(RecyclerView rv, LayoutInflater getLayoutInflater, MainListAdapter mainListAdapter) {
+             Intent intent = new Intent(mCtx, DetailsActivity.class);
+             Bundle extras = new Bundle();
+             extras.putInt(Contract.EXTRA_MAIN_LIST_POSITION, i);
+             if(i>0){
+              extras.putBoolean(Contract.EXTRA_INTER_FROM_MAIN_ACTIVITY,true);
 
-        rv.setHasFixedSize(true);
-        rv.setLayoutManager(new LinearLayoutManager(mCtx,
-                LinearLayoutManager.VERTICAL, false));
-        mainListAdapter = new MainListAdapter(getMainModel(mCtx), getLayoutInflater);
-        rv.setAdapter(mainListAdapter);
-        mainListAdapter.notifyDataSetChanged();
-
-        final OnItemListClickListener onItemListClickListener = new OnItemListClickListener() {
-            @SuppressWarnings("unused")
-            @Override
-            public void onlItemClick(int pos) {
-                launchDetailActivity(pos, mCtx);
-
-            }
-        };
-
-        mainListAdapter.setOnItemListClickListener(onItemListClickListener);
+             }
+             intent.putExtras(extras);
+             mCtx.startActivity(intent);
 
     }
-
-    @SuppressWarnings("ParameterCanBeLocal")
-    private  void initialiseListWithsLargeSize( RecyclerView rv, LayoutInflater getLayoutInflater, MainListAdapter mainListAdapter) {
-
-
-        rv.setHasFixedSize(true);
-        rv.setLayoutManager(new GridLayoutManager(mCtx, 2,
-                GridLayoutManager.VERTICAL, false));
-        mainListAdapter = new MainListAdapter(getMainModel(mCtx), getLayoutInflater);
-        rv.setAdapter(mainListAdapter);
-        mainListAdapter.notifyDataSetChanged();
-
-        final OnItemListClickListener onItemListClickListener = new OnItemListClickListener() {
-            @SuppressWarnings("unused")
-            @Override
-            public void onlItemClick(int pos) {
-                launchDetailActivity(pos, mCtx);
-
-            }
-        };
-
-        mainListAdapter.setOnItemListClickListener(onItemListClickListener);
-
-
-    }
-
-    private static void launchDetailActivity(int position, Context context) {
-        Intent intent = new Intent(context, DetailsActivity.class);
-        Bundle extras = new Bundle();
-        extras.putInt(Contract.EXTRA_MAIN_LIST_POSITION, position);
-        // SharedPrefManager.getInstance(this).setPrefBakePosition(position);
-        // String name = mMainModelArrayList.get(position).getName();
-        // extras.putString(Contract.EXTRA_BAKE_NAME, name);
-        // SharedPrefManager.getInstance(this).setPrefDetailsPosition(position);
-        // SharedPrefManager.getInstance(this).setPrefBakeName(name);
-        intent.putExtras(extras);
-        context.startActivity(intent);
-    }
-
-
-    private static ArrayList<MainModel> getMainModel(Context context) {
-
-
-        final String names_values[] = {
-                context.getString(R.string.restaurant),
-                context.getString(R.string.libraries),
-                context.getString(R.string.pharmacies),
-                context.getString(R.string.architectural_tools),
-                context.getString(R.string.other)
-
-
-        };
-
-        final int images_values[] = {
-                R.drawable.restaurant,
-                R.drawable.libraries,
-                R.drawable.pharmacies,
-                R.drawable.architectural_tools,
-                R.drawable.other
-
-        };
-
-
-        ArrayList<MainModel> mainModelArrayList = new ArrayList<>();
-
-
-        for (int i = 0; i < names_values.length; i++) {
-            MainModel s = new MainModel();
-            s.setName(names_values[i]);
-            s.setImage(images_values[i]);
-            mainModelArrayList.add(s);
-        }
-        return mainModelArrayList;
-    }
-
 
     @TargetApi(Build.VERSION_CODES.KITKAT)
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
@@ -336,5 +231,66 @@ public class MainPresenter {
     }
 
 
+////////////////////////////////////////////////getCategories  value ArrayList from server////////////////////////////////////////////////////////////////////////
 
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+    public void getCategoriesArrayList(final RecyclerView rvShow, final LayoutInflater layoutInflater) {
+
+
+        mApiService.getCategory(LangUtil.getCurrentLanguage(mCtx))
+
+                // ,SharedPrefManager.getInstance( this ).getDeviceToken())
+                .enqueue(new Callback<ResponseBody>() {
+                    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+                    @Override
+                    public void onResponse(@NonNull Call<ResponseBody> call, @NonNull Response<ResponseBody> response) {
+                        if (response.isSuccessful()) {
+                            try {
+                                String remoteResponse = Objects.requireNonNull(response.body()).string();
+
+                                Log.d("JSONStringGetCategories", remoteResponse);
+
+                                initialiseListCategory(remoteResponse, rvShow, layoutInflater);
+
+
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(@NonNull Call<ResponseBody> call, @NonNull Throwable t) {
+                        Log.e("debugJSONS", "onFailure: ERROR > " + t.toString());
+
+                    }
+                });
+
+    }
+
+    private void initialiseListCategory(String remoteResponse, RecyclerView rvShowAll, LayoutInflater layoutInflater) {
+        mRCategory = rvShowAll;
+        mLayoutInflater = layoutInflater;
+        if (mCategoryArrayList != null) {
+            mCategoryArrayList.clear();
+
+        }
+        mArraySort = Contract.CATEGORY_COL;
+
+        mCategoryArrayList =
+                JsonUtils.parseCategoryModels(remoteResponse, Contract.CATEGORY_COL);
+
+
+        rvShowAll.setHasFixedSize(true);
+        rvShowAll.setLayoutManager(new GridLayoutManager(mCtx, 1,
+                GridLayoutManager.VERTICAL, false));
+        CategoryAdapter mCategoryAdapter = new CategoryAdapter(
+                mCategoryArrayList
+                , layoutInflater);
+        mCategoryAdapter.setOnMainItemListClickListener(onMainItemListClickListener);
+        rvShowAll.setAdapter(mCategoryAdapter);
+        mCategoryAdapter.notifyDataSetChanged();
+
+
+    }
 }

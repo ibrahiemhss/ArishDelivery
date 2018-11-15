@@ -12,7 +12,9 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.delivery.arish.arishdelivery.R;
 import com.delivery.arish.arishdelivery.base.BaseActivity;
 import com.delivery.arish.arishdelivery.data.Contract;
@@ -34,16 +36,16 @@ public class OrdersActivity extends BaseActivity {
     @SuppressWarnings("WeakerAccess")
     @BindView(R.id.rv_container_orders)
     protected RelativeLayout mRvContainerOrders;
-    @SuppressWarnings("WeakerAccess")
+    @SuppressWarnings({"WeakerAccess", "unused"})
     @BindView(R.id.btn_add_order)
     protected Button mAddOrder;
-    @SuppressWarnings("WeakerAccess")
+    @SuppressWarnings({"WeakerAccess", "unused"})
     @BindView(R.id.etx_add_order)
     protected TextView mEtxAddOrder;
-    @SuppressWarnings("WeakerAccess")
+    @SuppressWarnings({"WeakerAccess", "unused"})
     @BindView(R.id.rv_direct_call)
     protected RelativeLayout mDirectCall;
-    @SuppressWarnings("WeakerAccess")
+    @SuppressWarnings({"WeakerAccess", "unused"})
     @BindView(R.id.rv_whatsapp)
     protected RelativeLayout mWhatsApp;
     @SuppressWarnings("WeakerAccess")
@@ -55,6 +57,7 @@ public class OrdersActivity extends BaseActivity {
     @SuppressWarnings("WeakerAccess")
     @BindView(R.id.arrow_upp)
     protected ImageView mArrowUpp;
+    private String mId;
 
     private boolean isInterActivity = true;
     @SuppressWarnings("SameReturnValue")
@@ -81,23 +84,31 @@ public class OrdersActivity extends BaseActivity {
 
         Bundle extras = getIntent().getExtras();
         assert extras != null;
-        if (extras.containsKey(Contract.EXTRA_DETAILS_LIST_POSITION)
-                && extras.containsKey(Contract.EXTRA_DETAILS_LIST)) {
-            int mPosition = extras.getInt(Contract.EXTRA_DETAILS_LIST_POSITION, 0);
-            ArrayList<DetailsModel> mDetailsModelArrayList = extras.getParcelableArrayList(Contract.EXTRA_DETAILS_LIST);
+        if (extras.containsKey(Contract.EXTRA_RESTAURANT_ID_ITEM)
+                && extras.containsKey(Contract.EXTRA_RESTAURANT_IMAGE_URL_ITEM)) {
+
             mArrowDown.setVisibility(View.VISIBLE);
 
+            mId= extras.getString(Contract.EXTRA_RESTAURANT_ID_ITEM);
+            String imgUrl=extras.getString(Contract.EXTRA_RESTAURANT_IMAGE_URL_ITEM);
+            Toast.makeText(this, imgUrl, Toast.LENGTH_SHORT).show();
 
-            mImgMenu.setImageResource(Objects.requireNonNull(mDetailsModelArrayList).get(mPosition).getImage());
-            mRvContainerOrders.setElevation(12);
-            mRvContainerOrders.setBackgroundColor(getResources().getColor(R.color.white));
-            PhotoViewAttacher photoAttacher;
-            photoAttacher = new PhotoViewAttacher(mImgMenu);
-            photoAttacher.update();
+            if (imgUrl != null) {
+                Glide.with(this).load(imgUrl).into(mImgMenu);
+                mRvContainerOrders.setElevation(12);
+                mRvContainerOrders.setBackgroundColor(getResources().getColor(R.color.white));
+                PhotoViewAttacher photoAttacher;
+                photoAttacher = new PhotoViewAttacher(mImgMenu);
+                photoAttacher.update();
+            }
+
+            mArrowDown.setVisibility(View.VISIBLE);
+            mArrowUpp.setVisibility(View.VISIBLE);
+
             // isHide=true;
 
-        } else if (extras.containsKey(Contract.EXTRA_INTER_ACTIVITY)) {
-            isInterActivity = extras.getBoolean(Contract.EXTRA_INTER_ACTIVITY);
+        } else if (extras.containsKey(Contract.EXTRA_INTER_FROM_MAIN_ACTIVITY)) {
+            isInterActivity = extras.getBoolean(Contract.EXTRA_INTER_FROM_MAIN_ACTIVITY);
             mArrowDown.setVisibility(View.GONE);
             mArrowUpp.setVisibility(View.GONE);
         }

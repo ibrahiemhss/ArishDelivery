@@ -10,18 +10,18 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.delivery.arish.arishdelivery.R;
 import com.delivery.arish.arishdelivery.base.BaseActivity;
-import com.delivery.arish.arishdelivery.data.Contract;
 import com.delivery.arish.arishdelivery.data.SharedPrefManager;
 import com.delivery.arish.arishdelivery.mvp.presenter.LogInPresenter;
 import com.delivery.arish.arishdelivery.ui.Main.MainActivity;
 import com.delivery.arish.arishdelivery.ui.log_in.resetPassword.ResetPasswordActivity;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.iid.InstanceIdResult;
 
 import butterknife.BindView;
 
@@ -29,9 +29,9 @@ import butterknife.BindView;
 public class LogInActivity extends BaseActivity {
     private static final String TAG = "LogInActivity";
 
-    @SuppressWarnings("WeakerAccess")
+    /*@SuppressWarnings("WeakerAccess")
     @BindView(R.id.rv_container_login)
-    protected RelativeLayout mRelativeLayout;
+    protected RelativeLayout mRelativeLayout;*/
     @SuppressWarnings("WeakerAccess")
     @BindView(R.id.etEmail)
     EditText mEtEmail;
@@ -48,6 +48,8 @@ public class LogInActivity extends BaseActivity {
     @BindView(R.id.txt_reset_password)
     TextView mTxtResetPass;
 
+    private String mToken;
+
 
     @Override
     protected void onViewReady(Bundle savedInstanceState, Intent intent) {
@@ -63,8 +65,6 @@ public class LogInActivity extends BaseActivity {
             finish();
 
         }
-        Log.d(TAG,"mytoken "+FirebaseInstanceId.getInstance().getToken());
-        Toast.makeText(this, "mytoken "+FirebaseInstanceId.getInstance().getToken(), Toast.LENGTH_LONG).show();
 
     }
 
@@ -81,8 +81,18 @@ public class LogInActivity extends BaseActivity {
 
     @Override
     protected void setListener() {//method come from BasActivity
-        onClickViews();
 
+        /*get new token of current device in string to send this string to server when log in*/
+        FirebaseInstanceId.getInstance().getInstanceId().addOnSuccessListener( LogInActivity.this,  new OnSuccessListener<InstanceIdResult>() {
+            @Override
+            public void onSuccess(InstanceIdResult instanceIdResult) {
+                mToken = instanceIdResult.getToken();
+                Log.d(TAG,"FCM_TOKEN"+mToken);
+            }
+        });
+        //Log.d(TAG,"mytoken "+ FirebaseMessaging.getInst);
+        Toast.makeText(this, "mytoken "+FirebaseInstanceId.getInstance().getToken(), Toast.LENGTH_LONG).show();
+        onClickViews();
     }
 
 
