@@ -14,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 
 import com.delivery.arish.arishdelivery.data.Contract;
+import com.delivery.arish.arishdelivery.data.SharedPrefManager;
 import com.delivery.arish.arishdelivery.internet.BaseApiService;
 import com.delivery.arish.arishdelivery.internet.UtilsApi;
 import com.delivery.arish.arishdelivery.mvp.View.OnMainItemListClickListener;
@@ -60,6 +61,7 @@ public class DetailsPresenter {
         Bundle extras = new Bundle();
         extras.putString(Contract.EXTRA_RESTAURANT_ID_ITEM, id);
         extras.putString(Contract.EXTRA_RESTAURANT_IMAGE_URL_ITEM, imgUrl);
+        SharedPrefManager.getInstance(mCtx).saveRestId(id);
 
         intent.putExtras(extras);
         mCtx.startActivity(intent);

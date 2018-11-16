@@ -51,10 +51,10 @@
     <string name="confirm_password">Confirm password</string>
     <string name="email_error">Please enter a valid e-mail address</string>
     <string name="password_error">Password must contain at least 8 characters</string>
-    <string name="name_error">Username must contain at least 6 characters</string>
+    <string name="name_error">Value must contain at least 6 characters</string>
     <string name="phone_error">The phone number must consist of 10 digits</string>
     <string name="confirm_password_error">The password is not the same</string>
-    <string name="name_error_char"><![CDATA[Make sure your UserName not contains this characters  ($&+,:;=\\\\?@#|/\'<>.^*()%!-])]]></string>
+    <string name="name_error_char"><![CDATA[Please do not write these letters  ($&+,:;=\\\\?@#|/\'<>.^*()%!-])]]></string>
     <string name="img_arrow_conten_description">Click here to hide the display buttons or click to show them again</string>
     <string name="img_arrow_down_conten_description">Click here to return the order display buttons again</string>
     <string name="img_orders_views_conten_description">This list of buttons to reserve a new order</string>
@@ -73,5 +73,9 @@
     <string name="notification_sub_text">Tap to see details of this order</string>
     <string name="or">OR</string>
     <string name="order_across_app">Send your order across the app</string>
+    <string name="adding_order">Your order is being sent......</string>
+    <string name="order_message">wants a new order</string>
+    <string name="success_sent">Your order has been sent. Please wait a little while for your reply</string>
+    <string name="error_sent">The request was successfully sent but failed to send the alert Please update Google Play services</string>
 
 </resources>

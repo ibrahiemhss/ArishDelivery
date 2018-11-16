@@ -148,4 +148,30 @@ public class SharedPrefManager {
         editor.apply();
         return true;
     }
+
+    public String getCategoryId() {
+        pref = mCtx.getSharedPreferences(Contract.SHARED_PREF_NAME, Context.MODE_PRIVATE);
+        return pref.getString(Contract.KEY_CATEGORY_ID, null);
+    }
+
+    public boolean saveCategoryId(String token) {
+        editor = pref.edit();
+        editor.putString(Contract.KEY_CATEGORY_ID, token);
+        editor.apply();
+        editor.apply();
+        return true;
+    }
+
+    public String getRestId() {
+        pref = mCtx.getSharedPreferences(Contract.SHARED_PREF_NAME, Context.MODE_PRIVATE);
+        return pref.getString(Contract.KEY_REST_ID, null);
+    }
+
+    public boolean saveRestId(String restaurantId) {
+        editor = pref.edit();
+        editor.putString(Contract.KEY_REST_ID, restaurantId);
+        editor.apply();
+        editor.apply();
+        return true;
+    }
 }

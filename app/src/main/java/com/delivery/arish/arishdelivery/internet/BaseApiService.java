@@ -98,7 +98,37 @@ public interface BaseApiService {
     Call<ResponseBody> getCategory(
             @Field(Contract.LANG_COL) String lang);
 
+    @FormUrlEncoded
+    @POST(Contract.ADD_ORDER_URL)
+    Call<ResponseBody> addOrder(
+            @Field(Contract.NAME_COL) String name,
+            @Field(Contract.CUSTOMER_ID_COL) String customer_id,
+            @Field(Contract.SERVICE_ID_COL) String service_id,
+            @Field(Contract.LANG_COL) String lang);
+    @FormUrlEncoded
+    @POST(Contract.SEND_ORDER_MESSAGE_URL)
+    Call<ResponseBody> sendOrderMessage(
+            @Field(Contract.ID_COL) String id,
+            @Field(Contract.FCM_TITLE) String title,
+            @Field(Contract.FCM_MESSAGE) String message);
 
+    @FormUrlEncoded
+    @POST(Contract.ADD_REST_ORDER_URL)
+    Call<ResponseBody> addRestOrder(
+            @Field(Contract.NAME_COL) String name,
+            @Field(Contract.CUSTOMER_ID_COL) String customer_id,
+            @Field(Contract.RESTAURANT_ID_COL) String restaurant_id,
+            @Field(Contract.SERVICE_ID_COL) String service_id,
+            @Field(Contract.LANG_COL) String lang);
+
+
+    @FormUrlEncoded
+    @POST(Contract.SEND_ORDER_REST_MESSAGE_URL)
+    Call<ResponseBody> sendOrderRestMessage(
+            @Field(Contract.ID_COL) String id,
+            @Field(Contract.RESTAURANT_ID_COL) String restaurant_id,
+            @Field(Contract.FCM_TITLE) String title,
+            @Field(Contract.FCM_MESSAGE) String message);
 
 
 }

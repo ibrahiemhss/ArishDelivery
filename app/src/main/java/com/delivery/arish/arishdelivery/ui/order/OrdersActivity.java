@@ -5,6 +5,7 @@ import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.AnimationUtils;
@@ -18,9 +19,12 @@ import com.bumptech.glide.Glide;
 import com.delivery.arish.arishdelivery.R;
 import com.delivery.arish.arishdelivery.base.BaseActivity;
 import com.delivery.arish.arishdelivery.data.Contract;
+import com.delivery.arish.arishdelivery.data.SharedPrefManager;
 import com.delivery.arish.arishdelivery.mvp.model.DetailsModel;
+import com.delivery.arish.arishdelivery.mvp.presenter.OrderPresenter;
 import com.delivery.arish.arishdelivery.ui.Main.MainActivity;
 import com.delivery.arish.arishdelivery.ui.details.DetailsActivity;
+import com.delivery.arish.arishdelivery.util.EditTextUtil;
 
 import java.util.ArrayList;
 import java.util.Objects;
@@ -28,7 +32,8 @@ import java.util.Objects;
 import butterknife.BindView;
 import uk.co.senab.photoview.PhotoViewAttacher;
 
-public class OrdersActivity extends BaseActivity {
+public class OrdersActivity extends BaseActivity implements View.OnClickListener{
+    private static final String TAG = OrdersActivity.class.getSimpleName();
 
     @SuppressWarnings("WeakerAccess")
     @BindView(R.id.img_menu)
@@ -57,9 +62,11 @@ public class OrdersActivity extends BaseActivity {
     @SuppressWarnings("WeakerAccess")
     @BindView(R.id.arrow_upp)
     protected ImageView mArrowUpp;
-    private String mId;
 
-    private boolean isInterActivity = true;
+    private OrderPresenter mOrderPresenter;
+
+
+    private boolean isInterActivity = false;
     @SuppressWarnings("SameReturnValue")
     @Override
     protected int getResourceLayout() {
@@ -69,6 +76,7 @@ public class OrdersActivity extends BaseActivity {
     @Override
     protected void onViewReady(Bundle savedInstanceState, Intent intent) {
         super.onViewReady(savedInstanceState, intent);
+        mOrderPresenter=new OrderPresenter(this);
         setSupportActionBar(mToolbar);
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -89,7 +97,8 @@ public class OrdersActivity extends BaseActivity {
 
             mArrowDown.setVisibility(View.VISIBLE);
 
-            mId= extras.getString(Contract.EXTRA_RESTAURANT_ID_ITEM);
+           // mService_id= extras.getString(Contract.EXTRA_RESTAURANT_ID_ITEM);
+          //  mCustomer_id= SharedPrefManager.getInstance(this).getUserId();
             String imgUrl=extras.getString(Contract.EXTRA_RESTAURANT_IMAGE_URL_ITEM);
             Toast.makeText(this, imgUrl, Toast.LENGTH_SHORT).show();
 
@@ -118,22 +127,12 @@ public class OrdersActivity extends BaseActivity {
     protected void setListener() {
 
 
-        mArrowDown.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                slideDown(mRvContainerOrders);
-                mArrowUpp.setVisibility(View.VISIBLE);
-            }
-        });
-
-        mArrowUpp.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                slideUp(mRvContainerOrders);
-                mArrowUpp.setVisibility(View.GONE);
-
-            }
-        });
+        mArrowDown.setOnClickListener(this);
+        mArrowUpp.setOnClickListener(this);
+        mDirectCall.setOnClickListener(this);
+        mWhatsApp.setOnClickListener(this);
+        mAddOrder.setOnClickListener(this);
+        mArrowUpp.setOnClickListener(this);
     }
 
     @Override
@@ -149,9 +148,10 @@ public class OrdersActivity extends BaseActivity {
             case android.R.id.home:
                 Intent intent;
                 if (isInterActivity) {
-                    intent = new Intent(OrdersActivity.this, DetailsActivity.class);
-                } else {
                     intent = new Intent(OrdersActivity.this, MainActivity.class);
+                } else {
+                    intent = new Intent(OrdersActivity.this, DetailsActivity.class);
+
                 }
 
                 startActivity(intent);
@@ -167,9 +167,9 @@ public class OrdersActivity extends BaseActivity {
         super.onBackPressed();
         Intent intent;
         if (isInterActivity) {
-            intent = new Intent(OrdersActivity.this, DetailsActivity.class);
-        } else {
             intent = new Intent(OrdersActivity.this, MainActivity.class);
+        } else {
+            intent = new Intent(OrdersActivity.this, DetailsActivity.class);
         }
 
         startActivity(intent);
@@ -191,4 +191,59 @@ public class OrdersActivity extends BaseActivity {
     }
 
 
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+    @Override
+    public void onClick(View view) {
+        int id=view.getId();
+        switch (id){
+            case R.id.arrow_down:
+                slideDown(mRvContainerOrders);
+                mArrowUpp.setVisibility(View.VISIBLE);
+                break;
+            case R.id.arrow_upp:
+                slideUp(mRvContainerOrders);
+                mArrowUpp.setVisibility(View.GONE);
+
+                break;
+            case R.id.btn_add_order:
+
+
+                    if (EditTextUtil.isNameCase(mEtxAddOrder.getText().toString()) == 1) {
+                        mEtxAddOrder.setError(getResources().getString(R.string.name_error));
+                        return;
+
+                    }
+
+                    if (EditTextUtil.isNameCase(mEtxAddOrder.getText().toString()) == 2) {
+                        mEtxAddOrder.setError(getResources().getString(R.string.name_error_char));
+                        return;
+
+                    }
+
+                if (isInterActivity) {
+                        Log.d(TAG,"requestOtder Base ");
+
+                  mOrderPresenter.requestAddOrder(mEtxAddOrder.getText().toString());
+
+                }else {
+                    Log.d(TAG,"requestOtder Rest ");
+
+                    mOrderPresenter.requestAddRestOrder(mEtxAddOrder.getText().toString());
+
+                }
+
+
+                 //   mOrderPresenter.requestSendOrderMessag();
+
+
+                break;
+            case R.id.rv_direct_call:
+
+                break;
+            case R.id.rv_whatsapp:
+
+                break;
+
+        }
+    }
 }

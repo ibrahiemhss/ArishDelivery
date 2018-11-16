@@ -35,6 +35,7 @@ import com.delivery.arish.arishdelivery.ui.Main.CategoryAdapter;
 import com.delivery.arish.arishdelivery.ui.details.DetailsActivity;
 import com.delivery.arish.arishdelivery.ui.log_in.LogInActivity;
 import com.delivery.arish.arishdelivery.ui.log_in.ProfileActivity;
+import com.delivery.arish.arishdelivery.ui.order.OrdersActivity;
 import com.delivery.arish.arishdelivery.util.JsonUtils;
 import com.delivery.arish.arishdelivery.util.LangUtil;
 
@@ -74,15 +75,21 @@ public class MainPresenter {
     }
     private final OnMainItemListClickListener onMainItemListClickListener = this::launchDetailActivity;
 
-    private void launchDetailActivity( int i, String s) {
+    private void launchDetailActivity( int i, String id) {
 
-             Intent intent = new Intent(mCtx, DetailsActivity.class);
+             Intent intent = null;
              Bundle extras = new Bundle();
-             extras.putInt(Contract.EXTRA_MAIN_LIST_POSITION, i);
-             if(i>0){
-              extras.putBoolean(Contract.EXTRA_INTER_FROM_MAIN_ACTIVITY,true);
 
-             }
+           SharedPrefManager.getInstance(mCtx).saveCategoryId(id);
+
+        if(i>0){
+            intent = new Intent(mCtx, OrdersActivity.class);
+            extras.putBoolean(Contract.EXTRA_INTER_FROM_MAIN_ACTIVITY,true);
+
+             }else {
+            intent = new Intent(mCtx, DetailsActivity.class);
+
+        }
              intent.putExtras(extras);
              mCtx.startActivity(intent);
 

@@ -52,23 +52,9 @@ public class DetailsActivity extends BaseActivity {
     @Override
     protected void init() {
         mDetailsPresenter=new DetailsPresenter(this);
-        Bundle extras = getIntent().getExtras();
-        assert extras != null;
-        if (extras.containsKey(Contract.EXTRA_MAIN_LIST_POSITION)) {
-            int id = extras.getInt(Contract.EXTRA_MAIN_LIST_POSITION, 0);
-
-            if (id > 0) {
-                Bundle extras2 = new Bundle();
-                extras2.putBoolean(Contract.EXTRA_INTER_FROM_MAIN_ACTIVITY, false);
-                Intent intent = new Intent(DetailsActivity.this, OrdersActivity.class);
-                intent.putExtras(extras2);
-                startActivity(intent);
-                finish();
-
-            }else {
-                mDetailsPresenter.getRestaurantArrayList(mRv, getLayoutInflater());
-            }
-        }
+       // Bundle extras = getIntent().getExtras();
+       // assert extras != null;
+        mDetailsPresenter.getRestaurantArrayList(mRv, getLayoutInflater());
 
     }
 

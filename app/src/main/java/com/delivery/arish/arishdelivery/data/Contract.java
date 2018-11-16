@@ -21,6 +21,14 @@ public class Contract {
     public static final String GET_CATEGORIES_URL = "fetch_data/getAllCategories.php";
     public static final String GET_RESTAURANTS_URL = "fetch_data/getAllRestuarants.php";
 
+    /////orders Urls/////////////////////
+    public static final String ADD_ORDER_URL = "order/addOrder.php";
+    public static final String ADD_REST_ORDER_URL = "order/addRestOrder.php";
+
+    /////firebase messages Urls/////////////////////
+    public static final String SEND_ORDER_MESSAGE_URL = "FCM/sendOrderPush.php";
+
+    public static final String SEND_ORDER_REST_MESSAGE_URL = "FCM/sendRestOrderpush.php";
 
     /*this json fields come from server as warning message*/
     public static final String ERROR = "error";//JSONObject error
@@ -62,16 +70,18 @@ public class Contract {
     public static final String EN_NAME_COL = "en_name";
     public static final String RESTAURANT_COL = "restaurant";
     public static final String CATEGORY_COL = "categories";
-
+    public static final String CUSTOMER_ID_COL = "customer_id";
+    public static final String SERVICE_ID_COL = "service_id";
+    public static final String RESTAURANT_ID_COL = "restaurant_id";
     /*this final static strings as a value of extra strings passes with bundles
      *to save status of app or sharedpreferences etce..... */
     public static final String EXTRA_MAIN_LIST_POSITION = "main_list_position";//used to save value of position of listview when inter details class
     public static final String EXTRA_RESTAURANT_LIST_POSITION = "restaurant_list_position";//pas resturant position
     public static final String EXTRA_RESTAURANT_ID_ITEM = "restaurant_list_id_item";//key to pass resturant id value from list resturant
     public static final String EXTRA_RESTAURANT_IMAGE_URL_ITEM = "restaurant_img_url_item";//key to pass resturant image url value from list resturant
+    public static final String EXTRA_CATEGORY_ID_ITEM = "category_list_id_item";//key to pass resturant id value from list resturant
 
     public static final String EXTRA_INTER_FROM_MAIN_ACTIVITY = "inter_main_activity";
-    public static final String EXTRA_DETAILS_LIST = "details_list";
     /**sharedpreferences keys
      ** {@linkplain com.delivery.arish.arishdelivery.data.SharedPrefManager}*/
     public static final String USER_ID_KEY = "user_id";//key used to save user id in bundle of sharedpreferences
@@ -83,6 +93,9 @@ public class Contract {
     public static final String KEY_IS_USER_LOGGEDIN = "isUserLoggedIn";//key used to save boolean of log in status in bundle of sharedpreferences
     public static final String KEY_DEVICE_TOKEN = "device_token";//used to save device token in bundle of sharedpreferences
     public static final String KEY_ACCESS = "key_access";//used to save ............
+    public static final String KEY_CATEGORY_ID = "key_category_id";//used to save ............
+    public static final String KEY_REST_ID = "key_restaurant_id";//used to save ............
+
 
 
 }
